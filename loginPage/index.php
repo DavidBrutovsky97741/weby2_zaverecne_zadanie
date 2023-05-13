@@ -23,14 +23,22 @@
             </div>
 
             <h2 id="login">Prihlásenie</h2>
-            
-            <form>
-                <input type="text" placeholder="Ais ID">
-                <input type="password" placeholder="Heslo">
+
+            <?php
+
+            if (isset($_GET['msg'])){
+                $msg = $_GET['msg'];
+                echo('<p style="color: red">'.$msg.'</p>');
+            }
+            ?>
+
+            <form action="/weby2_zaverecne_zadanie/api/login-api.php" method="post">
+                <input type="text" placeholder="Prihlasovacie meno" name="name">
+                <input type="password" placeholder="Heslo" name="password">
                 <button>Prihlásiť sa</button>
             </form>
             <p class="message">Prihlásenie podľa vašich osobných údajov Ais</p>
-            <p class="copyright">Team Alpha Beta Gamma Delta  <br>2023 ©</p>
+            <p class="copyright">Team Alpha Beta Gamma Delta<br>2023 ©</p>
         </div>
     </div>
 </body>
