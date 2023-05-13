@@ -1,6 +1,6 @@
 <?php
 
-ini_set('display_errors', 1);
+ini_set('display_errors', 1); 
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
@@ -12,29 +12,49 @@ $ldapconn = ldap_connect("ldap.stuba.sk")
 
 $set = ldap_set_option($ldapconn, LDAP_OPT_PROTOCOL_VERSION, 3);
 
-$idecko = 97741;
+$ldapuid = $_POST['name'];
+$ldappass = $_POST['password'];
 
 if ($ldapconn) {
-    $results=ldap_search($ldapconn,$dn,'surname=Žáková',array("givenname","employeetype","surname","mail","faculty","cn","uisid","uid"),0,8);
-    $info=ldap_get_entries($ldapconn,$results);
-    //var_dump($info);
-    
-    $i=0;
-    while ($i <= 10) {
-        echo $info[$i]['cn'][0]."<br>";
-        echo $info[$i]['givenname'][0]."<br>";
-        echo $info[$i]['sn'][0]."<br>";
-        echo $info[$i]['mail'][0]."<br>";
-        echo $info[$i]['employeetype'][0]."<br>";
-        echo $info[$i]['uisid'][0]."<br>";     
-        echo $info[$i]['uid'][0]."<br>";
-        echo $info[$i]['faculty'][0]."<br><br>";
-        $i++; 
-    }
-    
+
+    $ldaprdn = "uid=$ldapuid, $dn";
+
+    $ldapbind = ldap_bind($ldapconn, $ldaprdn, $ldappass);
+    // verify binding
+    if ($ldapbind) {
+      $results = ldap_search($ldapconn, $dn, 'uid='.$ldapuid.'', array("givenname", "employeetype", "surname", "mail", "faculty", "cn", "uisid", "uid"), 0, 8);
+      $info = ldap_get_entries($ldapconn, $results);
+      //var_dump($info);
+
+  /*
+      echo "<br>" . $info[0]['cn'][0] . "<br>"; //cele meno
+      echo $info[0]['givenname'][0] . "<br>";
+      echo $info[0]['sn'][0] . "<br>";
+      echo $info[0]['mail'][0] . "<br>";
+      echo $info[0]['employeetype'][0] . "<br>"; //student 
+      echo $info[0]['uisid'][0] . "<br>"; //id
+      echo $info[0]['uid'][0] . "<br>"; //username
+
+*/
+      $_SESSION['login'] = 'true';
+      $_SESSION['full_name'] = $info[0]['cn'][0];
+      $_SESSION['name'] = $info[0]['givenname'][0]." ".$info[0]['sn'][0];
+      $_SESSION['type'] = $info[0]['employeetype'][0];
+      $_SESSION['id'] = $info[0]['uisid'][0];
+
+      //echo "LDAP bind successful...";
+
+      ldap_unbind($ldapconn);
+      //header("Location: /new/ide/ui/index.php");
+      //die(); 
+      echo("good but TODO lol");
+    }else {
+        header("Location: /weby2_zaverecne_zadanie/loginPage/index.php?msg=Zadané meno alebo heslo nie je správne!");
+        die();
+
+      }
 }
     
-ldap_unbind($ldapconn);
 ?>
 
 
