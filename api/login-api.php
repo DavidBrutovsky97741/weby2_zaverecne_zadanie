@@ -48,6 +48,11 @@ if ($ldapconn) {
       //header("Location: /new/ide/ui/index.php");
       //die(); 
       echo("good but TODO lol");
+      if(isset($_POST['adminRole'])){
+        $_SESSION['type'] = "staff";
+        echo("log as teacher");
+      }
+
     }else {
         header("Location: /weby2_zaverecne_zadanie/loginPage/index.php?msg=Zadané meno alebo heslo nie je správne!");
         die();
