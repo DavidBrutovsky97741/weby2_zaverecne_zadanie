@@ -1,9 +1,11 @@
 <?php
+session_start();
 
+/*
 ini_set('display_errors', 1); 
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-
+*/
 $dn  = 'ou=People, DC=stuba, DC=sk';
 
 // connect to ldap server
@@ -41,6 +43,7 @@ if ($ldapconn) {
       $_SESSION['name'] = $info[0]['givenname'][0]." ".$info[0]['sn'][0];
       $_SESSION['type'] = $info[0]['employeetype'][0];
       $_SESSION['id'] = $info[0]['uisid'][0];
+      $_SESSION['language'] = "slovak";
 
       //echo "LDAP bind successful...";
 
@@ -58,6 +61,9 @@ if ($ldapconn) {
         die();
 
       }
+
+      header("Location: /weby2_zaverecne_zadanie/mainPage/index.php");
+      die();
 }
     
 ?>
