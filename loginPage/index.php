@@ -35,6 +35,7 @@
             <form action="/weby2_zaverecne_zadanie/api/login-api.php" method="post">
                 <input type="text" placeholder="Prihlasovacie meno" name="name">
                 <input type="password" placeholder="Heslo" name="password">
+                <input type="checkbox" name="adminRole">
                 <button>Prihlásiť sa</button>
             </form>
             <p class="message">Prihlásenie podľa vašich osobných údajov Ais</p>
