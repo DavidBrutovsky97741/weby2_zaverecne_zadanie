@@ -7,6 +7,11 @@ if (!isset($_SESSION['login']) || (strcmp($_SESSION['login'], 'true') != 0)) {
     die();
 }
 
+if (!isset($_SESSION['login']) || (strcmp($_SESSION['login'], 'true') != 0) || (strcmp($_SESSION['type'], 'staff') != 0)) {
+    header("Location: /weby2_zaverecne_zadanie/loginPage/index.php");
+    die();
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -71,133 +76,17 @@ if (!isset($_SESSION['login']) || (strcmp($_SESSION['login'], 'true') != 0)) {
         <a class="navAttpic" href="/weby2_zaverecne_zadanie/api/language-api.php?language=english"> <img
                 src="https://flagsapi.com/GB/shiny/32.png"></a>
 
-
     </nav>
 
-    <?php
-
-    if (!isset($_SESSION['login']) || (strcmp($_SESSION['login'], 'true') != 0) || (strcmp($_SESSION['type'], 'staff') != 0)) {
-        // student
-    
-        echo ('    
-        <div class="modalSet" id="modalSet">
-
-        <table>
-        <thead>
-            <tr>');
-
-        if (strcmp($_SESSION['language'], 'slovak') == 0) {
-            echo (' <th colspan="2" id="setName">Názov setu</th>');
-        } else {
-            echo (' <th colspan="2" id="setName">Set name</th>');
-        }
-        echo ('     
-            </tr>
-        </thead>
-        <tbody>
-            <tr>');
-
-        if (strcmp($_SESSION['language'], 'slovak') == 0) {
-            echo ('<td>Počet úloh</td>');
-        } else {
-            echo ('<td>Number of tasks</td>');
-        }
-        echo ('   
-                <td id="countTasks">with two columns</td>
-            </tr>
-    
-            <tr>');
-
-        if (strcmp($_SESSION['language'], 'slovak') == 0) {
-            echo ('<td>Maximálny počet bodov</td>');
-        } else {
-            echo ('<td>Max points</td>');
-        }
-
-        echo (' 
-                <td id="points">with two columns</td>
-            </tr>
-            <tr>');
-
-        if (strcmp($_SESSION['language'], 'slovak') == 0) {
-            echo ('<td>Stav</td>');
-        } else {
-            echo ('<td>State</td>');
-        }
-
-        echo ('
-                <td id="taskState">with two columns</td>
-            </tr>
-        </tbody>
-    </table>');
-
-        if (strcmp($_SESSION['language'], 'slovak') == 0) {
-            echo (' <button type="button" class="btn btn-success">Písať test</button>');
-            echo (' <button type="button" class="btn btn-danger" onclick="closeModal()">Zatvoriť</button>');
-        } else {
-            echo (' <button type="button" class="btn btn-success">Start test</button>');
-            echo (' <button type="button" class="btn btn-danger" onclick="closeModal()">Close</button>');
-        }
-        echo ('
-        </div>
-    
-        <div class="container">
-            <button class="button" onclick="generateSets()">
-                <div class="button__line"></div>
-                <div class="button__line"></div> ');
-        if (strcmp($_SESSION['language'], 'slovak') == 0) {
-            echo (' <span class="button__text">Generuj sady úloh</span>');
-        } else {
-            echo (' <span class="button__text">Generate sets of tasks</span>');
-        }
-
-        echo ('
-            </button>
-    
-        </div>
-    
-    
-    
-        <div class="sets" id="sets">');
-        if (strcmp($_SESSION['language'], 'slovak') == 0) {
-            echo (' <p> Tu sa zobrazia generované sety úloh </p>');
-        } else {
-            echo (' <p>Here will be shown generated sets of tasks </p>');
-        }
-
-        echo ('
-        </div>');
-
-
-    } else {
-
-   echo ('<div class="teacherCan">
-
-    <div class="can" onclick="window.open(\'/weby2_zaverecne_zadanie/mainPage/newSet.php\')">
-    <p>Nahrať novú sadu</p>
-    </div>        
-
-    <div class="can" onclick="">
-    <p>Prehľad študentov</p>
-    </div>        
-
-    <div class="can">
-    <p>Výber sád na generovanie</p>
-    </div>        
-
-    <div class="can">
-    <p>Zmeniť body za sadu</p>
-    </div>       
-
-</div>');
-
-
-    }
-
-    ?>
-
-
-
+    <form id="folderUploadForm">
+        <label for="imageFolder">Image Folder:</label>
+        <input type="file" id="imageFolder" webkitdirectory directory multiple required>
+        <br>
+        <label for="latexFolder">LaTeX Folder:</label>
+        <input type="file" id="latexFolder" webkitdirectory directory multiple required>
+        <br>
+        <button type="submit">Upload</button>
+    </form>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"

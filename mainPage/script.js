@@ -47,7 +47,68 @@ function closeModal(){
     document.getElementById('modalSet').style.display = 'none';
 }
 
+
+function handleFormSubmit(event) {
+    event.preventDefault(); // Prevent form submission
+
+    var imageFolderInput = document.getElementById('imageFolder');
+    var latexFolderInput = document.getElementById('latexFolder');
+
+    // Check if the file inputs exist
+    if (!imageFolderInput || !latexFolderInput) {
+        alert('Unable to find file inputs. Please make sure they exist.');
+        return;
+    }
+
+    var imageFiles = imageFolderInput.files;
+    var latexFiles = latexFolderInput.files;
+    var onlyImages = true;
+    var onlyLaTeX = true;
+
+    // Loop through the selected image files and check their extensions
+    for (var i = 0; i < imageFiles.length; i++) {
+        var imageFile = imageFiles[i];
+        var imageExtension = imageFile.name.split('.').pop().toLowerCase();
+
+        // Check if the file extension is not an image extension
+        if (!['jpg', 'jpeg', 'png', 'gif'].includes(imageExtension)) {
+            onlyImages = false;
+            break;
+        }
+    }
+
+    // Loop through the selected LaTeX files and check their extensions
+    for (var j = 0; j < latexFiles.length; j++) {
+        var latexFile = latexFiles[j];
+        var latexExtension = latexFile.name.split('.').pop().toLowerCase();
+
+        // Check if the file extension is not 'tex'
+        if (latexExtension !== 'tex') {
+            onlyLaTeX = false;
+            break;
+        }
+    }
+
+    // Display the result based on the onlyImages and onlyLaTeX variables
+    if (onlyImages && onlyLaTeX) {
+        alert('The image folder contains only images, and the LaTeX folder contains only LaTeX files.');
+    } else if (onlyImages) {
+        alert('The image folder contains only images, but the LaTeX folder contains files other than LaTeX files.');
+    } else if (onlyLaTeX) {
+        alert('The LaTeX folder contains only LaTeX files, but the image folder contains files other than images.');
+    } else {
+        alert('The folders contain files other than the specified types.');
+    }
+
+    // Clear the selected files
+    imageFolderInput.value = '';
+    latexFolderInput.value = '';
+}
+
+document.getElementById('folderUploadForm').addEventListener('submit', handleFormSubmit);
+
 function newSetUpload(){
+
     //odosielam zip
     //dosavam odozvu, 200 etc.
 }
