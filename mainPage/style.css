@@ -351,3 +351,9 @@ button{
     cursor: pointer;
 }
 
+.flagbutton{
+    display: flex;
+    width: auto;
+    background: none;
+}
+
