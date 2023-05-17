@@ -9,7 +9,7 @@ session_destroy();
 
 session_start();
 
-header("Location: /weby2_zaverecne_zadanie/loginPage/index.php");
+header("Location: /loginPage/index.php");
 die();
 
 ?>
