@@ -1,5 +1,6 @@
 <?php
 session_start();
+ob_start();
 
 /*
 ini_set('display_errors', 1); 
@@ -50,21 +51,21 @@ if ($ldapconn) {
       ldap_unbind($ldapconn);
       //header("Location: /new/ide/ui/index.php");
       //die(); 
-      echo("good but TODO lol");
+      //echo("good but TODO lol");
       if(isset($_POST['adminRole'])){
         $_SESSION['type'] = "staff";
-        echo("log as teacher");
+        //echo("log as teacher");
       }
 
     }else {
-        header("Location: /loginPage/index.php?msg=Zadané meno alebo heslo nie je správne!");
+        header("Location:/loginPage/index.php?msg=Zadané meno alebo heslo nie je správne!");
         die();
-
       }
 
-      header("Location: /api/roleCheck.php");
+      header("Location:/api/roleCheck.php");
       die();
 }
+ob_flush();
     
 ?>
 
