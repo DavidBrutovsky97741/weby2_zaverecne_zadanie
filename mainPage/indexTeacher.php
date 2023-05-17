@@ -67,7 +67,7 @@ if (!isset($_SESSION['login']) || (strcmp($_SESSION['login'], 'true') != 0) || (
 
     <div class="teacherCan">
 
-        <div class="can" onclick="window.open('/weby2_zaverecne_zadanie/mainPage/newSet.php')">
+        <div class="can" onclick="window.open('/mainPage/newSet.php')">
             <p id="newSetName" >Nahrať novú sadu</p> 
         </div>
 
