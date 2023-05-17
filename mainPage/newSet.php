@@ -3,12 +3,12 @@
 session_start();
 
 if (!isset($_SESSION['login']) || (strcmp($_SESSION['login'], 'true') != 0)) {
-    header("Location: /weby2_zaverecne_zadanie/loginPage/index.php");
+    header("Location: /loginPage/index.php");
     die();
 }
 
 if (!isset($_SESSION['login']) || (strcmp($_SESSION['login'], 'true') != 0) || (strcmp($_SESSION['type'], 'staff') != 0)) {
-    header("Location: /weby2_zaverecne_zadanie/loginPage/index.php");
+    header("Location: /maniPage/index.php");
     die();
 }
 
@@ -44,7 +44,7 @@ if (!isset($_SESSION['login']) || (strcmp($_SESSION['login'], 'true') != 0) || (
 
         ?>
 
-        <a href="/weby2_zaverecne_zadanie/mainPage/index.php"><i class='material-icons'>home</i></a>
+        <a href="/mainPage/index.php"><i class='material-icons'>home</i></a>
 
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
@@ -58,9 +58,9 @@ if (!isset($_SESSION['login']) || (strcmp($_SESSION['login'], 'true') != 0) || (
         <?php
 
         if (strcmp($_SESSION['language'], 'slovak') == 0) {
-            echo ('<a class="navAtt" href="/weby2_zaverecne_zadanie/api/logout-api.php">Ohlásiť sa </a>');
+            echo ('<a class="navAtt" href="/api/logout-api.php">Ohlásiť sa </a>');
         } else {
-            echo ('<a class="navAtt" href="/weby2_zaverecne_zadanie/api/logout-api.php">Log out </a>');
+            echo ('<a class="navAtt" href="/api/logout-api.php">Log out </a>');
         }
 
         ?>
@@ -70,10 +70,10 @@ if (!isset($_SESSION['login']) || (strcmp($_SESSION['login'], 'true') != 0) || (
             <?php echo ($_SESSION['full_name']); ?> &nbsp;&nbsp;&nbsp;
         </a>
 
-        <a class="navAttpic" href="/weby2_zaverecne_zadanie/api/language-api.php?language=slovak"> <img
+        <a class="navAttpic" href="/api/language-api.php?language=slovak"> <img
                 src="https://flagsapi.com/SK/shiny/32.png"></a>
 
-        <a class="navAttpic" href="/weby2_zaverecne_zadanie/api/language-api.php?language=english"> <img
+        <a class="navAttpic" href="/api/language-api.php?language=english"> <img
                 src="https://flagsapi.com/GB/shiny/32.png"></a>
 
     </nav>

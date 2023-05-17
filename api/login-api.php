@@ -57,12 +57,12 @@ if ($ldapconn) {
       }
 
     }else {
-        header("Location: /weby2_zaverecne_zadanie/loginPage/index.php?msg=Zadané meno alebo heslo nie je správne!");
+        header("Location: /loginPage/index.php?msg=Zadané meno alebo heslo nie je správne!");
         die();
 
       }
 
-      header("Location: /weby2_zaverecne_zadanie/api/roleCheck.php");
+      header("Location: /api/roleCheck.php");
       die();
 }
     

@@ -18,7 +18,7 @@
 
 
             <div class="avatar">
-                <img src="/weby2_zaverecne_zadanie/images/logoStu.jpg" alt="Logo">
+                <img src="/images/logoStu.jpg" alt="Logo">
                 <!-- weby2_zaverecne_zadanie/ je folder na serveri -->
             </div>
 
@@ -32,7 +32,7 @@
             }
             ?>
 
-            <form action="/weby2_zaverecne_zadanie/api/login-api.php" method="post">
+            <form action="/api/login-api.php" method="post">
                 <input type="text" placeholder="Prihlasovacie meno" name="name">
                 <input type="password" placeholder="Heslo" name="password">
                 <input type="checkbox" name="adminRole">

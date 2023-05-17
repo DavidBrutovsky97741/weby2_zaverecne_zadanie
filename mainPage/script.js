@@ -22,7 +22,7 @@ function generateSets() {
     
 
         img.setAttribute('class','imgSets');
-        img.setAttribute('src','/weby2_zaverecne_zadanie/images/folder.png');
+        img.setAttribute('src','/images/folder.png');
 
         p.setAttribute('class','setDiscription');
         p.textContent = 'set_"'+randomSetName+'"';
@@ -70,8 +70,10 @@ function handleFormSubmit(event) {
         var imageFile = imageFiles[i];
         var imageExtension = imageFile.name.split('.').pop().toLowerCase();
 
+        
+
         // Check if the file extension is not an image extension
-        if (!['jpg', 'jpeg', 'png', 'gif'].includes(imageExtension)) {
+        if (!['jpg', 'jpeg', 'png'].includes(imageExtension)) {
             onlyImages = false;
             break;
         }
@@ -103,9 +105,14 @@ function handleFormSubmit(event) {
     // Clear the selected files
     imageFolderInput.value = '';
     latexFolderInput.value = '';
+
+
+
+
+
 }
 
-//document.getElementById('folderUploadForm').addEventListener('submit', handleFormSubmit);
+document.getElementById('folderUploadForm').addEventListener('submit', handleFormSubmit);
 
 function newSetUpload(){
 

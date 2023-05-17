@@ -3,12 +3,12 @@
 session_start();
 
 if (!isset($_SESSION['login']) || (strcmp($_SESSION['login'], 'true') != 0)) {
-    header("Location: /weby2_zaverecne_zadanie/loginPage/index.php");
+    header("Location: /loginPage/index.php");
     die();
 }
 
 if (!isset($_SESSION['login']) || (strcmp($_SESSION['login'], 'true') != 0) || (strcmp($_SESSION['type'], 'student') != 0)) {
-    header("Location: /weby2_zaverecne_zadanie/mainPage/indexTeacher.php");
+    header("Location: /mainPage/indexTeacher.php");
     die();
 }
 
@@ -39,7 +39,7 @@ if (!isset($_SESSION['login']) || (strcmp($_SESSION['login'], 'true') != 0) || (
         <a class="navbar-brand" id="navName"> &nbsp; Záverečné zadanie webte2</a>
 
 
-        <a href="/weby2_zaverecne_zadanie/mainPage/index.php"><i class='material-icons'>home</i></a>
+        <a href="/mainPage/index.php"><i class='material-icons'>home</i></a>
 
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
@@ -51,7 +51,7 @@ if (!isset($_SESSION['login']) || (strcmp($_SESSION['login'], 'true') != 0) || (
 
         </div>
 
-        <a class="navAtt" id="logout" href="/weby2_zaverecne_zadanie/api/logout-api.php">Ohlásiť sa </a>
+        <a class="navAtt" id="logout" href="/api/logout-api.php">Ohlásiť sa </a>
 
 
 
