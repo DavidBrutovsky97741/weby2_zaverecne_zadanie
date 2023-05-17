@@ -105,7 +105,7 @@ function handleFormSubmit(event) {
     latexFolderInput.value = '';
 }
 
-document.getElementById('folderUploadForm').addEventListener('submit', handleFormSubmit);
+//document.getElementById('folderUploadForm').addEventListener('submit', handleFormSubmit);
 
 function newSetUpload(){
 
@@ -126,4 +126,53 @@ function setsToGenerate(){
 function pointsForSet(){
     // praca nad db
     // missing frontend    
+}
+
+function slovakStudent(){ 
+    document.getElementById('buttonGenerate').innerHTML = "Generuj sady úloh";
+    document.getElementById('logout').innerHTML = "Ohlásiť sa";
+    document.getElementById('navName').innerHTML = " &nbsp; Záverečné zadanie webte2";
+
+
+    if (document.getElementById('setsEmptyInfo') !== null) {
+        document.getElementById('setsEmptyInfo').innerHTML = " Tu sa zobrazia generované sety úloh";    
+     }
+    document.getElementById('taskStateTranslate').innerHTML = "Stav ";
+    document.getElementById('pointsTranslate').innerHTML = " Maximálny počet bodov";
+    document.getElementById('countTasksTranslate').innerHTML = " Počet úloh";
+    document.getElementById('closeModal').innerHTML = "Zatvoriť";
+    document.getElementById('testWrite').innerHTML = "Písať test";
+}
+
+function englishStudentTranslate(){
+    document.getElementById('buttonGenerate').innerHTML = "Generate sets of tasks";
+    document.getElementById('logout').innerHTML = "Log out";
+    document.getElementById('navName').innerHTML = " &nbsp; Final task webte2";
+   
+if (document.getElementById('setsEmptyInfo') !== null) {
+     document.getElementById('setsEmptyInfo').innerHTML = " Here will be shown generated sets of tasks";    
+  }
+    document.getElementById('taskStateTranslate').innerHTML = " State";
+    document.getElementById('pointsTranslate').innerHTML = " Max points";
+    document.getElementById('countTasksTranslate').innerHTML = " Number of tasks"; 
+    document.getElementById('closeModal').innerHTML = "Close";
+    document.getElementById('testWrite').innerHTML = "Write test";
+}
+
+function slovakTeacher(){
+    document.getElementById('logout').innerHTML = "Ohlásiť sa";
+    document.getElementById('navName').innerHTML = " &nbsp; Záverečné zadanie webte2";
+    document.getElementById('newSetName').innerHTML = " Nahrať novú sadu";
+    document.getElementById('studentsOverview').innerHTML = " Prehľad študentov";
+    document.getElementById('whatToGenerate').innerHTML = " Výber sád na generovanie";
+    document.getElementById('changePoints').innerHTML = " Zmeniť body za sadu";
+}
+
+function englishTeacherTranslate(){
+    document.getElementById('logout').innerHTML = "Log out";
+    document.getElementById('navName').innerHTML = " &nbsp; Final task webte2";
+    document.getElementById('newSetName').innerHTML = " Upload new set";
+    document.getElementById('studentsOverview').innerHTML = " Students overview";
+    document.getElementById('whatToGenerate').innerHTML = " Pick sets to generate";
+    document.getElementById('changePoints').innerHTML = " Change points of set";
 }

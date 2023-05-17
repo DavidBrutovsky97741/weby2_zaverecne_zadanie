@@ -62,7 +62,7 @@ if ($ldapconn) {
 
       }
 
-      header("Location: /weby2_zaverecne_zadanie/mainPage/index.php");
+      header("Location: /weby2_zaverecne_zadanie/api/roleCheck.php");
       die();
 }
     
