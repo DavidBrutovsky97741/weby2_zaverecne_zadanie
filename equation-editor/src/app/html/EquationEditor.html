@@ -495,6 +495,8 @@
     <br>
     <br>
     <button id="toLatex">To LaTeX</button>
+    <button id="submitSolution">Submit Solution</button>
+    <br>    <br>
     <br>    <br>
     <br>
     LaTeX:
@@ -503,9 +505,7 @@
     <script>
       var generateLatex = function(expr) {
 	var latexString = '';
-	console.log(expr);
 	var topLevelContainer = containerCheck(expr);
-	console.log(topLevelContainer.length);
 	for (var i = 0; i < topLevelContainer.length; i++) {
 		var wrapper = topLevelContainer[i];
 		switch (wrapper.type) {
@@ -903,9 +903,25 @@ var superscriptToLatex = function(expr) {
         var jsonObj = $('.eqEdEquation').data('eqObject').buildJsonObj();
         $('#ContentJSON').html(JSON.stringify(jsonObj));
       });
-      $('#toLatex').on('click', function() {
+
+        $('#toLatex').on('click', function() {
         var jsonObj = $('.eqEdEquation').data('eqObject').buildJsonObj();
-        $('#ContentLatex').html(generateLatex(jsonObj));
+        
+        // Call the generateLatex function to get the result
+        var latexResult = generateLatex(JSON.stringify(jsonObj));
+        console.log(latexResult);
+        // Send the result to the PHP script
+        $.ajax({
+          url: '../php/octaveExpressionComparator.php',
+          method: 'POST',
+          data: { latexResult: "2+2" },
+          success: function(response) {
+            // console.log(JSON.parse(response));
+            console.log(response);
+            // $('#ContentLatex').html(response);
+           // window.location.href = '../php/octaveExpressionComparator.php';
+          }
+        });
       });
     </script>
 
