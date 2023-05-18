@@ -301,8 +301,7 @@ body {
     justify-content : center ;
     align-items : center ;
     margin-top: 5%;
-    margin-left: 35%;
-    margin-right: 35%;
+
 }
 
 .modalSet{    
@@ -377,6 +376,10 @@ button{
     margin-top: 10%;
     margin-left: 10%;
     text-align: center;
+}
+
+.folderUploadForm{
+    
 }
 
 

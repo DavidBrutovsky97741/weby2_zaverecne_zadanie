@@ -7,16 +7,20 @@ $.ajax({
     url: "../api/tasks/index.php",
     method: "GET",
     success: function (response) {
+        //console.log(response);
         response = JSON.parse(response);
         for (let i = 0; i < response.length; i++) {
-            if (uniqueSets.includes(response[i].task_id)) {
+            if (uniqueSets.includes(response[i].id)) {
                 continue;
-            } else {                
-                uniqueSets.push(response[i].task_id);
+            } else {   
+                uniqueSets.push(response[i].id);
             }
         }
     }
 });
+
+
+
 function generateSets() {
     //ziskat pocet setov a ich meno / id
 
@@ -25,7 +29,9 @@ function generateSets() {
     document.getElementById('sets').innerHTML = '';
 
     let count = uniqueSets.length;
-    console.log(uniqueSets[0]);
+    
+    //console.log(uniqueSets[0]);
+    
     for (let i = 0; i < count; i++) {
 
         let randomSetName = (Math.random() + 1).toString(36).substring(5);
@@ -35,9 +41,11 @@ function generateSets() {
         const img = document.createElement('img');
         const p = document.createElement('p');
 
+        //console.log(uniqueSets[i]);
+
         click.setAttribute('class', 'aLink');
         click.setAttribute('id', uniqueSets[i]);
-        click.setAttribute('onclick', 'openModal(event.target.id);');   //TODO: iba id bolo v url
+        click.setAttribute('onclick', 'openModal(this.id);');   //TODO: iba id bolo v url
         div.setAttribute('class', 'folderDiscription');
 
 
@@ -60,12 +68,19 @@ function generateSets() {
 
 function openModal(id) { // zistak to id a podla toho dat filter na konkretnu sadu
     elementId = id;
-    console.log(elementId);
+    //alert(elementId);
+    let buttonElement = document.getElementById('testWrite');
+
+    buttonElement.onclick = function() {
+        testWritingTask(id);
+      };
+
     document.getElementById('modalSet').style.display = 'block';
 
 }
-function testWritingTask() { //id task setu
-    console.log(elementId);
+function testWritingTask(id) { //id task setu
+    console.log(id);
+    //console.log(elementId);
     window.location.href = "studentPages/testWriting.php?taks="+elementId;
 
 }
@@ -162,20 +177,11 @@ function handleFormSubmit(event) {
     imageFolderInput.value = '';
     latexFolderInput.value = '';
 
-
 }
 
 if (document.getElementById('folderUploadForm') !== null) {
     document.getElementById('folderUploadForm').addEventListener('submit', handleFormSubmit);
 }
-
-
-
-
-
-
-
-
 
 
 function sendData(latexContent, images, fileName) {
@@ -194,9 +200,6 @@ function sendData(latexContent, images, fileName) {
         }
     });
 }
-document.getElementById('folderUploadForm').addEventListener('submit', handleFormSubmit);
-
-
 
 function newSetUpload() {
 

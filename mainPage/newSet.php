@@ -75,15 +75,23 @@ if (!isset($_SESSION['login']) || (strcmp($_SESSION['login'], 'true') != 0) || (
 
     </nav>
 
+    <div class="formUpload">
+
     <form id="folderUploadForm">
+    <div class="formUploadsection">
         <label for="imageFolder">Image Folder:</label>
         <input type="file" id="imageFolder" webkitdirectory directory multiple>
         <br>
+        </div>
+        <div class="formUploadsection">
         <label for="latexFolder">LaTeX Folder:</label>
         <input type="file" id="latexFolder" webkitdirectory directory multiple required>
         <br>
+        </div>
         <button type="submit">Upload</button>
     </form>
+
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
