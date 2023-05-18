@@ -70,7 +70,10 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 require_once('../config.php');
 $_POST = json_decode(file_get_contents('php://input'), true);
-
+file_get_contents('php://input');
+echo "TOTO: \n";
+print_r(json_encode($_POST)) ;
+echo "\n";
 if (
     $_SERVER["REQUEST_METHOD"] == "POST"
     && isset($_POST["name"])
@@ -88,6 +91,9 @@ if (
     //     $response = $stmt->fetchAll(PDO::FETCH_ASSOC);
     //     echo json_encode($response);
     // }
+
+    createNewTaskSetBuild($db, $_POST);
+
     return;
 }
 
@@ -139,7 +145,6 @@ function parseLaTeX($text)
         $task['solution'] = trim($match[4]);
         $tasks[] = $task;
     }
-
     return $tasks;
 }
 
