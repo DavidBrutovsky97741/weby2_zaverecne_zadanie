@@ -107,10 +107,11 @@ class Err extends Result
 
 function parseLaTeX($text)
 {
-    $pattern = '/\\\\section\*\{(.+?)\}.*?\\\\begin\{task\}(.*?)(?:\\\\includegraphics\{(.*?)\})?.*?\\\\end\{task\}.*?\\\\begin\{solution\}(.*?)\\\\end\{solution\}/s';
+    $pattern = '/\\\\section\*\{(.+?)\}.*?\\\\begin\{task\}(.*?)(?:\\\\includegraphics\{(.*?)\}|\\\\end\{task\}).*?\\\\begin\{solution\}(.*?)\\\\end\{solution\}/s';
     preg_match_all($pattern, $text, $matches, PREG_SET_ORDER);
 
     $tasks = array();
+    var_dump($matches);
     foreach ($matches as $match) {
         $task = array();
         $task['section'] = trim($match[1]);
@@ -188,6 +189,7 @@ function createImage(PDO $db, array $image): Result
 function createTask(PDO $db, int $taskSetId, array $task, int|null $imageId): Result
 {
     try {
+        var_dump($task);
         $sql = "INSERT INTO Tasks (task_set_id, task_text, task_image_id, answer ) VALUES (?, ?, ?, ?)";
         $stmt = $db->prepare($sql);
         if ($stmt->execute([$taskSetId, $task["task"], $imageId, $task["solution"]])) {
