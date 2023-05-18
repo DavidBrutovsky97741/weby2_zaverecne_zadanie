@@ -1,53 +1,78 @@
+
 function generateSets() {
     //ziskat pocet setov a ich meno / id
     //praca nad db
 
     document.getElementById('sets').innerHTML = '';
 
-    let count = 20;    
+    let count = 20;
 
-    for (let i=0;i<count;i++){        
+    for (let i = 0; i < count; i++) {
 
         let randomSetName = (Math.random() + 1).toString(36).substring(5);
 
-        const click = document.createElement('p'); 
+        const click = document.createElement('p');
         const div = document.createElement('div');
         const img = document.createElement('img');
         const p = document.createElement('p');
 
-        click.setAttribute('class','aLink');
-        click.setAttribute('onclick','openModal();');   // pripisat na id
+        click.setAttribute('class', 'aLink');
+        click.setAttribute('onclick', 'openModal();');   // pripisat na id
 
-        div.setAttribute('class','folderDiscription');
-    
+        div.setAttribute('class', 'folderDiscription');
 
-        img.setAttribute('class','imgSets');
-        img.setAttribute('src','/images/folder.png');
 
-        p.setAttribute('class','setDiscription');
-        p.textContent = 'set_"'+randomSetName+'"';
+        img.setAttribute('class', 'imgSets');
+        img.setAttribute('src', '/images/folder.png');
+
+        p.setAttribute('class', 'setDiscription');
+        p.textContent = 'set_"' + randomSetName + '"';
 
 
         $('#sets').append(click);
 
         click.appendChild(div);
         click.appendChild(img);
-        click.appendChild(p); 
+        click.appendChild(p);
 
     }
 
 }
 
-function openModal(){ // zistak to id a podla toho dat filter na konkretnu sadu
+function openModal() { // zistak to id a podla toho dat filter na konkretnu sadu
     document.getElementById('modalSet').style.display = 'block';
 }
 
 
-function closeModal(){
+function closeModal() {
     document.getElementById('modalSet').style.display = 'none';
 }
 
 
+function sendData(contents, images, fileName) {
+
+
+    $.ajax({
+        url: "../api/newSet/index.php",
+        method: "POST",
+        data: {
+            json: {
+                "name": fileName,
+                "maxpoints": 10,
+                "text": contents,
+                "images": images
+            },
+        },
+        success: function (response) {
+            var data = JSON.parse(response);
+            console.log(data.length);
+        }
+    })
+}
+
+images = [];
+fileName = "";
+latexContent = "";
 function handleFormSubmit(event) {
     event.preventDefault(); // Prevent form submission
 
@@ -68,22 +93,36 @@ function handleFormSubmit(event) {
     // Loop through the selected image files and check their extensions
     for (var i = 0; i < imageFiles.length; i++) {
         var imageFile = imageFiles[i];
+
         var imageExtension = imageFile.name.split('.').pop().toLowerCase();
 
-        
+
 
         // Check if the file extension is not an image extension
         if (!['jpg', 'jpeg', 'png'].includes(imageExtension)) {
             onlyImages = false;
             break;
+        } else {
+            var reader = new FileReader();
+            reader.onload = function (event) {
+                var imageContent = event.target.result;
+                
+                var imageObject = {
+                    "fileName": imageFile.name,
+                    "image64": imageContent
+                }
+
+                images.push(imageObject);
+            };
+            reader.readAsDataURL(imageFile);
         }
     }
 
     // Loop through the selected LaTeX files and check their extensions
     for (var j = 0; j < latexFiles.length; j++) {
         var latexFile = latexFiles[j];
+        fileName = latexFile.name;
         var latexExtension = latexFile.name.split('.').pop().toLowerCase();
-
         // Check if the file extension is not 'tex'
         if (latexExtension !== 'tex') {
             onlyLaTeX = false;
@@ -91,6 +130,15 @@ function handleFormSubmit(event) {
         }
     }
 
+    var reader = new FileReader();
+    reader.onload = function (event) {
+        var contents = event.target.result;
+        console.log("File contents:", contents);
+        latexContent = contents;
+    };
+    reader.readAsText(latexFile);
+    
+    
     // Display the result based on the onlyImages and onlyLaTeX variables
     if (onlyImages && onlyLaTeX) {
         alert('The image folder contains only images, and the LaTeX folder contains only LaTeX files.');
@@ -101,13 +149,11 @@ function handleFormSubmit(event) {
     } else {
         alert('The folders contain files other than the specified types.');
     }
-
+    sendData(contents, images, fileName);
+    
     // Clear the selected files
     imageFolderInput.value = '';
     latexFolderInput.value = '';
-
-
-
 
 
 }
@@ -128,36 +174,41 @@ function testWritingTask(){ //id task setu
 
 
 
-function newSetUpload(){
+
+document.getElementById('folderUploadForm').addEventListener('submit', handleFormSubmit);
+
+
+
+function newSetUpload() {
 
     //odosielam zip
     //dosavam odozvu, 200 etc.
 }
 
-function studentsOverview(){
+function studentsOverview() {
     //praca nad db
     // missing frontend
 }
 
-function setsToGenerate(){
+function setsToGenerate() {
     // praca nad db
     // missing frontend
 }
 
-function pointsForSet(){
+function pointsForSet() {
     // praca nad db
     // missing frontend    
 }
 
-function slovakStudent(){ 
+function slovakStudent() {
     document.getElementById('buttonGenerate').innerHTML = "Generuj sady úloh";
     document.getElementById('logout').innerHTML = "Ohlásiť sa";
     document.getElementById('navName').innerHTML = " &nbsp; Záverečné zadanie webte2";
 
 
     if (document.getElementById('setsEmptyInfo') !== null) {
-        document.getElementById('setsEmptyInfo').innerHTML = " Tu sa zobrazia generované sety úloh";    
-     }
+        document.getElementById('setsEmptyInfo').innerHTML = " Tu sa zobrazia generované sety úloh";
+    }
     document.getElementById('taskStateTranslate').innerHTML = "Stav ";
     document.getElementById('pointsTranslate').innerHTML = " Maximálny počet bodov";
     document.getElementById('countTasksTranslate').innerHTML = " Počet úloh";
@@ -165,22 +216,22 @@ function slovakStudent(){
     document.getElementById('testWrite').innerHTML = "Písať test";
 }
 
-function englishStudentTranslate(){
+function englishStudentTranslate() {
     document.getElementById('buttonGenerate').innerHTML = "Generate sets of tasks";
     document.getElementById('logout').innerHTML = "Log out";
     document.getElementById('navName').innerHTML = " &nbsp; Final task webte2";
-   
-if (document.getElementById('setsEmptyInfo') !== null) {
-     document.getElementById('setsEmptyInfo').innerHTML = " Here will be shown generated sets of tasks";    
-  }
+
+    if (document.getElementById('setsEmptyInfo') !== null) {
+        document.getElementById('setsEmptyInfo').innerHTML = " Here will be shown generated sets of tasks";
+    }
     document.getElementById('taskStateTranslate').innerHTML = " State";
     document.getElementById('pointsTranslate').innerHTML = " Max points";
-    document.getElementById('countTasksTranslate').innerHTML = " Number of tasks"; 
+    document.getElementById('countTasksTranslate').innerHTML = " Number of tasks";
     document.getElementById('closeModal').innerHTML = "Close";
     document.getElementById('testWrite').innerHTML = "Write test";
 }
 
-function slovakTeacher(){
+function slovakTeacher() {
     document.getElementById('logout').innerHTML = "Ohlásiť sa";
     document.getElementById('navName').innerHTML = " &nbsp; Záverečné zadanie webte2";
     document.getElementById('newSetName').innerHTML = " Nahrať novú sadu";
@@ -189,7 +240,7 @@ function slovakTeacher(){
     document.getElementById('changePoints').innerHTML = " Zmeniť body za sadu";
 }
 
-function englishTeacherTranslate(){
+function englishTeacherTranslate() {
     document.getElementById('logout').innerHTML = "Log out";
     document.getElementById('navName').innerHTML = " &nbsp; Final task webte2";
     document.getElementById('newSetName').innerHTML = " Upload new set";

@@ -94,7 +94,7 @@ if (!isset($_SESSION['login']) || (strcmp($_SESSION['login'], 'true') != 0) || (
     <script src="https://cdnjs.cloudflare.com/ajax/libs/json2/20160511/json2.js"
         integrity="sha512-h3RrO+eudpiPUYFkwORXD2ppuy9jOXQ+MzVEIo7k+OuA7y9Ze5jsQ5WN/ZSgI+ZSIngT6pDSaqpgmnam2HPe1g=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script defer src="script.js"></script>
+    <script src="script.js"></script>
 
 
 
