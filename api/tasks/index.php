@@ -5,12 +5,6 @@ error_reporting(E_ALL);
 require_once('../config.php');
 require_once('../students/index.php');
 
-
-if($_SERVER["REQUEST_METHOD"] == "GET"){
-    getAvailableTasks($db);
-    return;
-}
-
 function getAvailableTasks(PDO $db): array
 {
     try {
@@ -18,7 +12,7 @@ function getAvailableTasks(PDO $db): array
         $stmt = $db->prepare($sql);
         if ($stmt->execute()) {
             $response = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            echo json_encode($response);
+            $response;
             return $response;
         }
         return [];
@@ -154,8 +148,14 @@ if (
 
 if (
     $_SERVER["REQUEST_METHOD"] == "GET"
+    && isset($_GET["getAll"])
 ) {
     echo json_encode(getTaskSets($db));
+    return;
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "GET") {
+    echo json_encode(getAvailableTasks($db));
     return;
 }
 
