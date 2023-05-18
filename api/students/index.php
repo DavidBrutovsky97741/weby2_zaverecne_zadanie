@@ -3,25 +3,6 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-require('../api/config.php');
-//$_POST = json_decode(file_get_contents('php://input'), true);
-
-
-
-if (
-    $_SERVER["REQUEST_METHOD"] == "GET"
-) {
-    $sql = "SELECT * FROM Students ";
-    $stmt = $db->prepare($sql);
-    if ($stmt->execute()) {
-        $response = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        echo "asdfas";
-        echo json_encode($response);
-    }
-    return;
-}
-
-
 function insertStudentDB($email, $aisId, $name, $surname)
 {
 
@@ -43,17 +24,17 @@ function insertStudentDB($email, $aisId, $name, $surname)
 function getStudentByAisId(PDO $db, int $aisId)
 {
     try {
-        $sql = "SELECT * FROM Students ";
+        $sql = "SELECT * FROM Students WHERE aisId = ?";
         $stmt = $db->prepare($sql);
-        if ($stmt->execute()) {
+        if ($stmt->execute([$aisId])) {
             $response = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            echo "asdfas";
-            echo json_encode($response);
+            return $response;
         }
-
+        return null;
     } catch (Exception $e) {
-
+        return null;
     }
 }
+
 
 ?>
