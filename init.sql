@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: db
--- Generation Time: May 18, 2023 at 11:34 AM
+-- Generation Time: May 18, 2023 at 07:19 PM
 -- Server version: 8.0.33
 -- PHP Version: 8.1.17
 
@@ -20,17 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `zaverecne`
 --
-
--- --------------------------------------------------------
-
---
--- Table structure for table `Available_task_sets`
---
-
-CREATE TABLE `Available_task_sets` (
-  `id` int UNSIGNED NOT NULL,
-  `task_id` int UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -104,19 +93,13 @@ CREATE TABLE `Tasks_sets` (
   `max_points` int UNSIGNED NOT NULL,
   `start_generate_date` datetime DEFAULT NULL,
   `end_generate_date` datetime DEFAULT NULL,
-  `name` text NOT NULL
+  `name` text NOT NULL,
+  `available` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Indexes for dumped tables
 --
-
---
--- Indexes for table `Available_task_sets`
---
-ALTER TABLE `Available_task_sets`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `task_id` (`task_id`);
 
 --
 -- Indexes for table `Images`
@@ -158,12 +141,6 @@ ALTER TABLE `Tasks_sets`
 --
 
 --
--- AUTO_INCREMENT for table `Available_task_sets`
---
-ALTER TABLE `Available_task_sets`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `Images`
 --
 ALTER TABLE `Images`
@@ -173,35 +150,29 @@ ALTER TABLE `Images`
 -- AUTO_INCREMENT for table `Students`
 --
 ALTER TABLE `Students`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `Student_task_sets`
 --
 ALTER TABLE `Student_task_sets`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `Tasks`
 --
 ALTER TABLE `Tasks`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `Tasks_sets`
 --
 ALTER TABLE `Tasks_sets`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- Constraints for dumped tables
 --
-
---
--- Constraints for table `Available_task_sets`
---
-ALTER TABLE `Available_task_sets`
-  ADD CONSTRAINT `Available_task_sets_ibfk_1` FOREIGN KEY (`task_id`) REFERENCES `Tasks_sets` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
 -- Constraints for table `Student_task_sets`
