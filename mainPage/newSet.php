@@ -67,29 +67,30 @@ if (!isset($_SESSION['login']) || (strcmp($_SESSION['login'], 'true') != 0) || (
         </a>
 
         <a class="navAttpic" href="/api/language-api.php?language=slovak"> <img class="flagSize"
-                    src="/images/slovakia.png" width=30></a></button>
+                src="/images/slovakia.png" width=30></a></button>
 
-        <a class="navAttpic" href="/api/language-api.php?language=english"> <img class="flagSize"
-                    src="/images/gb.png" width=30 ></a> </button>
+        <a class="navAttpic" href="/api/language-api.php?language=english"> <img class="flagSize" src="/images/gb.png"
+                width=30></a> </button>
 
 
     </nav>
 
     <div class="formUpload">
 
-    <form id="folderUploadForm">
-    <div class="formUploadsection">
-        <label for="imageFolder">Image Folder:</label>
-        <input type="file" id="imageFolder" webkitdirectory directory multiple>
-        <br>
-        </div>
-        <div class="formUploadsection">
-        <label for="latexFolder">LaTeX Folder:</label>
-        <input type="file" id="latexFolder" webkitdirectory directory multiple required>
-        <br>
-        </div>
-        <button type="submit">Upload</button>
-    </form>
+        <form id="folderUploadForm">
+
+            <div class="formUploadsection">
+                <label for="imageFolder">Image Folder:</label>
+                <input type="file" id="imageFolder" webkitdirectory directory multiple>
+            </div>
+
+            <div class="formUploadsection">
+                <label for="latexFolder">LaTeX Folder:</label>
+                <input type="file" id="latexFolder" webkitdirectory directory multiple required>
+            </div>
+
+            <button type="submit">Upload</button>
+        </form>
 
     </div>
 

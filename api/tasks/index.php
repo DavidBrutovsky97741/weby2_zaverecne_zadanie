@@ -5,6 +5,23 @@ error_reporting(E_ALL);
 require_once('../config.php');
 require_once('../students/index.php');
 
+function getPoints(PDO $db): array
+{
+    try {
+        $sql = "SELECT * FROM Tasks_sets";
+        $stmt = $db->prepare($sql);
+        if ($stmt->execute()) {
+            $response = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $response;
+
+            return $response;
+        }
+        return [];
+    } catch (Exception $e) {
+        return [];
+    }
+}
+
 function getAvailableTasks(PDO $db): array
 {
     try {
@@ -146,6 +163,21 @@ if (
     return;
 }
 
+function changePoints($id,$points,PDO $db){
+
+    try {
+        $sql = "UPDATE Tasks_sets SET max_points = ? WHERE id = ?";
+        $stmt = $db->prepare($sql);
+        if ($stmt->execute([$points, $id])) {
+            return $stmt->rowCount() > 0 ? true : false;
+        }
+        return false;
+    } catch (Exception $e) {
+        return false;
+    }
+
+}
+
 if (
     $_SERVER["REQUEST_METHOD"] == "GET"
     && isset($_GET["getAll"])
@@ -154,9 +186,28 @@ if (
     return;
 }
 
+if (
+    $_SERVER["REQUEST_METHOD"] == "POST"
+
+) {
+    echo changePoints($_POST['id'],$_POST['points'],$db);
+    return;
+}
+
+if (
+    $_SERVER["REQUEST_METHOD"] == "GET"
+    && isset($_GET["getPoints"])
+) {
+    echo json_encode(getPoints($db));
+    return;
+}
+
+
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
     echo json_encode(getAvailableTasks($db));
     return;
 }
+
+
 
 ?>

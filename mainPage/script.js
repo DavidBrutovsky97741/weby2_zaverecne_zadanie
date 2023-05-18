@@ -91,13 +91,13 @@ function closeModal() {
 }
 
 
-
-
 function handleFormSubmit(event) {
     event.preventDefault(); // Prevent form submission
 
     var imageFolderInput = document.getElementById('imageFolder');
     var latexFolderInput = document.getElementById('latexFolder');
+
+   
 
     // Check if the file inputs exist
     if (!imageFolderInput || !latexFolderInput) {

@@ -378,8 +378,48 @@ button{
     text-align: center;
 }
 
-.folderUploadForm{
-    
+.formUpload{
+
+
+    width: auto;
+  
+    height: 100%;
+    text-align: center;
+
+}
+
+.formUploadsection{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid black;
+    text-align: center;
+    margin: 5%;
+}
+
+#imageFolder{
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5%;
+    width: 100%;
+    height: 20vh;
+    border: 1px solid black;
+    cursor: pointer;
+}
+
+#latexFolder{
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5%;
+    width: 100%;
+    height: 20vh;
+    border: 1px solid black;
+    cursor: pointer;
+
 }
 
 
