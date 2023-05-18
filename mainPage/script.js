@@ -2,37 +2,30 @@ images = [];
 fileName = "";
 latexContent = "";
 uniqueSets = [];
+elementId = "";
 $.ajax({
     url: "../api/tasks/index.php",
     method: "GET",
     success: function (response) {
-        // response = JSON.parse(response);
-        console.log("Success");
-        console.log(response);
+        response = JSON.parse(response);
         for (let i = 0; i < response.length; i++) {
             if (uniqueSets.includes(response[i].task_id)) {
                 continue;
-            }else{
-            uniqueSets.push(response[i].task_id);
+            } else {                
+                uniqueSets.push(response[i].task_id);
             }
         }
-        // console.log(uniqueSets);
     }
 });
 function generateSets() {
     //ziskat pocet setov a ich meno / id
-
-    //praca nad db
-
-        
-
 
 
     // console.log(uniqueSets);
     document.getElementById('sets').innerHTML = '';
 
     let count = uniqueSets.length;
-
+    console.log(uniqueSets[0]);
     for (let i = 0; i < count; i++) {
 
         let randomSetName = (Math.random() + 1).toString(36).substring(5);
@@ -43,8 +36,8 @@ function generateSets() {
         const p = document.createElement('p');
 
         click.setAttribute('class', 'aLink');
+        click.setAttribute('id', uniqueSets[i]);
         click.setAttribute('onclick', 'openModal();');   // pripisat na id
-
         div.setAttribute('class', 'folderDiscription');
 
 
@@ -66,12 +59,19 @@ function generateSets() {
 }
 
 function openModal() { // zistak to id a podla toho dat filter na konkretnu sadu
-    document.getElementById('modalSet').style.display = 'block';
-}
 
+    document.getElementById('modalSet').style.display = 'block';
+
+}
+function testWritingTask() { //id task setu
+    console.log(elementId);
+    // window.location.href = "studentPages/testWriting.php?taks="+elementId;
+
+}
 
 function closeModal() {
     document.getElementById('modalSet').style.display = 'none';
+    
 }
 
 
@@ -172,11 +172,7 @@ if (document.getElementById('folderUploadForm') !== null) {
 
 
 
-function testWritingTask() { //id task setu
 
-    window.location.href = "studentPages/testWriting.php?taks=xxx";
-
-}
 
 
 
