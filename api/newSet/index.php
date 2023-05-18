@@ -71,26 +71,6 @@ error_reporting(E_ALL);
 require_once('../config.php');
 $_POST = json_decode(file_get_contents('php://input'), true);
 
-if (
-    $_SERVER["REQUEST_METHOD"] == "POST"
-    && isset($_POST["name"])
-    && isset($_POST["text"])
-    && isset($_POST["maxPoints"])
-    && isset($_POST["images"])
-) {
-    // $name = $_POST["name"];
-    // $text = $_POST["text"];
-    // $images = $_POST["images"];
-    // $maxPoints = $_POST["maxPoints"];
-    // $sql = "INSERT INTO Tasks_sets (latex_text, max_points, name) VALUES (?, ?, ?)";
-    // $stmt = $db->prepare($sql);
-    // if ($stmt->execute([$text, $maxPoints, $name])) {
-    //     $response = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    //     echo json_encode($response);
-    // }
-    return;
-}
-
 abstract class Result
 {
     public function isOk(): bool
@@ -127,7 +107,7 @@ class Err extends Result
 
 function parseLaTeX($text)
 {
-    $pattern = '/\\\\section\*\{(.+?)\}.*?\\\\begin\{task\}(.*?)\\\\includegraphics\{(.*?)\}.*?\\\\end\{task\}.*?\\\\begin\{solution\}(.*?)\\\\end\{solution\}/s';
+    $pattern = '/\\\\section\*\{(.+?)\}.*?\\\\begin\{task\}(.*?)(?:\\\\includegraphics\{(.*?)\})?.*?\\\\end\{task\}.*?\\\\begin\{solution\}(.*?)\\\\end\{solution\}/s';
     preg_match_all($pattern, $text, $matches, PREG_SET_ORDER);
 
     $tasks = array();
@@ -135,7 +115,7 @@ function parseLaTeX($text)
         $task = array();
         $task['section'] = trim($match[1]);
         $task['task'] = trim($match[2]);
-        $task['image'] = trim($match[3]);
+        $task['image'] = isset($match[3]) && $match[3] != "" ? trim($match[3]) : null;
         $task['solution'] = trim($match[4]);
         $tasks[] = $task;
     }
@@ -146,7 +126,7 @@ function parseLaTeX($text)
 function validateImages($tasks, $images): bool
 {
     foreach ($tasks as $task) {
-        if (count($task["images"]) === 0)
+        if (is_null($task["image"]) || $task["image"] === "")
             continue;
         $contains = false;
         foreach ($images as $image) {
@@ -157,26 +137,17 @@ function validateImages($tasks, $images): bool
             return false;
     }
     return true;
-
-    // foreach ($images as $image) {
-    //     $contains = false;
-    //     foreach ($tasks as $task) {
-    //         if (str_contains($task["image"], $image["name"]))
-    //             $contains = true;
-    //     }
-    //     if ($contains == false)
-    //         return false;
-    // }
-    // return true;
 }
 
 
-// function findImage($task, $images):array {
-//     foreach ($image as $images) {
-//         if (str_contains($task["image"], $image["fileName"])) return $image
-//     }
-//     return []
-// }
+function findImage($task, $images): array
+{
+    foreach ($images as $image) {
+        if (str_contains($task["image"], $image["fileName"]))
+            return $image;
+    }
+    return [];
+}
 
 /** */
 function createNewTaskSet(
@@ -215,11 +186,39 @@ function createImage(PDO $db, array $image): Result
     }
 }
 
-// function createTasks(PDO $db, int $taskSetId, array $tasks, array $images){
-//     foreach ($task as $images) {
-//         # code...
-//     }
-// }
+function createTask(PDO $db, int $taskSetId, array $task, int|null $imageId): Result
+{
+    try {
+        $sql = "INSERT INTO Tasks (task_set_id, task_text, task_image_id, answer ) VALUES (?, ?, ?, ?)";
+        $stmt = $db->prepare($sql);
+        if ($stmt->execute([$taskSetId, $task["task"], $imageId, $task["solution"]])) {
+            if ($stmt->rowCount() == 0)
+                return new Err(error: "no rows affected");
+            return new Ok(value: $db->lastInsertId());
+        }
+        return new Err(error: "execute failed");
+    } catch (Exception $e) {
+        return new Err(error: $e->getMessage());
+    }
+}
+
+function createTasks(PDO $db, int $taskSetId, array $tasks, array $images): Result
+{
+    foreach ($tasks as $task) {
+        $image = findImage($task, $images);
+        echo "asdfasdfasd: " . $task["image"];
+        $imageResult = null;
+        if (!is_null($task["image"]) || $task["image"] != "") {
+            $imageResult = createImage($db, $image);
+            if ($imageResult->isErr())
+                return $imageResult;
+        }
+        $taskResult = createTask($db, $taskSetId, $task, $imageResult ? $imageResult?->value : null);
+        if ($taskResult->isErr())
+            return $taskResult;
+    }
+    return new Ok(value: "tasks created");
+}
 
 function createNewTaskSetBuild(PDO $db, array $request): Result
 {
@@ -227,7 +226,6 @@ function createNewTaskSetBuild(PDO $db, array $request): Result
     $maxPoints = $request["maxPoints"];
     $latexText = $request["text"];
     $images = $request["images"];
-
     $tasks = parseLaTeX($latexText);
     if (!validateImages($tasks, $images))
         return new Err(error: "missing images");
@@ -235,24 +233,26 @@ function createNewTaskSetBuild(PDO $db, array $request): Result
     $newSetResult = createNewTaskSet($db, $name, $maxPoints, $latexText);
     if ($newSetResult->isErr())
         return $newSetResult;
-    // var_dump(createNewTaskSet($db, $name, $maxPoints, $latexText));
 
-
-
-    // return new Ok(value: );
+    return createTasks($db, $newSetResult?->value, $tasks, $images);
 }
 
-var_dump(createNewTaskSetBuild($db, [
-    "name" => "aaaas",
-    "maxPoints" => 485,
-    "text" => $latexText,
-    "images" => []
-]))
+// var_dump(createNewTaskSetBuild($db, [
+//     "name" => "aaaas",
+//     "maxPoints" => 485,
+//     "text" => $latexText,
+//     "images" => []
+// ]));
 
-    // if ($result->isOk()) {
-//     echo "Result: " . $result->value;
-// } else {
-//     echo "Error: " . $result->error;
-// }
+if (
+    $_SERVER["REQUEST_METHOD"] == "POST"
+    && isset($_POST["name"])
+    && isset($_POST["text"])
+    && isset($_POST["maxPoints"])
+    && isset($_POST["images"])
+) {
+    createNewTaskSetBuild($db, $_POST);
+    return;
+}
 
-    ?>
+?>
