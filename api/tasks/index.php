@@ -8,7 +8,7 @@ require_once('../students/index.php');
 function getAvailableTasks(PDO $db): array
 {
     try {
-        $sql = "SELECT * FROM Available_task_sets INNER JOIN Tasks_sets ON Available_task_sets.task_id = Tasks_sets.id";
+        $sql = "SELECT * FROM Tasks_sets WHERE Tasks_sets.available = true";
         $stmt = $db->prepare($sql);
         if ($stmt->execute()) {
             $response = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -23,7 +23,7 @@ function getAvailableTasks(PDO $db): array
 function getAvailableTask(PDO $db, int $taskSetId): array
 {
     try {
-        $sql = "SELECT * FROM Available_task_sets INNER JOIN Tasks_sets ON Available_task_sets.task_id = Tasks_sets.id WHERE Tasks_sets.id = ?";
+        $sql = "SELECT * FROM Tasks_sets WHERE Tasks_sets.available = true AND Tasks_sets.id = ?";
         $stmt = $db->prepare($sql);
         if ($stmt->execute([$taskSetId])) {
             $response = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -39,11 +39,10 @@ function getAvailableTask(PDO $db, int $taskSetId): array
 function addToAvailableTaskSets(PDO $db, int $taskSetId): bool
 {
     try {
-        $sql = "INSERT INTO Available_task_sets (task_id) VALUES (?)";
+        $sql = "UPDATE Tasks_sets SET Tasks_sets.available = true WHERE Tasks_sets.id = ?";
         $stmt = $db->prepare($sql);
         if ($stmt->execute([$taskSetId])) {
-            // $response = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            return true;
+            return $stmt->rowCount() > 0 ? true : false;
         }
         return false;
     } catch (Exception $e) {
@@ -52,10 +51,10 @@ function addToAvailableTaskSets(PDO $db, int $taskSetId): bool
 }
 
 
-function deleteFromAvailableTaskSets(PDO $db, int $taskSetId): bool
+function deleteFromAvailableTaskSets(PDO $db, string $taskSetId): bool
 {
     try {
-        $sql = "DELETE FROM Available_task_sets WHERE ?";
+        $sql = "UPDATE Tasks_sets SET Tasks_sets.available = false WHERE Tasks_sets.id = ?";
         $stmt = $db->prepare($sql);
         if ($stmt->execute([$taskSetId])) {
             return $stmt->rowCount() > 0 ? true : false;
@@ -114,6 +113,43 @@ function submitStudentTaskSet(PDO $db, int $pointsAcquired, int $studentTaskSetI
     } catch (Exception $e) {
         return false;
     }
+}
+
+function getTaskSets(PDO $db)
+{
+    try {
+        $sql = "SELECT * FROM Tasks_sets";
+        $stmt = $db->prepare($sql);
+        if ($stmt->execute()) {
+            $response = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $response;
+        }
+        return [];
+    } catch (Exception $e) {
+        return [];
+    }
+}
+
+if (
+    $_SERVER["REQUEST_METHOD"] == "GET"
+    && isset($_GET["Available"])
+    && isset($_GET["taskSetId"])
+) {
+    var_dump($_GET["Available"]);
+    if ($_GET["Available"] === "true") {
+        var_dump(addToAvailableTaskSets($db, intval($_GET["taskSetId"])));
+    } else {
+        echo deleteFromAvailableTaskSets($db, $_GET["taskSetId"]);
+    }
+
+    return;
+}
+
+if (
+    $_SERVER["REQUEST_METHOD"] == "GET"
+) {
+    echo json_encode(getTaskSets($db));
+    return;
 }
 
 ?>
