@@ -119,7 +119,6 @@ function parseLaTeX($text)
         $task['solution'] = trim($match[4]);
         $tasks[] = $task;
     }
-
     return $tasks;
 }
 

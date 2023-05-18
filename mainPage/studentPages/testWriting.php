@@ -26,7 +26,7 @@ if (!isset($_SESSION['login']) || (strcmp($_SESSION['login'], 'true') != 0) || (
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/mainPage/style.css">
     <title>Document</title>
 </head>
 
@@ -56,72 +56,41 @@ if (!isset($_SESSION['login']) || (strcmp($_SESSION['login'], 'true') != 0) || (
             <?php echo ($_SESSION['full_name']); ?> &nbsp;&nbsp;&nbsp;
         </a>
 
-        <button class="flagbutton" onclick="slovakStudent()"><a class="navAttpic"> <img class="flagSize"
+        <button class="flagbutton" onclick="slovakStudentTranslateTest()"><a class="navAttpic"> <img class="flagSize"
                     src="/images/slovakia.png" width=30></a></button>
 
-        <button class="flagbutton" onclick="englishStudentTranslate()"><a class="navAttpic"> <img class="flagSize"
+        <button class="flagbutton" onclick="englishStudentTranslateTest()"><a class="navAttpic"> <img class="flagSize"
                     src="/images/gb.png" width=30 ></a> </button>
 
     </nav>
 
 
-    <div class="modalSet" id="modalSet">   
-
-        <table>
+        <table class="taskTable">
             <thead>
                 <tr>
-
-                    <th colspan="2" id="setName">Názov setu</th>
-
+                    <th>ID</th>
+                    <th id="taskName">Úloha</th>
+                    <th id="stateName">Stav</th>
+                    <th id="functionName">Funkcie</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td id="countTasksTranslate">Počet úloh</td>
-
-                    <td id="countTasks">with two columns</td>
-                </tr>
-
-                <tr>
-                    <td id="pointsTranslate">Maximálny počet bodov</td>
+            <tbody id="Tbody">
 
 
-                    <td id="points">with two columns</td>
-                </tr>
-                <tr>
-
-                    <td id="taskStateTranslate">Stav</td>
-
-
-                    <td id="taskState">with two columns</td>
-                </tr>
+        
             </tbody>
         </table>
 
-
-        <button type="button" class="btn btn-success" id="testWrite" onclick="testWritingTask()">Písať test</button>
-        <button type="button" class="btn btn-danger" id="closeModal" onclick="closeModal()">Zatvoriť</button>
-
         
 
-    </div>
-
-    <div class="container">
-        <button class="button" onclick="generateSets()">
+        <div class="containerNew" id="container">
+        <button class="button" onclick="submitTaks()">
             <div class="button__line"></div>
             <div class="button__line"></div>
-            <span class="button__text" id="buttonGenerate">Generuj sady úloh</span>
+            <span class="button__text" id="buttonGenerate">Odoslať odpovede</span>
 
         </button>
     </div>
-
-    <div class="sets" id="sets">
-        <p id="setsEmptyInfo"> Tu sa zobrazia generované sety úloh </p>
-    </div>
-
-
-
-
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
@@ -134,7 +103,6 @@ if (!isset($_SESSION['login']) || (strcmp($_SESSION['login'], 'true') != 0) || (
         integrity="sha512-h3RrO+eudpiPUYFkwORXD2ppuy9jOXQ+MzVEIo7k+OuA7y9Ze5jsQ5WN/ZSgI+ZSIngT6pDSaqpgmnam2HPe1g=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script defer src="script.js"></script>
-
 
 </body>
 

@@ -1,4 +1,6 @@
-
+images = [];
+fileName = "";
+latexContent = "";
 function generateSets() {
     //ziskat pocet setov a ich meno / id
     //praca nad db
@@ -49,30 +51,8 @@ function closeModal() {
 }
 
 
-function sendData(contents, images, fileName) {
 
 
-    $.ajax({
-        url: "../api/newSet/index.php",
-        method: "POST",
-        data: {
-            json: {
-                "name": fileName,
-                "maxpoints": 10,
-                "text": contents,
-                "images": images
-            },
-        },
-        success: function (response) {
-            var data = JSON.parse(response);
-            console.log(data.length);
-        }
-    })
-}
-
-images = [];
-fileName = "";
-latexContent = "";
 function handleFormSubmit(event) {
     event.preventDefault(); // Prevent form submission
 
@@ -113,6 +93,7 @@ function handleFormSubmit(event) {
                 }
 
                 images.push(imageObject);
+                // console.log(images);
             };
             reader.readAsDataURL(imageFile);
         }
@@ -129,12 +110,14 @@ function handleFormSubmit(event) {
             break;
         }
     }
-
     var reader = new FileReader();
     reader.onload = function (event) {
-        var contents = event.target.result;
-        console.log("File contents:", contents);
-        latexContent = contents;
+        // var contents = event.target.result;
+        // console.log("File contents:", contents);
+        // latexContent = contents;
+        latexContent = event.target.result;
+        // console.log(latexContent);
+        sendData(latexContent, images, fileName);
     };
     reader.readAsText(latexFile);
     
@@ -149,7 +132,6 @@ function handleFormSubmit(event) {
     } else {
         alert('The folders contain files other than the specified types.');
     }
-    sendData(contents, images, fileName);
     
     // Clear the selected files
     imageFolderInput.value = '';
@@ -158,8 +140,40 @@ function handleFormSubmit(event) {
 
 }
 
+if (document.getElementById('folderUploadForm') !== null) {
+    document.getElementById('folderUploadForm').addEventListener('submit', handleFormSubmit);
+ }
 
 
+
+
+
+function testWritingTask(){ //id task setu
+
+    window.location.href = "studentPages/testWriting.php?taks=xxx";
+
+}
+
+
+
+
+function sendData(latexContent, images, fileName) {
+    images = images || [];
+    $.ajax({
+        url: "../api/newSet/index.php",
+        method: "POST",
+        data: JSON.stringify({
+            "name": fileName,
+            "maxpoints": 10,
+            "text": latexContent,
+            "images": images
+        }),
+        success: function (response) {
+            var data = JSON.parse(response);
+            console.log(data.length);
+        }
+    });
+}
 document.getElementById('folderUploadForm').addEventListener('submit', handleFormSubmit);
 
 
@@ -234,3 +248,12 @@ function englishTeacherTranslate() {
     document.getElementById('changePoints').innerHTML = " Change points of set";
 }
 
+function englishStudentTranslateTest(){
+    document.getElementById('logout').innerHTML = "Log out";
+    document.getElementById('navName').innerHTML = " &nbsp; Final task webte2";
+}
+
+function slovakStudentTranslateTest(){
+    document.getElementById('logout').innerHTML = "Ohlásiť sa";
+    document.getElementById('navName').innerHTML = " &nbsp; Záverečné zadanie webte2";
+}
