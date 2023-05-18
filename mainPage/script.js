@@ -1,3 +1,4 @@
+
 function generateSets() {
     //ziskat pocet setov a ich meno / id
     //praca nad db
@@ -48,12 +49,19 @@ function closeModal() {
 }
 
 
-function sendData(contents) {
+function sendData(contents, images, fileName) {
+
+
     $.ajax({
         url: "../api/newSet/index.php",
         method: "POST",
         data: {
-            json: contents,
+            json: {
+                "name": fileName,
+                "maxpoints": 10,
+                "text": contents,
+                "images": images
+            },
         },
         success: function (response) {
             var data = JSON.parse(response);
@@ -62,8 +70,9 @@ function sendData(contents) {
     })
 }
 
-
-
+images = [];
+fileName = "";
+latexContent = "";
 function handleFormSubmit(event) {
     event.preventDefault(); // Prevent form submission
 
@@ -93,33 +102,43 @@ function handleFormSubmit(event) {
         if (!['jpg', 'jpeg', 'png'].includes(imageExtension)) {
             onlyImages = false;
             break;
+        } else {
+            var reader = new FileReader();
+            reader.onload = function (event) {
+                var imageContent = event.target.result;
+                
+                var imageObject = {
+                    "fileName": imageFile.name,
+                    "image64": imageContent
+                }
+
+                images.push(imageObject);
+            };
+            reader.readAsDataURL(imageFile);
         }
-
     }
-
 
     // Loop through the selected LaTeX files and check their extensions
     for (var j = 0; j < latexFiles.length; j++) {
         var latexFile = latexFiles[j];
-
+        fileName = latexFile.name;
         var latexExtension = latexFile.name.split('.').pop().toLowerCase();
         // Check if the file extension is not 'tex'
         if (latexExtension !== 'tex') {
             onlyLaTeX = false;
             break;
-        } else {
-            var reader = new FileReader();
-            reader.onload = function (event) {
-                var contents = event.target.result;
-                console.log("File contents:", contents);
-
-
-                sendData(contents);
-            };
-            reader.readAsText(latexFile);
         }
     }
 
+    var reader = new FileReader();
+    reader.onload = function (event) {
+        var contents = event.target.result;
+        console.log("File contents:", contents);
+        latexContent = contents;
+    };
+    reader.readAsText(latexFile);
+    
+    
     // Display the result based on the onlyImages and onlyLaTeX variables
     if (onlyImages && onlyLaTeX) {
         alert('The image folder contains only images, and the LaTeX folder contains only LaTeX files.');
@@ -130,7 +149,8 @@ function handleFormSubmit(event) {
     } else {
         alert('The folders contain files other than the specified types.');
     }
-
+    sendData(contents, images, fileName);
+    
     // Clear the selected files
     imageFolderInput.value = '';
     latexFolderInput.value = '';
