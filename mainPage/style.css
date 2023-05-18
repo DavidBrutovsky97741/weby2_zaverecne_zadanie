@@ -355,5 +355,15 @@ button{
     display: flex;
     width: auto;
     background: none;
+
 }
+.taskTable{
+    width: 80%;
+    height: 80%;
+    overflow: hidden;
+    margin-top: 10%;
+    margin-left: 10%;
+    text-align: center;
+}
+
 
