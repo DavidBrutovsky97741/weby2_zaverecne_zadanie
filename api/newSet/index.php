@@ -205,7 +205,6 @@ function createTasks(PDO $db, int $taskSetId, array $tasks, array $images): Resu
 {
     foreach ($tasks as $task) {
         $image = findImage($task, $images);
-        echo "asdfasdfasd: " . $task["image"];
         $imageResult = null;
         if (!is_null($task["image"]) || $task["image"] != "") {
             $imageResult = createImage($db, $image);
@@ -250,7 +249,7 @@ if (
     && isset($_POST["maxPoints"])
     && isset($_POST["images"])
 ) {
-    createNewTaskSetBuild($db, $_POST);
+    echo json_encode(createNewTaskSetBuild($db, $_POST));
     return;
 }
 
