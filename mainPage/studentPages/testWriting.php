@@ -81,11 +81,13 @@ if (!isset($_SESSION['login']) || (strcmp($_SESSION['login'], 'true') != 0) || (
             </tbody>
         </table>
 
+        
+
         <div class="containerNew" id="container">
         <button class="button" onclick="submitTaks()">
             <div class="button__line"></div>
             <div class="button__line"></div>
-            <span class="button__text" id="buttonGenerate">Odoslať odpoveďe</span>
+            <span class="button__text" id="buttonGenerate">Odoslať odpovede</span>
 
         </button>
     </div>

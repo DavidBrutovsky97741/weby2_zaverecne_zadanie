@@ -24,7 +24,7 @@ window.onload = function () {
         }
     })*/
 
-    
+
 
     let count = 5;
 
@@ -109,6 +109,7 @@ window.onload = function () {
     document.getElementById('taskName').innerHTML = "Task";
     document.getElementById('stateName').innerHTML = " State";
     document.getElementById('functionName').innerHTML = " Functions";
+    document.getElementById('buttonGenerate').innerHTML = " Submit tasks";
 
     let i = 0;
     while (true) {
@@ -129,6 +130,7 @@ function slovakStudentTranslateTest(){
     document.getElementById('taskName').innerHTML = "Úloha";
     document.getElementById('stateName').innerHTML = " Stav";
     document.getElementById('functionName').innerHTML = " Funkcie";
+    document.getElementById('buttonGenerate').innerHTML = " Odoslať odpovede";
 
     let i = 0;
     while (true) {
