@@ -40,10 +40,6 @@ if (!isset($_SESSION['login']) || (strcmp($_SESSION['login'], 'true') != 0) || (
         <a href="/mainPage/indexTeacher.php"><i class='material-icons'>home</i></a>
 
 
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
-            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 
 
@@ -55,11 +51,11 @@ if (!isset($_SESSION['login']) || (strcmp($_SESSION['login'], 'true') != 0) || (
             <?php echo ($_SESSION['full_name']); ?> &nbsp;&nbsp;&nbsp;
         </a>
 
-        <button class="flagbutton" onclick="slovakTeacher()"><a class="navAttpic" > <img
-                src="https://flagsapi.com/SK/shiny/32.png"></a></button>
+        <button class="flagbutton" onclick="slovakTeacher()"><a class="navAttpic" > <img class="flagSize"
+                    src="/images/slovakia.png" width=30></a></button>
 
-        <button class="flagbutton" onclick="englishTeacherTranslate()"><a class="navAttpic"> <img
-                src="https://flagsapi.com/GB/shiny/32.png"></a> </button>
+        <button class="flagbutton" onclick="englishTeacherTranslate()"><a class="navAttpic"><img class="flagSize"
+                    src="/images/gb.png" width=30 ></a> </button>
 
 
 

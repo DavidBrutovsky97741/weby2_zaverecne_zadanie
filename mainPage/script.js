@@ -140,6 +140,21 @@ function handleFormSubmit(event) {
 
 }
 
+if (document.getElementById('folderUploadForm') !== null) {
+    document.getElementById('folderUploadForm').addEventListener('submit', handleFormSubmit);
+ }
+
+
+
+
+
+function testWritingTask(){ //id task setu
+
+    window.location.href = "studentPages/testWriting.php?taks=xxx";
+
+}
+
+
 
 
 function sendData(latexContent, images, fileName) {
@@ -233,3 +248,12 @@ function englishTeacherTranslate() {
     document.getElementById('changePoints').innerHTML = " Change points of set";
 }
 
+function englishStudentTranslateTest(){
+    document.getElementById('logout').innerHTML = "Log out";
+    document.getElementById('navName').innerHTML = " &nbsp; Final task webte2";
+}
+
+function slovakStudentTranslateTest(){
+    document.getElementById('logout').innerHTML = "Ohlásiť sa";
+    document.getElementById('navName').innerHTML = " &nbsp; Záverečné zadanie webte2";
+}
