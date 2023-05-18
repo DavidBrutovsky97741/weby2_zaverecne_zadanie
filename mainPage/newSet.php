@@ -77,7 +77,7 @@ if (!isset($_SESSION['login']) || (strcmp($_SESSION['login'], 'true') != 0) || (
 
     <form id="folderUploadForm">
         <label for="imageFolder">Image Folder:</label>
-        <input type="file" id="imageFolder" webkitdirectory directory multiple required>
+        <input type="file" id="imageFolder" webkitdirectory directory multiple>
         <br>
         <label for="latexFolder">LaTeX Folder:</label>
         <input type="file" id="latexFolder" webkitdirectory directory multiple required>

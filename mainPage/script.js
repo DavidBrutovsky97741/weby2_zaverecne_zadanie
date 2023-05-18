@@ -164,13 +164,12 @@ function sendData(latexContent, images, fileName) {
         method: "POST",
         data: JSON.stringify({
             "name": fileName,
-            "maxpoints": 10,
+            "maxPoints": 10,
             "text": latexContent,
             "images": images
         }),
         success: function (response) {
-            var data = JSON.parse(response);
-            console.log(data.length);
+            console.log(response);
         }
     });
 }
