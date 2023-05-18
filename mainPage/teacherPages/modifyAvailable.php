@@ -129,7 +129,7 @@ if (!isset($_SESSION['login']) || (strcmp($_SESSION['login'], 'true') != 0) || (
             });
         }
 
-        fetch("http://localhost:8000/api/tasks/index.php").then((response) => {
+        fetch("http://localhost:8000/api/tasks/index.php?getAll").then((response) => {
             if (response.ok) return response.text()
         }).then((data) => {
             const parsed = JSON.parse(data)

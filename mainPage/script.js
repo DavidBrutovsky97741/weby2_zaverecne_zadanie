@@ -4,7 +4,7 @@ latexContent = "";
 uniqueSets = [];
 elementId = "";
 $.ajax({
-    url: "../api/tasks/index.php",
+    url: "http://localhost:8000/api/tasks/index.php",
     method: "GET",
     success: function (response) {
         response = JSON.parse(response);
