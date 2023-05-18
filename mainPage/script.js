@@ -1,3 +1,15 @@
+$(document).ready(function() {
+    $('#myTable').DataTable({
+      columnDefs: [
+        {
+            targets: [3],
+            orderData: [3, 1]
+        }
+    ]  });
+    
+});
+
+
 
 function generateSets() {
     //ziskat pocet setov a ich meno / id

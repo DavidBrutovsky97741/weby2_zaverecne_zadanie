@@ -12,7 +12,7 @@ if (strcmp($language,'slovak')==0){
     $_SESSION['language'] = "english";
 }
 
-header("Location: /weby2_zaverecne_zadanie/mainPage/index.php");
+header("Location: /mainPage/index.php");
 die();
 
 ?>
