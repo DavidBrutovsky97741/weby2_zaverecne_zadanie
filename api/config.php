@@ -1,5 +1,5 @@
 <?php
-$hostname = "172.25.0.1:3306";
+$hostname = "172.20.128.2:3306";
 $username = "root";
 $password = "MYSQL_ROOT_PASSWORD";
 $dbname = "zaverecne";

@@ -99,6 +99,15 @@ function parseLaTeX($text)
     return $tasks;
 }
 
+function createNewTaskSet(PDO $db, array $request)
+{
+    $name = $request["name"];
+    $maxPoints = $request["maxPoints"];
+    $latexText = $request["text"];
+    $images = $request["images"];
+
+}
+
 $tasks = parseLaTeX($latexText);
 var_dump($tasks);
 
