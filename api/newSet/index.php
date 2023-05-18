@@ -157,7 +157,7 @@ function createNewTaskSet(
     , string $latexText
 ): Result {
     try {
-        $sql = "INSERT INTO Tasks_sets (latex_text, max_points, name) VALUES (?, ?, ?)";
+        $sql = "INSERT INTO Tasks_sets (latex_text, max_points, name, available) VALUES (?, ?, ?, true)";
         $stmt = $db->prepare($sql);
         if ($stmt->execute([$latexText, $maxPoints, $name])) {
             if ($stmt->rowCount() == 0)
