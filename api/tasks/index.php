@@ -73,6 +73,19 @@ function deleteFromAvailableTaskSets(PDO $db, int $taskSetId): bool
         return false;
     }
 }
+function updateStudentGeneratedCount(PDO $db, int $studentId)
+{
+    try {
+        $sql = "UPDATE Student SET Student.generated_task_sets_count = Student.generated_task_sets_count + 1 WHERE Student.id = ?";
+        $stmt = $db->prepare($sql);
+        if ($stmt->execute([$studentId])) {
+            return $stmt->rowCount() > 0 ? true : false;
+        }
+        return false;
+    } catch (Exception $e) {
+        return false;
+    }
+}
 
 function generateStudentTaskSet(PDO $db, int $studentAisId, int $taskSetId)
 {
@@ -86,7 +99,7 @@ function generateStudentTaskSet(PDO $db, int $studentAisId, int $taskSetId)
         $stmt = $db->prepare($sql);
         if ($stmt->execute([0, $taskSetId, $students[0]["id"], "GENERATED"])) {
             $response = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            var_dump($response);
+            updateStudentGeneratedCount($db, $students[0]["id"]);
             return true;
         }
         return false;
@@ -95,10 +108,19 @@ function generateStudentTaskSet(PDO $db, int $studentAisId, int $taskSetId)
     }
 }
 
-getAvailableTasks($db);
 
-
-// addToAvailableTaskSets($db, 45);
-// var_dump(generateStudentTaskSet($db, 111982, 45));
+function submitStudentTaskSet(PDO $db, int $pointsAcquired, int $studentTaskSetId)
+{
+    try {
+        $sql = "UPDATE Student_task_sets SET Student_task_sets.state = 'Submited', Student_task_sets.points_acquired = ?  WHERE Student_task_sets.id = ?";
+        $stmt = $db->prepare($sql);
+        if ($stmt->execute([$pointsAcquired, $studentTaskSetId])) {
+            return $stmt->rowCount() > 0 ? true : false;
+        }
+        return false;
+    } catch (Exception $e) {
+        return false;
+    }
+}
 
 ?>
