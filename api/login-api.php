@@ -57,6 +57,13 @@ if ($ldapconn) {
         //echo("log as teacher");
       }
 
+      if (strcmp($info[0]['employeetype'][0],'student')==0){
+
+        require('students/index.php');
+
+        insertStudentDB($info[0]['mail'][0],$info[0]['uisid'][0],$info[0]['givenname'][0],$info[0]['sn'][0]); 
+      }
+
     }else {
         header("Location:/loginPage/index.php?msg=Zadané meno alebo heslo nie je správne!");
         die();
