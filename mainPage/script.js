@@ -37,7 +37,7 @@ function generateSets() {
 
         click.setAttribute('class', 'aLink');
         click.setAttribute('id', uniqueSets[i]);
-        click.setAttribute('onclick', 'openModal();');   // pripisat na id
+        click.setAttribute('onclick', 'openModal(event.target.id);');   //TODO: iba id bolo v url
         div.setAttribute('class', 'folderDiscription');
 
 
@@ -58,14 +58,15 @@ function generateSets() {
 
 }
 
-function openModal() { // zistak to id a podla toho dat filter na konkretnu sadu
-
+function openModal(id) { // zistak to id a podla toho dat filter na konkretnu sadu
+    elementId = id;
+    console.log(elementId);
     document.getElementById('modalSet').style.display = 'block';
 
 }
 function testWritingTask() { //id task setu
     console.log(elementId);
-    // window.location.href = "studentPages/testWriting.php?taks="+elementId;
+    window.location.href = "studentPages/testWriting.php?taks="+elementId;
 
 }
 
