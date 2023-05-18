@@ -2,6 +2,30 @@ window.onload = function () {
 
     var tbody = document.getElementById('Tbody');
 
+    document.getElementById('container').style.display='none';
+
+    
+    /*               TU TREBA Z BACKENDU SADU
+    $.ajax({
+
+        url: "/Zadanie4/ip-api/index.php",
+
+        method: "POST",
+
+        data: {
+            worker: "get_ip",
+        },
+
+        success: function (response) {
+            //console.log(response)
+            var data = JSON.parse(response);
+            //console.log(data)
+
+        }
+    })*/
+
+    
+
     let count = 5;
 
     for(let i=0;i<count;i++){       
@@ -43,29 +67,36 @@ window.onload = function () {
         
     }
 
-    /*
-    $.ajax({
+  }
 
-        url: "/Zadanie4/ip-api/index.php",
+  function checkTasksDone(){
 
-        method: "POST",
+    let i = 0;
+    let x = 1;
+    while (true) { //count how many are there
 
-        data: {
-            worker: "get_ip",
-        },
+        if (document.getElementById(i) == null) {
+            break    
+         }
 
-        success: function (response) {
-            //console.log(response)
-            var data = JSON.parse(response);
-            //console.log(data)
+         var isDisabled = document.getElementById(i).disabled;
 
-        }
-    })*/
+        if (isDisabled) {
+            x++;
+          } 
+        i++;
+      }
+
+      if (x==i){
+        document.getElementById('container').style.display='block';
+      }
+     
 
   }
 
   function writeTask(id){
 
+    checkTasksDone();
 
     document.getElementById(id).disabled = true;
 
@@ -109,4 +140,8 @@ function slovakStudentTranslateTest(){
          document.getElementById(i).innerHTML = 'Písať úlohu';
         i++;
       }
+}
+
+function submitTaks(){
+    //TODO
 }
