@@ -47,10 +47,6 @@ if (!isset($_SESSION['login']) || (strcmp($_SESSION['login'], 'true') != 0) || (
         <a href="/mainPage/index.php"><i class='material-icons'>home</i></a>
 
 
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
-            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 
 
@@ -70,11 +66,12 @@ if (!isset($_SESSION['login']) || (strcmp($_SESSION['login'], 'true') != 0) || (
             <?php echo ($_SESSION['full_name']); ?> &nbsp;&nbsp;&nbsp;
         </a>
 
-        <a class="navAttpic" href="/api/language-api.php?language=slovak"> <img
-                src="https://flagsapi.com/SK/shiny/32.png"></a>
+        <a class="navAttpic" href="/api/language-api.php?language=slovak"> <img class="flagSize"
+                    src="/images/slovakia.png" width=30></a></button>
 
-        <a class="navAttpic" href="/api/language-api.php?language=english"> <img
-                src="https://flagsapi.com/GB/shiny/32.png"></a>
+        <a class="navAttpic" href="/api/language-api.php?language=english"> <img class="flagSize"
+                    src="/images/gb.png" width=30 ></a> </button>
+
 
     </nav>
 
