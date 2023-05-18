@@ -1,6 +1,22 @@
+<<<<<<< HEAD
+$(document).ready(function() {
+    $('#myTable').DataTable({
+      columnDefs: [
+        {
+            targets: [3],
+            orderData: [3, 1]
+        }
+    ]  });
+    
+});
+
+
+
+=======
 images = [];
 fileName = "";
 latexContent = "";
+>>>>>>> 5a61f781ca44ff7175dedf6ed0eda95d4f212cae
 function generateSets() {
     //ziskat pocet setov a ich meno / id
     //praca nad db
