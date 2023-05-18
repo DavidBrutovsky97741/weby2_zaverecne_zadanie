@@ -1,10 +1,8 @@
 <?php
-// $hostname = "147.175.98.162:3306";
-$hostname = "localhost:3306";
-$username = "username";
-$password = "password";
+$hostname = "172.20.128.2:3306";
+$username = "root";
+$password = "MYSQL_ROOT_PASSWORD";
 $dbname = "zaverecne";
-$port = "3306";
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: POST, GET, PUT, OPTIONS, PATCH, DELETE');
 header('Access-Control-Allow-Credentials: true');
