@@ -3,13 +3,36 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 require_once('../config.php');
+require_once('../students/index.php');
+
+
+if($_SERVER["REQUEST_METHOD"] == "GET"){
+    getAvailableTasks($db);
+    return;
+}
 
 function getAvailableTasks(PDO $db): array
 {
     try {
-        $sql = "SELECT * FROM Available_task_sets";
+        $sql = "SELECT * FROM Available_task_sets INNER JOIN Tasks_sets ON Available_task_sets.task_id = Tasks_sets.id";
         $stmt = $db->prepare($sql);
         if ($stmt->execute()) {
+            $response = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            echo json_encode($response);
+            return $response;
+        }
+        return [];
+    } catch (Exception $e) {
+        return [];
+    }
+}
+
+function getAvailableTask(PDO $db, int $taskSetId): array
+{
+    try {
+        $sql = "SELECT * FROM Available_task_sets INNER JOIN Tasks_sets ON Available_task_sets.task_id = Tasks_sets.id WHERE Tasks_sets.id = ?";
+        $stmt = $db->prepare($sql);
+        if ($stmt->execute([$taskSetId])) {
             $response = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return $response;
         }
@@ -18,6 +41,7 @@ function getAvailableTasks(PDO $db): array
         return [];
     }
 }
+
 
 function addToAvailableTaskSets(PDO $db, int $taskSetId): bool
 {
@@ -49,19 +73,33 @@ function deleteFromAvailableTaskSets(PDO $db, int $taskSetId): bool
         return false;
     }
 }
-
-function generateRandomStudentTaskSet(PDO $db, int $studentAisId, int $taskSetid)
+function updateStudentGeneratedCount(PDO $db, int $studentId)
 {
-    $availableTasks = getAvailableTasks($db);
-    var_dump($availableTasks);
-    $randomTaskSet = rand(0, count($availableTasks) - 1);
-    $taskSetId = $availableTasks[$randomTaskSet]["task_id"];
+    try {
+        $sql = "UPDATE Student SET Student.generated_task_sets_count = Student.generated_task_sets_count + 1 WHERE Student.id = ?";
+        $stmt = $db->prepare($sql);
+        if ($stmt->execute([$studentId])) {
+            return $stmt->rowCount() > 0 ? true : false;
+        }
+        return false;
+    } catch (Exception $e) {
+        return false;
+    }
+}
+
+function generateStudentTaskSet(PDO $db, int $studentAisId, int $taskSetId)
+{
+    $availableTask = getAvailableTask($db, $taskSetId);
+    if (count($availableTask) === 0)
+        return false;
+    $students = getStudentByAisId($db, $studentAisId);
 
     try {
-        $sql = "INSERT INTO Student_task_sets (task_id) VALUES (?)";
+        $sql = "INSERT INTO Student_task_sets (points_acquired, task_set_id , student_id, state) VALUES (?, ?, ?, ?)";
         $stmt = $db->prepare($sql);
-        if ($stmt->execute([$taskSetId])) {
-            // $response = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        if ($stmt->execute([0, $taskSetId, $students[0]["id"], "GENERATED"])) {
+            $response = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            updateStudentGeneratedCount($db, $students[0]["id"]);
             return true;
         }
         return false;
@@ -70,7 +108,19 @@ function generateRandomStudentTaskSet(PDO $db, int $studentAisId, int $taskSetid
     }
 }
 
-addToAvailableTaskSets($db, 45);
-generateRandomStudentTaskSet($db, 2134);
+
+function submitStudentTaskSet(PDO $db, int $pointsAcquired, int $studentTaskSetId)
+{
+    try {
+        $sql = "UPDATE Student_task_sets SET Student_task_sets.state = 'Submited', Student_task_sets.points_acquired = ?  WHERE Student_task_sets.id = ?";
+        $stmt = $db->prepare($sql);
+        if ($stmt->execute([$pointsAcquired, $studentTaskSetId])) {
+            return $stmt->rowCount() > 0 ? true : false;
+        }
+        return false;
+    } catch (Exception $e) {
+        return false;
+    }
+}
 
 ?>
