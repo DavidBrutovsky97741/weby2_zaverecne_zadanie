@@ -14,7 +14,7 @@ function getAvailableTasks(PDO $db): array
             return $response;
         }
         return [];
-    } catch (Error $e) {
+    } catch (Exception $e) {
         return [];
     }
 }
@@ -29,7 +29,7 @@ function addToAvailableTaskSets(PDO $db, int $taskSetId): bool
             return true;
         }
         return false;
-    } catch (Error $e) {
+    } catch (Exception $e) {
         return false;
     }
 }
@@ -45,15 +45,32 @@ function deleteFromAvailableTaskSets(PDO $db, int $taskSetId): bool
             // $response = $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
         return false;
-    } catch (Error $e) {
+    } catch (Exception $e) {
         return false;
     }
 }
 
-function generateRandomStudentTaskSet(PDO $db, int $studentAisId)
+function generateRandomStudentTaskSet(PDO $db, int $studentAisId, int $taskSetid)
 {
     $availableTasks = getAvailableTasks($db);
+    var_dump($availableTasks);
+    $randomTaskSet = rand(0, count($availableTasks) - 1);
+    $taskSetId = $availableTasks[$randomTaskSet]["task_id"];
 
+    try {
+        $sql = "INSERT INTO Student_task_sets (task_id) VALUES (?)";
+        $stmt = $db->prepare($sql);
+        if ($stmt->execute([$taskSetId])) {
+            // $response = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return true;
+        }
+        return false;
+    } catch (Exception $e) {
+        return false;
+    }
 }
+
+addToAvailableTaskSets($db, 45);
+generateRandomStudentTaskSet($db, 2134);
 
 ?>

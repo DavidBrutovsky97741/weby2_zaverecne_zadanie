@@ -1,4 +1,22 @@
+<<<<<<< HEAD
+$(document).ready(function() {
+    $('#myTable').DataTable({
+      columnDefs: [
+        {
+            targets: [3],
+            orderData: [3, 1]
+        }
+    ]  });
+    
+});
 
+
+
+=======
+images = [];
+fileName = "";
+latexContent = "";
+>>>>>>> 5a61f781ca44ff7175dedf6ed0eda95d4f212cae
 function generateSets() {
     //ziskat pocet setov a ich meno / id
     //praca nad db
@@ -49,30 +67,8 @@ function closeModal() {
 }
 
 
-function sendData(contents, images, fileName) {
 
 
-    $.ajax({
-        url: "../api/newSet/index.php",
-        method: "POST",
-        data: {
-            json: {
-                "name": fileName,
-                "maxpoints": 10,
-                "text": contents,
-                "images": images
-            },
-        },
-        success: function (response) {
-            var data = JSON.parse(response);
-            console.log(data.length);
-        }
-    })
-}
-
-images = [];
-fileName = "";
-latexContent = "";
 function handleFormSubmit(event) {
     event.preventDefault(); // Prevent form submission
 
@@ -113,6 +109,7 @@ function handleFormSubmit(event) {
                 }
 
                 images.push(imageObject);
+                // console.log(images);
             };
             reader.readAsDataURL(imageFile);
         }
@@ -129,12 +126,14 @@ function handleFormSubmit(event) {
             break;
         }
     }
-
     var reader = new FileReader();
     reader.onload = function (event) {
-        var contents = event.target.result;
-        console.log("File contents:", contents);
-        latexContent = contents;
+        // var contents = event.target.result;
+        // console.log("File contents:", contents);
+        // latexContent = contents;
+        latexContent = event.target.result;
+        // console.log(latexContent);
+        sendData(latexContent, images, fileName);
     };
     reader.readAsText(latexFile);
     
@@ -149,7 +148,6 @@ function handleFormSubmit(event) {
     } else {
         alert('The folders contain files other than the specified types.');
     }
-    sendData(contents, images, fileName);
     
     // Clear the selected files
     imageFolderInput.value = '';
@@ -175,6 +173,23 @@ function testWritingTask(){ //id task setu
 
 
 
+function sendData(latexContent, images, fileName) {
+    images = images || [];
+    $.ajax({
+        url: "../api/newSet/index.php",
+        method: "POST",
+        data: JSON.stringify({
+            "name": fileName,
+            "maxpoints": 10,
+            "text": latexContent,
+            "images": images
+        }),
+        success: function (response) {
+            var data = JSON.parse(response);
+            console.log(data.length);
+        }
+    });
+}
 document.getElementById('folderUploadForm').addEventListener('submit', handleFormSubmit);
 
 
