@@ -11,8 +11,14 @@ if (!isset($_SESSION['login']) || (strcmp($_SESSION['login'], 'true') != 0) || (
     // student
     header("Location: /mainPage/index.php");
     die();
+
+    
+
+
 }else{
     header("Location: /mainPage/indexTeacher.php");
     die(); 
+
+
 }
 ?>
