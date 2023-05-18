@@ -88,7 +88,18 @@ function generateStudentTaskSet(PDO $db, int $studentAisId, int $taskSetId)
     }
 }
 
-// addToAvailableTaskSets($db, 45);
-// var_dump(generateStudentTaskSet($db, 111982, 45));
+function submitStudentTaskSet(PDO $db, int $pointsAcquired, int $studentTaskSetId)
+{
+    try {
+        $sql = "UPDATE Student_task_sets SET Student_task_sets.state = 'Submited', Student_task_sets.points_acquired = ?  WHERE Student_task_sets.id = ?";
+        $stmt = $db->prepare($sql);
+        if ($stmt->execute([$pointsAcquired, $studentTaskSetId])) {
+            return $stmt->rowCount() > 0 ? true : false;
+        }
+        return false;
+    } catch (Exception $e) {
+        return false;
+    }
+}
 
 ?>
