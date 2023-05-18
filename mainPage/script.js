@@ -1,14 +1,31 @@
 images = [];
 fileName = "";
 latexContent = "";
+uniqueSets = [];
+elementId = "";
+$.ajax({
+    url: "../api/tasks/index.php",
+    method: "GET",
+    success: function (response) {
+        response = JSON.parse(response);
+        for (let i = 0; i < response.length; i++) {
+            if (uniqueSets.includes(response[i].task_id)) {
+                continue;
+            } else {                
+                uniqueSets.push(response[i].task_id);
+            }
+        }
+    }
+});
 function generateSets() {
     //ziskat pocet setov a ich meno / id
-    //praca nad db
 
+
+    // console.log(uniqueSets);
     document.getElementById('sets').innerHTML = '';
 
-    let count = 20;
-
+    let count = uniqueSets.length;
+    console.log(uniqueSets[0]);
     for (let i = 0; i < count; i++) {
 
         let randomSetName = (Math.random() + 1).toString(36).substring(5);
@@ -19,8 +36,8 @@ function generateSets() {
         const p = document.createElement('p');
 
         click.setAttribute('class', 'aLink');
+        click.setAttribute('id', uniqueSets[i]);
         click.setAttribute('onclick', 'openModal();');   // pripisat na id
-
         div.setAttribute('class', 'folderDiscription');
 
 
@@ -42,12 +59,19 @@ function generateSets() {
 }
 
 function openModal() { // zistak to id a podla toho dat filter na konkretnu sadu
-    document.getElementById('modalSet').style.display = 'block';
-}
 
+    document.getElementById('modalSet').style.display = 'block';
+
+}
+function testWritingTask() { //id task setu
+    console.log(elementId);
+    // window.location.href = "studentPages/testWriting.php?taks="+elementId;
+
+}
 
 function closeModal() {
     document.getElementById('modalSet').style.display = 'none';
+    
 }
 
 
@@ -86,7 +110,7 @@ function handleFormSubmit(event) {
             var reader = new FileReader();
             reader.onload = function (event) {
                 var imageContent = event.target.result;
-                
+
                 var imageObject = {
                     "fileName": imageFile.name,
                     "image64": imageContent
@@ -120,8 +144,8 @@ function handleFormSubmit(event) {
         sendData(latexContent, images, fileName);
     };
     reader.readAsText(latexFile);
-    
-    
+
+
     // Display the result based on the onlyImages and onlyLaTeX variables
     if (onlyImages && onlyLaTeX) {
         alert('The image folder contains only images, and the LaTeX folder contains only LaTeX files.');
@@ -132,7 +156,7 @@ function handleFormSubmit(event) {
     } else {
         alert('The folders contain files other than the specified types.');
     }
-    
+
     // Clear the selected files
     imageFolderInput.value = '';
     latexFolderInput.value = '';
@@ -142,17 +166,13 @@ function handleFormSubmit(event) {
 
 if (document.getElementById('folderUploadForm') !== null) {
     document.getElementById('folderUploadForm').addEventListener('submit', handleFormSubmit);
- }
-
-
-
-
-
-function testWritingTask(){ //id task setu
-
-    window.location.href = "studentPages/testWriting.php?taks=xxx";
-
 }
+
+
+
+
+
+
 
 
 
@@ -247,12 +267,12 @@ function englishTeacherTranslate() {
     document.getElementById('changePoints').innerHTML = " Change points of set";
 }
 
-function englishStudentTranslateTest(){
+function englishStudentTranslateTest() {
     document.getElementById('logout').innerHTML = "Log out";
     document.getElementById('navName').innerHTML = " &nbsp; Final task webte2";
 }
 
-function slovakStudentTranslateTest(){
+function slovakStudentTranslateTest() {
     document.getElementById('logout').innerHTML = "Ohlásiť sa";
     document.getElementById('navName').innerHTML = " &nbsp; Záverečné zadanie webte2";
 }
