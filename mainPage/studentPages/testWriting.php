@@ -86,6 +86,17 @@ if (!isset($_SESSION['login']) || (strcmp($_SESSION['login'], 'true') != 0) || (
 
 </div>
 
+<style>
+  #taskContainer {
+    text-align: center;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+</style>
 
 
 
