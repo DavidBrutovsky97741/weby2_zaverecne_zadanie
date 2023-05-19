@@ -422,4 +422,16 @@ button{
 
 }
 
+.navod{
+    text-align: center;
+}
+.saveButton{
+    width: 50%;
+    margin-left: 25%;
+}
+
+ol li {
+    list-style-position: inside;
+}
+
 
