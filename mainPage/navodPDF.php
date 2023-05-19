@@ -44,7 +44,7 @@ if (!isset($_SESSION['login']) || (strcmp($_SESSION['login'], 'true') != 0)) {
 
         </div>
 
-        <a class="navAtt" id="logout" href="/api/logout-api.php">Ohlásiť sa </a>
+        <a class="navAtt" id="logout" href="/api/logout-api.php">Odhlásiť sa </a>
 
 
 

@@ -54,7 +54,7 @@ if (!isset($_SESSION['login']) || (strcmp($_SESSION['login'], 'true') != 0) || (
         <?php
 
         if (strcmp($_SESSION['language'], 'slovak') == 0) {
-            echo ('<a class="navAtt" href="/api/logout-api.php">Ohlásiť sa </a>');
+            echo ('<a class="navAtt" href="/api/logout-api.php">Odhlásiť sa </a>');
         } else {
             echo ('<a class="navAtt" href="/api/logout-api.php">Log out </a>');
         }

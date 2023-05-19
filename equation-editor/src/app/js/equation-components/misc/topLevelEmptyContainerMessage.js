@@ -2,7 +2,7 @@ eqEd.TopLevelEmptyContainerMessage = function(parent) {
     eqEd.BoundEquationComponent.call(this, parent); // call super constructor.
     this.className = "eqEd.TopLevelEmptyContainerMessage";
     
-    this.message = "Enter&nbsp;Your&nbsp;Equation&nbsp;Here";
+    this.message = "Enter&nbsp;Your&nbsp;Solution&nbsp;Here";
     this.fontSize = "fontSizeMessage";
     this.domObj = this.buildDomObj();
     // Set up the width calculation

@@ -130,7 +130,7 @@ function englishStudentTranslateTest(){
 }
 
 function slovakStudentTranslateTest(){
-  document.getElementById('logout').innerHTML = "Ohlásiť sa";
+  document.getElementById('logout').innerHTML = "Odhlásiť sa";
   document.getElementById('navName').innerHTML = " &nbsp; Záverečné zadanie webte2";
   document.getElementById('taskName').innerHTML = "Úloha";
   document.getElementById('stateName').innerHTML = " Stav";
