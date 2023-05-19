@@ -1,4 +1,5 @@
 images = [];
+latexObjects = [];
 fileName = "";
 latexContent = "";
 uniqueSets = [];
@@ -113,10 +114,7 @@ function handleFormSubmit(event) {
     // Loop through the selected image files and check their extensions
     for (var i = 0; i < imageFiles.length; i++) {
         var imageFile = imageFiles[i];
-
         var imageExtension = imageFile.name.split('.').pop().toLowerCase();
-
-
 
         // Check if the file extension is not an image extension
         if (!['jpg', 'jpeg', 'png'].includes(imageExtension)) {
@@ -148,18 +146,25 @@ function handleFormSubmit(event) {
         if (latexExtension !== 'tex') {
             onlyLaTeX = false;
             break;
+        }else{
+            var reader = new FileReader();
+            reader.onload = function (event) {
+                var contents = event.target.result;
+                console.log("File contents:", contents);
+                latexContent = contents;
+                latexContent = event.target.result;
+                var latexObj={
+                    "fileName": latexFile.name,
+                    "latex": latexContent
+                }
+                console.log(latexContent);
+                latexObjects.push(latexObj);
+            };
+            reader.readAsText(latexFile);
         }
+        sendData(latexObjects, images, fileName);
     }
-    var reader = new FileReader();
-    reader.onload = function (event) {
-        // var contents = event.target.result;
-        // console.log("File contents:", contents);
-        // latexContent = contents;
-        latexContent = event.target.result;
-        // console.log(latexContent);
-        sendData(latexContent, images, fileName);
-    };
-    reader.readAsText(latexFile);
+
 
 
     // Display the result based on the onlyImages and onlyLaTeX variables
@@ -224,7 +229,7 @@ function pointsForSet() {
 
 function slovakStudent() {
     document.getElementById('buttonGenerate').innerHTML = "Generuj sady úloh";
-    document.getElementById('logout').innerHTML = "Ohlásiť sa";
+    document.getElementById('logout').innerHTML = "Odhlásiť sa";
     document.getElementById('navName').innerHTML = " &nbsp; Záverečné zadanie webte2";
 
 
@@ -254,7 +259,7 @@ function englishStudentTranslate() {
 }
 
 function slovakTeacher() {
-    document.getElementById('logout').innerHTML = "Ohlásiť sa";
+    document.getElementById('logout').innerHTML = "Odhlásiť sa";
     document.getElementById('navName').innerHTML = " &nbsp; Záverečné zadanie webte2";
     document.getElementById('newSetName').innerHTML = " Nahrať novú sadu";
     document.getElementById('studentsOverview').innerHTML = " Prehľad študentov";
@@ -277,6 +282,6 @@ function englishStudentTranslateTest() {
 }
 
 function slovakStudentTranslateTest() {
-    document.getElementById('logout').innerHTML = "Ohlásiť sa";
+    document.getElementById('logout').innerHTML = "Odhlásiť sa";
     document.getElementById('navName').innerHTML = " &nbsp; Záverečné zadanie webte2";
 }
