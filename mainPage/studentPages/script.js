@@ -1,6 +1,8 @@
 window.onload = function() {
   var uniqueTasks;
   var taskIds = [];
+  var taskText = [];
+  var taskSolution = [];
   var url = new URL(window.location.href);
 
   // Get the value of the 'taks' parameter
@@ -23,6 +25,8 @@ window.onload = function() {
       uniqueTasks = response.length;
       for (let i = 0; i < uniqueTasks; i++) {
         taskIds.push(response[i].id);
+        taskText.push(response[i].task_text);
+        taskSolution.push(response[i].answer);
       }
       console.log("Number of tasks: " + uniqueTasks);
 
@@ -54,7 +58,7 @@ window.onload = function() {
         button.textContent = 'Písať úlohu';
 
         button.addEventListener('click', function() {
-          writeTask(this.id);
+          writeTask(this.id, response);
         });
 
         td4.appendChild(button);
@@ -64,12 +68,20 @@ window.onload = function() {
   });
 };
 
-
-
-function writeTask(id){
+function writeTask(id, response) {
   document.getElementById(id).disabled = true;
 
   document.getElementById('state' + id).innerHTML='check_box';
+  var task = response.find(function(task) {
+    return task.id === id;
+  });
+
+  if (task) {
+    console.log("Task ID: " + task.id);
+    console.log("Task Name: " + task.task_text);
+    console.log("Task Description: " + task.answer);
+    // Do something with the task data
+  }
 }
 
 function englishStudentTranslateTest(){
