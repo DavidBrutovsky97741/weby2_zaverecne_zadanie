@@ -4,6 +4,7 @@ window.onload = function() {
   var taskText = [];
   var taskSolution = [];
   var cleanedText = [];
+  var imageFiles = [];
   var url = new URL(window.location.href);
 
   // Get the value of the 'taks' parameter
@@ -30,6 +31,8 @@ window.onload = function() {
         taskText.push(response[i].task_text);
         
         taskSolution.push(response[i].answer);
+
+        imageFiles.push(response[i].task_image_id);
       }
       //CLEAN THINGS
       for (let i = 0; i < uniqueTasks; i++) {
@@ -95,6 +98,7 @@ function writeTask(id, response) {
     var clean =  task.task_text.replace(/\\begin{equation\*}([\s\S]*?)\\end{equation\*}/g, " \\( $1 \\)");
 
     document.getElementById("taskContainer").innerHTML = clean;
+    document.getElementById("taskImage").src = task.task_image_id
     console.log(clean);
     // Do something with the task data
     MathJax.typesetPromise([document.getElementById('taskContainer')])
