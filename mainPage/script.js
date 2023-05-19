@@ -68,6 +68,46 @@ function generateSets() {
 }
 
 function openModal(id) { // zistak to id a podla toho dat filter na konkretnu sadu
+
+    
+    $.ajax({
+
+        url: "/api/tasks/index.php",
+
+        method: "POST",
+
+        data: {
+            taskSetId: id,
+
+        },
+
+        success: function (response) {
+            response = JSON.parse(response);
+            let countTaksks = response.length;      
+            
+            fetch("http://localhost:8000/api/tasks/index.php?tasks").then((response) => {
+                if (response.ok) return response.text()
+            }).then((data) => {
+                const parsed = JSON.parse(data)
+       
+                count = parsed.length;
+
+                for (let i=0; i<count; i++){
+                    if(parsed[i].id==id){
+                       let points =  parsed[i].max_points;               
+
+                       document.getElementById('points').innerHTML = points;
+                       document.getElementById('countTasks').innerHTML = countTaksks;
+                    }
+                }
+
+                
+
+            })
+    
+        }
+    }) 
+
     elementId = id;
     //alert(elementId);
     let buttonElement = document.getElementById('testWrite');
@@ -77,6 +117,7 @@ function openModal(id) { // zistak to id a podla toho dat filter na konkretnu sa
       };
 
     document.getElementById('modalSet').style.display = 'block';
+
 
 }
 function testWritingTask(id) { //id task setu
