@@ -3,6 +3,7 @@ window.onload = function() {
   var taskIds = [];
   var taskText = [];
   var taskSolution = [];
+  var cleanedText = [];
   var url = new URL(window.location.href);
 
   // Get the value of the 'taks' parameter
@@ -25,8 +26,16 @@ window.onload = function() {
       uniqueTasks = response.length;
       for (let i = 0; i < uniqueTasks; i++) {
         taskIds.push(response[i].id);
+
         taskText.push(response[i].task_text);
+        
         taskSolution.push(response[i].answer);
+      }
+      //CLEAN THINGS
+      for (let i = 0; i < uniqueTasks; i++) {
+        var clean = taskText[i].replace(/\\begin{equation\*}([\s\S]*?)\\end{equation\*}/g, " \\( $1 \\)");
+        cleanedText.push(clean);
+        console.log(cleanedText[i]);
       }
       console.log("Number of tasks: " + uniqueTasks);
 
@@ -41,8 +50,11 @@ window.onload = function() {
         tr.appendChild(td1);
 
         var td2 = document.createElement('td'); //set task name
-        td2.textContent = 'Maximálny počet bodov';
+        td2.id = taskIds[i];
+        td2.innerHTML = "0/10";
         tr.appendChild(td2);
+        // document.getElementById("td2"+taskIds[i]) .innerHTML = cleanedText[i];
+
 
         var td3 = document.createElement('td'); // stav
         var state = document.createElement('i');
@@ -66,6 +78,8 @@ window.onload = function() {
       }
     }
   });
+
+
 };
 
 function writeTask(id, response) {
@@ -77,10 +91,16 @@ function writeTask(id, response) {
   });
 
   if (task) {
-    console.log("Task ID: " + task.id);
-    console.log("Task Name: " + task.task_text);
-    console.log("Task Description: " + task.answer);
+
+    var clean =  task.task_text.replace(/\\begin{equation\*}([\s\S]*?)\\end{equation\*}/g, " \\( $1 \\)");
+
+    document.getElementById("taskContainer").innerHTML = clean;
+    console.log(clean);
     // Do something with the task data
+    MathJax.typesetPromise([document.getElementById('taskContainer')])
+    .catch(function(err) {
+      console.log('Error while typesetting MathJax:', err);
+    });
   }
 }
 
