@@ -90,13 +90,7 @@ if (!isset($_SESSION['login']) || (strcmp($_SESSION['login'], 'true') != 0) || (
 
                     <td id="points">with two columns</td>
                 </tr>
-                <tr>
 
-                    <td id="taskStateTranslate">Stav</td>
-
-
-                    <td id="taskState">with two columns</td>
-                </tr>
             </tbody>
         </table>
 
