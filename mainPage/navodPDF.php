@@ -99,7 +99,7 @@ if (!isset($_SESSION['login']) || (strcmp($_SESSION['login'], 'true') != 0)) {
             <h2>4.</h2>
     
             <p>Po kliknutí sa zobrazí prehľadná tabuľka s názvom sady počom aktuálnych bodov za sadu možnosťou ich zmeny</p>
-            <p>Prázny input napocedá možnosť na vloženie nového počtu bodov za sadu</p>
+            <p>Prázdny input napovedá možnosť na vloženie nového počtu bodov za sadu</p>
             <p>Minimálny počet bodov je 1 keďže mínusové hodnoty nedávajú zmysel a 0 to nie je lebo v dnešnej dobe ani pes nešteká zadarmo </p>
             <p>Naopak maximálny počet je 99</p>
             <p>Po zadaní počtu bodov do miesta vloženie treba body potvrdiť kliknutím na tlačidlo zmena</p>
@@ -135,7 +135,7 @@ if (!isset($_SESSION['login']) || (strcmp($_SESSION['login'], 'true') != 0)) {
 
 
     <!-- Button to trigger the saveAsPDF() function -->
-    <button class="saveButton" onclick="saveAsPDF()">Save Page as PDF</button>
+    <button class="saveButton" id="saveButton" onclick="saveAsPDF()">Save Page as PDF</button>
 
 
 
@@ -144,6 +144,7 @@ if (!isset($_SESSION['login']) || (strcmp($_SESSION['login'], 'true') != 0)) {
             // Get the current page's HTML content
 
             document.getElementById('navBar').style.display = 'none';
+            document.getElementById('saveButton').style.display = 'none';
 
             const htmlContent = document.documentElement.innerHTML;
 

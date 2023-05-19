@@ -39,6 +39,8 @@ if (!isset($_SESSION['login']) || (strcmp($_SESSION['login'], 'true') != 0) || (
 
         <a href="/mainPage/indexTeacher.php"><i class='material-icons'>home</i></a>
 
+        <a href="/mainPage/navodPDF.php"><i class='material-icons'>assignment</i></a>
+
 
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 
