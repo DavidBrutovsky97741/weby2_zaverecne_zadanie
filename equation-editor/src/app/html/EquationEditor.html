@@ -3,185 +3,186 @@
 <head>
   <meta charset="utf-8">
   <title>Equation Editor</title>
-  <script src="../../lib/jquery-2.0.0.js"></script>
-  <script src="../../lib/underscore-1.6.0.js"></script>
-  <script src="../../lib/mousetrap-1.4.6.js"></script>
-  <script src="../../lib/spin.min.js"></script>
+  <script src="/equation-editor/src/lib/jquery-2.0.0.js"></script>
+  <script src="/equation-editor/src/lib/underscore-1.6.0.js"></script>
+  <script src="/equation-editor/src/lib/mousetrap-1.4.6.js"></script>
+  <script src="/equation-editor/src/lib/spin.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
-  <script src="../js/property.js"></script>
-  <script src="../js/init.js"></script>
-  <script src="../js/fontMetrics.js"></script>
-  <script src="../js/equation-components/misc/equationComponent.js"></script>
-  <script src="../js/equation-components/misc/boundEquationComponent.js"></script>
-  <script src="../js/equation.js"></script>
-  <script src="../js/equation-components/dom/equationDom.js"></script>
-  <script src="../js/equation-components/containers/container.js"></script>
-  <script src="../js/equation-components/dom/containerDom.js"></script>
-  <script src="../js/equation-components/wrappers/wrapper.js"></script>
-  <script src="../js/equation-components/dom/wrapperDom.js"></script>
-  <script src="../js/equation-components/misc/symbol.js"></script>
-  <script src="../js/equation-components/wrappers/symbolWrapper.js"></script>
-  <script src="../js/equation-components/wrappers/operatorWrapper.js"></script>
-  <script src="../js/equation-components/wrappers/emptyContainerWrapper.js"></script>
-  <script src="../js/equation-components/wrappers/topLevelEmptyContainerWrapper.js"></script>
-  <script src="../js/equation-components/misc/topLevelEmptyContainerMessage.js"></script>
-  <script src="../js/equation-components/wrappers/squareEmptyContainerWrapper.js"></script>
-  <script src="../js/equation-components/containers/squareEmptyContainer.js"></script>
-  <script src="../js/equation-components/wrappers/squareEmptyContainerFillerWrapper.js"></script>
-  <script src="../js/equation-components/wrappers/stackedFractionWrapper.js"></script>
-  <script src="../js/equation-components/containers/stackedFractionNumeratorContainer.js"></script>
-  <script src="../js/equation-components/containers/stackedFractionDenominatorContainer.js"></script>
-  <script src="../js/equation-components/misc/stackedFractionHorizontalBar.js"></script>
-  <script src="../js/equation-components/wrappers/superscriptWrapper.js"></script>
-  <script src="../js/equation-components/containers/superscriptContainer.js"></script>
-  <script src="../js/equation-components/wrappers/subscriptWrapper.js"></script>
-  <script src="../js/equation-components/containers/subscriptContainer.js"></script>
-  <script src="../js/equation-components/wrappers/superscriptAndSubscriptWrapper.js"></script>
-  <script src="../js/equation-components/wrappers/squareRootWrapper.js"></script>
-  <script src="../js/equation-components/misc/squareRootOverBar.js"></script>
-  <script src="../js/equation-components/misc/squareRootRadical.js"></script>
-  <script src="../js/equation-components/misc/squareRootDiagonal.js"></script>
-  <script src="../js/equation-components/containers/squareRootRadicandContainer.js"></script>
-  <script src="../js/equation-components/wrappers/nthRootWrapper.js"></script>
-  <script src="../js/equation-components/misc/nthRootOverBar.js"></script>
-  <script src="../js/equation-components/misc/nthRootRadical.js"></script>
-  <script src="../js/equation-components/misc/nthRootDiagonal.js"></script>
-  <script src="../js/equation-components/containers/nthRootRadicandContainer.js"></script>
-  <script src="../js/equation-components/containers/nthRootDegreeContainer.js"></script>
-  <script src="../js/equation-components/wrappers/bracketWrapper.js"></script>
-  <script src="../js/equation-components/misc/bracket.js"></script>
-  <script src="../js/equation-components/misc/wholeBracket.js"></script>
-  <script src="../js/equation-components/misc/topBracket.js"></script>
-  <script src="../js/equation-components/misc/middleBracket.js"></script>
-  <script src="../js/equation-components/misc/bottomBracket.js"></script>
-  <script src="../js/equation-components/misc/leftBracket.js"></script>
-  <script src="../js/equation-components/misc/rightBracket.js"></script>
-  <script src="../js/equation-components/misc/leftParenthesisBracket.js"></script>
-  <script src="../js/equation-components/misc/rightParenthesisBracket.js"></script>
-  <script src="../js/equation-components/misc/leftParenthesisWholeBracket.js"></script>
-  <script src="../js/equation-components/misc/leftParenthesisTopBracket.js"></script>
-  <script src="../js/equation-components/misc/leftParenthesisMiddleBracket.js"></script>
-  <script src="../js/equation-components/misc/leftParenthesisBottomBracket.js"></script>
-  <script src="../js/equation-components/misc/rightParenthesisWholeBracket.js"></script>
-  <script src="../js/equation-components/misc/rightParenthesisTopBracket.js"></script>
-  <script src="../js/equation-components/misc/rightParenthesisMiddleBracket.js"></script>
-  <script src="../js/equation-components/misc/rightParenthesisBottomBracket.js"></script>
-  <script src="../js/equation-components/misc/leftSquareBracket.js"></script>
-  <script src="../js/equation-components/misc/leftSquareWholeBracket.js"></script>
-  <script src="../js/equation-components/misc/leftSquareTopBracket.js"></script>
-  <script src="../js/equation-components/misc/leftSquareMiddleBracket.js"></script>
-  <script src="../js/equation-components/misc/leftSquareBottomBracket.js"></script>
-  <script src="../js/equation-components/misc/rightSquareBracket.js"></script>
-  <script src="../js/equation-components/misc/rightSquareWholeBracket.js"></script>
-  <script src="../js/equation-components/misc/rightSquareTopBracket.js"></script>
-  <script src="../js/equation-components/misc/rightSquareMiddleBracket.js"></script>
-  <script src="../js/equation-components/misc/rightSquareBottomBracket.js"></script>
-  <script src="../js/equation-components/misc/leftCurlyBracket.js"></script>
-  <script src="../js/equation-components/misc/leftCurlyWholeBracket.js"></script>
-  <script src="../js/equation-components/misc/leftCurlyTopBracket.js"></script>
-  <script src="../js/equation-components/misc/leftCurlyMiddleBracket.js"></script>
-  <script src="../js/equation-components/misc/leftCurlyBottomBracket.js"></script>
-  <script src="../js/equation-components/misc/rightCurlyBracket.js"></script>
-  <script src="../js/equation-components/misc/rightCurlyWholeBracket.js"></script>
-  <script src="../js/equation-components/misc/rightCurlyTopBracket.js"></script>
-  <script src="../js/equation-components/misc/rightCurlyMiddleBracket.js"></script>
-  <script src="../js/equation-components/misc/rightCurlyBottomBracket.js"></script>
-  <script src="../js/equation-components/misc/leftAngleBracket.js"></script>
-  <script src="../js/equation-components/misc/leftAngleWholeBracket.js"></script>
-  <script src="../js/equation-components/misc/rightAngleBracket.js"></script>
-  <script src="../js/equation-components/misc/rightAngleWholeBracket.js"></script>
-  <script src="../js/equation-components/misc/leftFloorBracket.js"></script>
-  <script src="../js/equation-components/misc/leftFloorWholeBracket.js"></script>
-  <script src="../js/equation-components/misc/leftFloorMiddleBracket.js"></script>
-  <script src="../js/equation-components/misc/leftFloorBottomBracket.js"></script>
-  <script src="../js/equation-components/misc/rightFloorBracket.js"></script>
-  <script src="../js/equation-components/misc/rightFloorWholeBracket.js"></script>
-  <script src="../js/equation-components/misc/rightFloorMiddleBracket.js"></script>
-  <script src="../js/equation-components/misc/rightFloorBottomBracket.js"></script>
-  <script src="../js/equation-components/misc/leftCeilBracket.js"></script>
-  <script src="../js/equation-components/misc/leftCeilWholeBracket.js"></script>
-  <script src="../js/equation-components/misc/leftCeilTopBracket.js"></script>
-  <script src="../js/equation-components/misc/leftCeilMiddleBracket.js"></script>
-  <script src="../js/equation-components/misc/rightCeilBracket.js"></script>
-  <script src="../js/equation-components/misc/rightCeilWholeBracket.js"></script>
-  <script src="../js/equation-components/misc/rightCeilTopBracket.js"></script>
-  <script src="../js/equation-components/misc/rightCeilMiddleBracket.js"></script>
-  <script src="../js/equation-components/misc/leftAbsValBracket.js"></script>
-  <script src="../js/equation-components/misc/rightAbsValBracket.js"></script>
-  <script src="../js/equation-components/misc/leftAbsValWholeBracket.js"></script>
-  <script src="../js/equation-components/misc/leftAbsValMiddleBracket.js"></script>
-  <script src="../js/equation-components/misc/rightAbsValWholeBracket.js"></script>
-  <script src="../js/equation-components/misc/rightAbsValMiddleBracket.js"></script>
-  <script src="../js/equation-components/misc/leftNormBracket.js"></script>
-  <script src="../js/equation-components/misc/rightNormBracket.js"></script>
-  <script src="../js/equation-components/misc/leftNormWholeBracket.js"></script>
-  <script src="../js/equation-components/misc/leftNormMiddleBracket.js"></script>
-  <script src="../js/equation-components/misc/rightNormWholeBracket.js"></script>
-  <script src="../js/equation-components/misc/rightNormMiddleBracket.js"></script>
-  <script src="../js/equation-components/wrappers/bracketPairWrapper.js"></script>
-  <script src="../js/equation-components/containers/bracketContainer.js"></script>
-  <script src="../js/equation-components/wrappers/bigOperatorWrapper.js"></script>
-  <script src="../js/equation-components/containers/bigOperatorUpperLimitContainer.js"></script>
-  <script src="../js/equation-components/containers/bigOperatorLowerLimitContainer.js"></script>
-  <script src="../js/equation-components/containers/bigOperatorOperandContainer.js"></script>
-  <script src="../js/equation-components/misc/bigOperatorSymbol.js"></script>
-  <script src="../js/equation-components/misc/sumBigOperatorSymbol.js"></script>
-  <script src="../js/equation-components/misc/bigCapBigOperatorSymbol.js"></script>
-  <script src="../js/equation-components/misc/bigCupBigOperatorSymbol.js"></script>
-  <script src="../js/equation-components/misc/bigSqCapBigOperatorSymbol.js"></script>
-  <script src="../js/equation-components/misc/bigSqCupBigOperatorSymbol.js"></script>
-  <script src="../js/equation-components/misc/bigSqCupBigOperatorSymbol.js"></script>
-  <script src="../js/equation-components/misc/prodBigOperatorSymbol.js"></script>
-  <script src="../js/equation-components/misc/coProdBigOperatorSymbol.js"></script>
-  <script src="../js/equation-components/misc/bigVeeBigOperatorSymbol.js"></script>
-  <script src="../js/equation-components/misc/bigWedgeBigOperatorSymbol.js"></script>
-  <script src="../js/equation-components/wrappers/integralWrapper.js"></script>
-  <script src="../js/equation-components/misc/integralSymbol.js"></script>
-  <script src="../js/equation-components/misc/doubleIntegralSymbol.js"></script>
-  <script src="../js/equation-components/misc/tripleIntegralSymbol.js"></script>
-  <script src="../js/equation-components/misc/contourIntegralSymbol.js"></script>
-  <script src="../js/equation-components/misc/contourDoubleIntegralSymbol.js"></script>
-  <script src="../js/equation-components/misc/contourTripleIntegralSymbol.js"></script>
-  <script src="../js/equation-components/containers/integralUpperLimitContainer.js"></script>
-  <script src="../js/equation-components/containers/integralLowerLimitContainer.js"></script>
-  <script src="../js/equation-components/misc/word.js"></script>
-  <script src="../js/equation-components/misc/functionWord.js"></script>
-  <script src="../js/equation-components/wrappers/functionWrapper.js"></script>
-  <script src="../js/equation-components/wrappers/functionLowerWrapper.js"></script>
-  <script src="../js/equation-components/misc/functionLowerWord.js"></script>
-  <script src="../js/equation-components/containers/functionLowerContainer.js"></script>
-  <script src="../js/equation-components/wrappers/logLowerWrapper.js"></script>
-  <script src="../js/equation-components/misc/logLowerWord.js"></script>
-  <script src="../js/equation-components/containers/logLowerContainer.js"></script>
-  <script src="../js/equation-components/wrappers/limitWrapper.js"></script>
-  <script src="../js/equation-components/containers/limitLeftContainer.js"></script>
-  <script src="../js/equation-components/containers/limitRightContainer.js"></script>
-  <script src="../js/equation-components/misc/limitWord.js"></script>
-  <script src="../js/equation-components/misc/limitSymbol.js"></script>
-  <script src="../js/equation-components/wrappers/matrixWrapper.js"></script>
-  <script src="../js/equation-components/containers/matrixContainer.js"></script>
-  <script src="../js/equation-components/wrappers/accentWrapper.js"></script>
-  <script src="../js/equation-components/misc/accentSymbol.js"></script>
-  <script src="../js/equation-components/containers/accentContainer.js"></script>
-  <script src="../js/equation-components/containers/topLevelContainer.js"></script>
-  <script src="../js/blinkingCursor.js"></script>
-  <script src="../js/mouseInteraction.js"></script>
-  <script src="../js/addWrapperUtil.js"></script>
-  <script src="../js/keyboardInteraction.js"></script>
-  <script src="../js/menuInteraction.js"></script>
-  <script src="../js/equationEditor.js"></script>
-  <link href="../../Fonts/TeX/font.css" rel="stylesheet" type="text/css" charset="utf-8" />
-  <link href="../css/equationEditor.css" rel="stylesheet" type="text/css" charset="utf-8" />
+  <script src="/equation-editor/src/app/js/property.js"></script>
+  <script src="/equation-editor/src/app/js/init.js"></script>
+  <script src="/equation-editor/src/app/js/fontMetrics.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/equationComponent.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/boundEquationComponent.js"></script>
+  <script src="/equation-editor/src/app/js/equation.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/dom/equationDom.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/containers/container.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/dom/containerDom.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/wrappers/wrapper.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/dom/wrapperDom.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/symbol.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/wrappers/symbolWrapper.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/wrappers/operatorWrapper.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/wrappers/emptyContainerWrapper.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/wrappers/topLevelEmptyContainerWrapper.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/topLevelEmptyContainerMessage.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/wrappers/squareEmptyContainerWrapper.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/containers/squareEmptyContainer.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/wrappers/squareEmptyContainerFillerWrapper.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/wrappers/stackedFractionWrapper.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/containers/stackedFractionNumeratorContainer.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/containers/stackedFractionDenominatorContainer.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/stackedFractionHorizontalBar.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/wrappers/superscriptWrapper.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/containers/superscriptContainer.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/wrappers/subscriptWrapper.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/containers/subscriptContainer.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/wrappers/superscriptAndSubscriptWrapper.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/wrappers/squareRootWrapper.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/squareRootOverBar.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/squareRootRadical.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/squareRootDiagonal.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/containers/squareRootRadicandContainer.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/wrappers/nthRootWrapper.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/nthRootOverBar.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/nthRootRadical.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/nthRootDiagonal.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/containers/nthRootRadicandContainer.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/containers/nthRootDegreeContainer.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/wrappers/bracketWrapper.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/bracket.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/wholeBracket.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/topBracket.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/middleBracket.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/bottomBracket.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/leftBracket.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/rightBracket.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/leftParenthesisBracket.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/rightParenthesisBracket.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/leftParenthesisWholeBracket.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/leftParenthesisTopBracket.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/leftParenthesisMiddleBracket.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/leftParenthesisBottomBracket.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/rightParenthesisWholeBracket.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/rightParenthesisTopBracket.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/rightParenthesisMiddleBracket.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/rightParenthesisBottomBracket.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/leftSquareBracket.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/leftSquareWholeBracket.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/leftSquareTopBracket.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/leftSquareMiddleBracket.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/leftSquareBottomBracket.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/rightSquareBracket.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/rightSquareWholeBracket.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/rightSquareTopBracket.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/rightSquareMiddleBracket.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/rightSquareBottomBracket.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/leftCurlyBracket.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/leftCurlyWholeBracket.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/leftCurlyTopBracket.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/leftCurlyMiddleBracket.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/leftCurlyBottomBracket.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/rightCurlyBracket.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/rightCurlyWholeBracket.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/rightCurlyTopBracket.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/rightCurlyMiddleBracket.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/rightCurlyBottomBracket.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/leftAngleBracket.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/leftAngleWholeBracket.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/rightAngleBracket.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/rightAngleWholeBracket.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/leftFloorBracket.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/leftFloorWholeBracket.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/leftFloorMiddleBracket.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/leftFloorBottomBracket.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/rightFloorBracket.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/rightFloorWholeBracket.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/rightFloorMiddleBracket.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/rightFloorBottomBracket.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/leftCeilBracket.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/leftCeilWholeBracket.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/leftCeilTopBracket.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/leftCeilMiddleBracket.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/rightCeilBracket.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/rightCeilWholeBracket.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/rightCeilTopBracket.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/rightCeilMiddleBracket.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/leftAbsValBracket.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/rightAbsValBracket.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/leftAbsValWholeBracket.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/leftAbsValMiddleBracket.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/rightAbsValWholeBracket.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/rightAbsValMiddleBracket.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/leftNormBracket.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/rightNormBracket.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/leftNormWholeBracket.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/leftNormMiddleBracket.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/rightNormWholeBracket.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/rightNormMiddleBracket.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/wrappers/bracketPairWrapper.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/containers/bracketContainer.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/wrappers/bigOperatorWrapper.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/containers/bigOperatorUpperLimitContainer.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/containers/bigOperatorLowerLimitContainer.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/containers/bigOperatorOperandContainer.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/bigOperatorSymbol.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/sumBigOperatorSymbol.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/bigCapBigOperatorSymbol.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/bigCupBigOperatorSymbol.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/bigSqCapBigOperatorSymbol.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/bigSqCupBigOperatorSymbol.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/bigSqCupBigOperatorSymbol.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/prodBigOperatorSymbol.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/coProdBigOperatorSymbol.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/bigVeeBigOperatorSymbol.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/bigWedgeBigOperatorSymbol.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/wrappers/integralWrapper.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/integralSymbol.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/doubleIntegralSymbol.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/tripleIntegralSymbol.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/contourIntegralSymbol.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/contourDoubleIntegralSymbol.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/contourTripleIntegralSymbol.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/containers/integralUpperLimitContainer.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/containers/integralLowerLimitContainer.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/word.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/functionWord.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/wrappers/functionWrapper.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/wrappers/functionLowerWrapper.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/functionLowerWord.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/containers/functionLowerContainer.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/wrappers/logLowerWrapper.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/logLowerWord.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/containers/logLowerContainer.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/wrappers/limitWrapper.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/containers/limitLeftContainer.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/containers/limitRightContainer.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/limitWord.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/limitSymbol.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/wrappers/matrixWrapper.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/containers/matrixContainer.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/wrappers/accentWrapper.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/misc/accentSymbol.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/containers/accentContainer.js"></script>
+  <script src="/equation-editor/src/app/js/equation-components/containers/topLevelContainer.js"></script>
+  <script src="/equation-editor/src/app/js/blinkingCursor.js"></script>
+  <script src="/equation-editor/src/app/js/mouseInteraction.js"></script>
+  <script src="/equation-editor/src/app/js/addWrapperUtil.js"></script>
+  <script src="/equation-editor/src/app/js/keyboardInteraction.js"></script>
+  <script src="/equation-editor/src/app/js/menuInteraction.js"></script>
+  <script src="/equation-editor/src/app/js/equationEditor.js"></script>
+  <link href="/equation-editor/src/Fonts/TeX/font.css" rel="stylesheet" type="text/css" charset="utf-8" />
+  <link href="/equation-editor/src/app/css/equationEditor.css" rel="stylesheet" type="text/css" charset="utf-8" />
 </head>
 <body>
 
 
     <br /><br />
     <input id="hiddenFocusInput" style="width: 0; height: 0; opacity: 0; position: absolute; top: 0; left: 0;" type="text" autocapitalize="off" />
-    <div id="loadingMessageOuter" style="width: 234px; height: 64px;">
-      <div id="loadingMessage" class="fontSizeSmaller" style="width: 500px; height: 64px; position: fixed;"></div>
-    </div>
+    
+
+
     <div class="equation-editor"></div>
+    <div style="text-align: center; display: flex; justify-content: center;">
     <div class="tabs">
         <ul class="outer-tab-links tab-links">
             <li class="outerTab active"><a href="#common">Common</a></li>
@@ -192,17 +193,17 @@
             <li class="outerTab"><a href="#integrals">Integrals</a></li>
             <li class="outerTab"><a href="#misc">Misc</a></li>
         </ul>
-     
+    <div style="text-align: center; display: flex; justify-content: center;">
         <div class="tab-content" id="tab-content-top">
             <div id="common" class="tab outer active">
-                <img class="menuItem" id="stackedFractionButton" src="../../MenuImages/png/stackedFraction.png">
-                <img class="menuItem" id="superscriptButton" src="../../MenuImages/png/superscript.png">
-                <img class="menuItem" id="subscriptButton" src="../../MenuImages/png/subscript.png">
-                <img class="menuItem" id="superscriptAndSubscriptButton" src="../../MenuImages/png/superscriptAndSubscript.png">
-                <img class="menuItem" id="squareRootButton" src="../../MenuImages/png/squareRoot.png">
-                <img class="menuItem" id="nthRootButton" height="60" src="../../MenuImages/png/nthRoot.png">
-                <img class="menuItem" id="limitButton" src="../../MenuImages/png/limit.png">
-                <img class="menuItem" id="logLowerButton" height="55" src="../../MenuImages/png/log_n.png">
+                <img class="menuItem" id="stackedFractionButton" src="/equation-editor/src/MenuImages/png/stackedFraction.png">
+                <img class="menuItem" id="superscriptButton" src="/equation-editor/src/MenuImages/png/superscript.png">
+                <img class="menuItem" id="subscriptButton" src="/equation-editor/src/MenuImages/png/subscript.png">
+                <img class="menuItem" id="superscriptAndSubscriptButton" src="/equation-editor/src/MenuImages/png/superscriptAndSubscript.png">
+                <img class="menuItem" id="squareRootButton" src="/equation-editor/src/MenuImages/png/squareRoot.png">
+                <img class="menuItem" id="nthRootButton" height="60" src="/equation-editor/src/MenuImages/png/nthRoot.png">
+                <img class="menuItem" id="limitButton" src="/equation-editor/src/MenuImages/png/limit.png">
+                <img class="menuItem" id="logLowerButton" height="55" src="/equation-editor/src/MenuImages/png/log_n.png">
                 <span class="menuItem MathJax_Main" id="logButton" style="font-size: 45px;">log</span>
                 <span class="menuItem MathJax_Main" id="lnButton" style="font-size: 45px;">ln</span>
             </div>
@@ -222,14 +223,14 @@
                     <span class="menuItem MathJax_Main" id="rightCeilBracketButton" style="font-size: 65px;">&#8969;</span>
                   </div>
                   <div id="bracketsPair" class="tab inner">
-                    <img class="menuItem" id="parenthesesBracketPairButton" src="../../MenuImages/png/parenthesesBracketPair.png">
-                    <img class="menuItem" id="squareBracketPairButton" src="../../MenuImages/png/squareBracketPair.png">
-                    <img class="menuItem" id="curlyBracketPairButton" src="../../MenuImages/png/curlyBracketPair.png">
-                    <img class="menuItem" id="angleBracketPairButton" src="../../MenuImages/png/angleBracketPair.png">
-                    <img class="menuItem" id="floorBracketPairButton" src="../../MenuImages/png/floorBracketPair.png">
-                    <img class="menuItem" id="ceilBracketPairButton" src="../../MenuImages/png/ceilBracketPair.png">
-                    <img class="menuItem" id="absValBracketPairButton" src="../../MenuImages/png/absBracketPair.png">
-                    <img class="menuItem" id="normBracketPairButton" src="../../MenuImages/png/normBracketPair.png">
+                    <img class="menuItem" id="parenthesesBracketPairButton" src="/equation-editor/src/MenuImages/png/parenthesesBracketPair.png">
+                    <img class="menuItem" id="squareBracketPairButton" src="/equation-editor/src/MenuImages/png/squareBracketPair.png">
+                    <img class="menuItem" id="curlyBracketPairButton" src="/equation-editor/src/MenuImages/png/curlyBracketPair.png">
+                    <img class="menuItem" id="angleBracketPairButton" src="/equation-editor/src/MenuImages/png/angleBracketPair.png">
+                    <img class="menuItem" id="floorBracketPairButton" src="/equation-editor/src/MenuImages/png/floorBracketPair.png">
+                    <img class="menuItem" id="ceilBracketPairButton" src="/equation-editor/src/MenuImages/png/ceilBracketPair.png">
+                    <img class="menuItem" id="absValBracketPairButton" src="/equation-editor/src/MenuImages/png/absBracketPair.png">
+                    <img class="menuItem" id="normBracketPairButton" src="/equation-editor/src/MenuImages/png/normBracketPair.png">
                   </div>
                 </div>
             </div>
@@ -343,165 +344,171 @@
                     <span class="menuItem MathJax_Main" id="minButton" style="font-size: 45px;">min</span>
                     <span class="menuItem MathJax_Main" id="supButton" style="font-size: 45px;">sup</span>
                     <span class="menuItem MathJax_Main" id="infButton" style="font-size: 45px;">inf</span>
-                    <img class="menuItem" id="maxLowerButton" src="../../MenuImages/png/maxLower.png">
-                    <img class="menuItem" id="minLowerButton" src="../../MenuImages/png/minLower.png">
+                    <img class="menuItem" id="maxLowerButton" src="/equation-editor/src/MenuImages/png/maxLower.png">
+                    <img class="menuItem" id="minLowerButton" src="/equation-editor/src/MenuImages/png/minLower.png">
                   </div>
                 </div>
             </div>
      
             <div id="largeOperators" class="tab outer">
                 <ul class="inner-tab-links tab-links">
-                    <li class="innerTab active"><a href="#largeOperatorsSum"><img class="innerTabImg" src="../../MenuImages/png/sumSymbol.png"></a></li>
-                    <li class="innerTab"><a href="#largeOperatorsBigCap"><img class="innerTabImg" src="../../MenuImages/png/bigCapSymbol.png"></a></li>
-                    <li class="innerTab"><a href="#largeOperatorsBigCup"><img class="innerTabImg" src="../../MenuImages/png/bigCupSymbol.png"></a></li>
-                    <li class="innerTab"><a href="#largeOperatorsBigSqCap"><img class="innerTabImg" src="../../MenuImages/png/bigSqCapSymbol.png"></a></li>
-                    <li class="innerTab"><a href="#largeOperatorsBigSqCup"><img class="innerTabImg" src="../../MenuImages/png/bigSqCupSymbol.png"></a></li>
-                    <li class="innerTab"><a href="#largeOperatorsProd"><img class="innerTabImg" src="../../MenuImages/png/prodSymbol.png"></a></li>
-                    <li class="innerTab"><a href="#largeOperatorsCoProd"><img class="innerTabImg" src="../../MenuImages/png/coProdSymbol.png"></a></li>
-                    <li class="innerTab"><a href="#largeOperatorsBigVee"><img class="innerTabImg" src="../../MenuImages/png/bigVeeSymbol.png"></a></li>
-                    <li class="innerTab"><a href="#largeOperatorsBigWedge"><img class="innerTabImg" src="../../MenuImages/png/bigWedgeSymbol.png"></a></li>
+                    <li class="innerTab active"><a href="#largeOperatorsSum"><img class="innerTabImg" src="/equation-editor/src/MenuImages/png/sumSymbol.png"></a></li>
+                    <li class="innerTab"><a href="#largeOperatorsBigCap"><img class="innerTabImg" src="/equation-editor/src/MenuImages/png/bigCapSymbol.png"></a></li>
+                    <li class="innerTab"><a href="#largeOperatorsBigCup"><img class="innerTabImg" src="/equation-editor/src/MenuImages/png/bigCupSymbol.png"></a></li>
+                    <li class="innerTab"><a href="#largeOperatorsBigSqCap"><img class="innerTabImg" src="/equation-editor/src/MenuImages/png/bigSqCapSymbol.png"></a></li>
+                    <li class="innerTab"><a href="#largeOperatorsBigSqCup"><img class="innerTabImg" src="/equation-editor/src/MenuImages/png/bigSqCupSymbol.png"></a></li>
+                    <li class="innerTab"><a href="#largeOperatorsProd"><img class="innerTabImg" src="/equation-editor/src/MenuImages/png/prodSymbol.png"></a></li>
+                    <li class="innerTab"><a href="#largeOperatorsCoProd"><img class="innerTabImg" src="/equation-editor/src/MenuImages/png/coProdSymbol.png"></a></li>
+                    <li class="innerTab"><a href="#largeOperatorsBigVee"><img class="innerTabImg" src="/equation-editor/src/MenuImages/png/bigVeeSymbol.png"></a></li>
+                    <li class="innerTab"><a href="#largeOperatorsBigWedge"><img class="innerTabImg" src="/equation-editor/src/MenuImages/png/bigWedgeSymbol.png"></a></li>
                 </ul>
                 <div class="tab-content tab-content-nested">
                   <div id="largeOperatorsSum" class="tab inner active">
-                    <img class="menuItem" id="sumBigOperatorButton" src="../../MenuImages/png/sum.png">
-                    <img class="menuItem" id="sumBigOperatorNoUpperButton" src="../../MenuImages/png/sumNoUpper.png">
-                    <img class="menuItem" id="sumBigOperatorNoUpperNoLowerButton" src="../../MenuImages/png/sumNoUpperNoLower.png">
-                    <img class="menuItem" id="inlineSumBigOperatorButton" src="../../MenuImages/png/sumInline.png">
-                    <img class="menuItem" id="inlineSumBigOperatorNoUpperButton" src="../../MenuImages/png/sumNoUpperInline.png">
+                    <img class="menuItem" id="sumBigOperatorButton" src="/equation-editor/src/MenuImages/png/sum.png">
+                    <img class="menuItem" id="sumBigOperatorNoUpperButton" src="/equation-editor/src/MenuImages/png/sumNoUpper.png">
+                    <img class="menuItem" id="sumBigOperatorNoUpperNoLowerButton" src="/equation-editor/src/MenuImages/png/sumNoUpperNoLower.png">
+                    <img class="menuItem" id="inlineSumBigOperatorButton" src="/equation-editor/src/MenuImages/png/sumInline.png">
+                    <img class="menuItem" id="inlineSumBigOperatorNoUpperButton" src="/equation-editor/src/MenuImages/png/sumNoUpperInline.png">
                   </div>
                   <div id="largeOperatorsBigCap" class="tab inner">
-                    <img class="menuItem" id="bigCapBigOperatorButton" src="../../MenuImages/png/bigCap.png">
-                    <img class="menuItem" id="bigCapBigOperatorNoUpperButton" src="../../MenuImages/png/bigCapNoUpper.png">
-                    <img class="menuItem" id="bigCapBigOperatorNoUpperNoLowerButton" src="../../MenuImages/png/bigCapNoUpperNoLower.png">
-                    <img class="menuItem" id="inlineBigCapBigOperatorButton" src="../../MenuImages/png/bigCapInline.png">
-                    <img class="menuItem" id="inlineBigCapBigOperatorNoUpperButton" src="../../MenuImages/png/bigCapNoUpperInline.png">
+                    <img class="menuItem" id="bigCapBigOperatorButton" src="/equation-editor/src/MenuImages/png/bigCap.png">
+                    <img class="menuItem" id="bigCapBigOperatorNoUpperButton" src="/equation-editor/src/MenuImages/png/bigCapNoUpper.png">
+                    <img class="menuItem" id="bigCapBigOperatorNoUpperNoLowerButton" src="/equation-editor/src/MenuImages/png/bigCapNoUpperNoLower.png">
+                    <img class="menuItem" id="inlineBigCapBigOperatorButton" src="/equation-editor/src/MenuImages/png/bigCapInline.png">
+                    <img class="menuItem" id="inlineBigCapBigOperatorNoUpperButton" src="/equation-editor/src/MenuImages/png/bigCapNoUpperInline.png">
                   </div>
                   <div id="largeOperatorsBigCup" class="tab inner">
-                    <img class="menuItem" id="bigCupBigOperatorButton" src="../../MenuImages/png/bigCup.png">
-                    <img class="menuItem" id="bigCupBigOperatorNoUpperButton" src="../../MenuImages/png/bigCupNoUpper.png">
-                    <img class="menuItem" id="bigCupBigOperatorNoUpperNoLowerButton" src="../../MenuImages/png/bigCupNoUpperNoLower.png">
-                    <img class="menuItem" id="inlineBigCupBigOperatorButton" src="../../MenuImages/png/bigCupInline.png">
-                    <img class="menuItem" id="inlineBigCupBigOperatorNoUpperButton" src="../../MenuImages/png/bigCupNoUpperInline.png">
+                    <img class="menuItem" id="bigCupBigOperatorButton" src="/equation-editor/src/MenuImages/png/bigCup.png">
+                    <img class="menuItem" id="bigCupBigOperatorNoUpperButton" src="/equation-editor/src/MenuImages/png/bigCupNoUpper.png">
+                    <img class="menuItem" id="bigCupBigOperatorNoUpperNoLowerButton" src="/equation-editor/src/MenuImages/png/bigCupNoUpperNoLower.png">
+                    <img class="menuItem" id="inlineBigCupBigOperatorButton" src="/equation-editor/src/MenuImages/png/bigCupInline.png">
+                    <img class="menuItem" id="inlineBigCupBigOperatorNoUpperButton" src="/equation-editor/src/MenuImages/png/bigCupNoUpperInline.png">
                   </div>
                   <div id="largeOperatorsBigSqCap" class="tab inner">
-                    <img class="menuItem" id="bigSqCapBigOperatorButton" src="../../MenuImages/png/bigSqCap.png">
-                    <img class="menuItem" id="bigSqCapBigOperatorNoUpperButton" src="../../MenuImages/png/bigSqCapNoUpper.png">
-                    <img class="menuItem" id="bigSqCapBigOperatorNoUpperNoLowerButton" src="../../MenuImages/png/bigSqCapNoUpperNoLower.png">
-                    <img class="menuItem" id="inlineBigSqCapBigOperatorButton" src="../../MenuImages/png/bigSqCapInline.png">
-                    <img class="menuItem" id="inlineBigSqCapBigOperatorNoUpperButton" src="../../MenuImages/png/bigSqCapNoUpperInline.png">
+                    <img class="menuItem" id="bigSqCapBigOperatorButton" src="/equation-editor/src/MenuImages/png/bigSqCap.png">
+                    <img class="menuItem" id="bigSqCapBigOperatorNoUpperButton" src="/equation-editor/src/MenuImages/png/bigSqCapNoUpper.png">
+                    <img class="menuItem" id="bigSqCapBigOperatorNoUpperNoLowerButton" src="/equation-editor/src/MenuImages/png/bigSqCapNoUpperNoLower.png">
+                    <img class="menuItem" id="inlineBigSqCapBigOperatorButton" src="/equation-editor/src/MenuImages/png/bigSqCapInline.png">
+                    <img class="menuItem" id="inlineBigSqCapBigOperatorNoUpperButton" src="/equation-editor/src/MenuImages/png/bigSqCapNoUpperInline.png">
                   </div>
                   <div id="largeOperatorsBigSqCup" class="tab inner">
-                    <img class="menuItem" id="bigSqCupBigOperatorButton" src="../../MenuImages/png/bigSqCup.png">
-                    <img class="menuItem" id="bigSqCupBigOperatorNoUpperButton" src="../../MenuImages/png/bigSqCupNoUpper.png">
-                    <img class="menuItem" id="bigSqCupBigOperatorNoUpperNoLowerButton" src="../../MenuImages/png/bigSqCupNoUpperNoLower.png">
-                    <img class="menuItem" id="inlineBigSqCupBigOperatorButton" src="../../MenuImages/png/bigSqCupInline.png">
-                    <img class="menuItem" id="inlineBigSqCupBigOperatorNoUpperButton" src="../../MenuImages/png/bigSqCupNoUpperInline.png">
+                    <img class="menuItem" id="bigSqCupBigOperatorButton" src="/equation-editor/src/MenuImages/png/bigSqCup.png">
+                    <img class="menuItem" id="bigSqCupBigOperatorNoUpperButton" src="/equation-editor/src/MenuImages/png/bigSqCupNoUpper.png">
+                    <img class="menuItem" id="bigSqCupBigOperatorNoUpperNoLowerButton" src="/equation-editor/src/MenuImages/png/bigSqCupNoUpperNoLower.png">
+                    <img class="menuItem" id="inlineBigSqCupBigOperatorButton" src="/equation-editor/src/MenuImages/png/bigSqCupInline.png">
+                    <img class="menuItem" id="inlineBigSqCupBigOperatorNoUpperButton" src="/equation-editor/src/MenuImages/png/bigSqCupNoUpperInline.png">
                   </div>
                   <div id="largeOperatorsProd" class="tab inner">
-                    <img class="menuItem" id="prodBigOperatorButton" src="../../MenuImages/png/prod.png">
-                    <img class="menuItem" id="prodBigOperatorNoUpperButton" src="../../MenuImages/png/prodNoUpper.png">
-                    <img class="menuItem" id="prodBigOperatorNoUpperNoLowerButton" src="../../MenuImages/png/prodNoUpperNoLower.png">
-                    <img class="menuItem" id="inlineProdBigOperatorButton" src="../../MenuImages/png/prodInline.png">
-                    <img class="menuItem" id="inlineProdBigOperatorNoUpperButton" src="../../MenuImages/png/prodNoUpperInline.png">
+                    <img class="menuItem" id="prodBigOperatorButton" src="/equation-editor/src/MenuImages/png/prod.png">
+                    <img class="menuItem" id="prodBigOperatorNoUpperButton" src="/equation-editor/src/MenuImages/png/prodNoUpper.png">
+                    <img class="menuItem" id="prodBigOperatorNoUpperNoLowerButton" src="/equation-editor/src/MenuImages/png/prodNoUpperNoLower.png">
+                    <img class="menuItem" id="inlineProdBigOperatorButton" src="/equation-editor/src/MenuImages/png/prodInline.png">
+                    <img class="menuItem" id="inlineProdBigOperatorNoUpperButton" src="/equation-editor/src/MenuImages/png/prodNoUpperInline.png">
                   </div>
                   <div id="largeOperatorsCoProd" class="tab inner">
-                    <img class="menuItem" id="coProdBigOperatorButton" src="../../MenuImages/png/coProd.png">
-                    <img class="menuItem" id="coProdBigOperatorNoUpperButton" src="../../MenuImages/png/coProdNoUpper.png">
-                    <img class="menuItem" id="coProdBigOperatorNoUpperNoLowerButton" src="../../MenuImages/png/coProdNoUpperNoLower.png">
-                    <img class="menuItem" id="inlineCoProdBigOperatorButton" src="../../MenuImages/png/coProdInline.png">
-                    <img class="menuItem" id="inlineCoProdBigOperatorNoUpperButton" src="../../MenuImages/png/coProdNoUpperInline.png">
+                    <img class="menuItem" id="coProdBigOperatorButton" src="/equation-editor/src/MenuImages/png/coProd.png">
+                    <img class="menuItem" id="coProdBigOperatorNoUpperButton" src="/equation-editor/src/MenuImages/png/coProdNoUpper.png">
+                    <img class="menuItem" id="coProdBigOperatorNoUpperNoLowerButton" src="/equation-editor/src/MenuImages/png/coProdNoUpperNoLower.png">
+                    <img class="menuItem" id="inlineCoProdBigOperatorButton" src="/equation-editor/src/MenuImages/png/coProdInline.png">
+                    <img class="menuItem" id="inlineCoProdBigOperatorNoUpperButton" src="/equation-editor/src/MenuImages/png/coProdNoUpperInline.png">
                   </div>
                   <div id="largeOperatorsBigVee" class="tab inner">
-                    <img class="menuItem" id="bigVeeBigOperatorButton" src="../../MenuImages/png/bigVee.png">
-                    <img class="menuItem" id="bigVeeBigOperatorNoUpperButton" src="../../MenuImages/png/bigVeeNoUpper.png">
-                    <img class="menuItem" id="bigVeeBigOperatorNoUpperNoLowerButton" src="../../MenuImages/png/bigVeeNoUpperNoLower.png">
-                    <img class="menuItem" id="inlineBigVeeBigOperatorButton" src="../../MenuImages/png/bigVeeInline.png">
-                    <img class="menuItem" id="inlineBigVeeBigOperatorNoUpperButton" src="../../MenuImages/png/bigVeeNoUpperInline.png">
+                    <img class="menuItem" id="bigVeeBigOperatorButton" src="/equation-editor/src/MenuImages/png/bigVee.png">
+                    <img class="menuItem" id="bigVeeBigOperatorNoUpperButton" src="/equation-editor/src/MenuImages/png/bigVeeNoUpper.png">
+                    <img class="menuItem" id="bigVeeBigOperatorNoUpperNoLowerButton" src="/equation-editor/src/MenuImages/png/bigVeeNoUpperNoLower.png">
+                    <img class="menuItem" id="inlineBigVeeBigOperatorButton" src="/equation-editor/src/MenuImages/png/bigVeeInline.png">
+                    <img class="menuItem" id="inlineBigVeeBigOperatorNoUpperButton" src="/equation-editor/src/MenuImages/png/bigVeeNoUpperInline.png">
                   </div>
                   <div id="largeOperatorsBigWedge" class="tab inner">
-                    <img class="menuItem" id="bigWedgeBigOperatorButton" src="../../MenuImages/png/bigWedge.png">
-                    <img class="menuItem" id="bigWedgeBigOperatorNoUpperButton" src="../../MenuImages/png/bigWedgeNoUpper.png">
-                    <img class="menuItem" id="bigWedgeBigOperatorNoUpperNoLowerButton" src="../../MenuImages/png/bigWedgeNoUpperNoLower.png">
-                    <img class="menuItem" id="inlineBigWedgeBigOperatorButton" src="../../MenuImages/png/bigWedgeInline.png">
-                    <img class="menuItem" id="inlineBigWedgeBigOperatorNoUpperButton" src="../../MenuImages/png/bigWedgeNoUpperInline.png">
+                    <img class="menuItem" id="bigWedgeBigOperatorButton" src="/equation-editor/src/MenuImages/png/bigWedge.png">
+                    <img class="menuItem" id="bigWedgeBigOperatorNoUpperButton" src="/equation-editor/src/MenuImages/png/bigWedgeNoUpper.png">
+                    <img class="menuItem" id="bigWedgeBigOperatorNoUpperNoLowerButton" src="/equation-editor/src/MenuImages/png/bigWedgeNoUpperNoLower.png">
+                    <img class="menuItem" id="inlineBigWedgeBigOperatorButton" src="/equation-editor/src/MenuImages/png/bigWedgeInline.png">
+                    <img class="menuItem" id="inlineBigWedgeBigOperatorNoUpperButton" src="/equation-editor/src/MenuImages/png/bigWedgeNoUpperInline.png">
                   </div>
                 </div>
             </div>
 
             <div id="integrals" class="tab outer">
                 <ul class="inner-tab-links tab-links">
-                    <li class="innerTab active"><a href="#integralsIntegral"><img class="innerTabImg" src="../../MenuImages/png/integralSymbol.png"></a></li>
-                    <li class="innerTab"><a href="#integralsDoubleIntegral"><img class="innerTabImg" src="../../MenuImages/png/doubleIntegralSymbol.png"></a></li>
-                    <li class="innerTab"><a href="#integralsTripleIntegral"><img class="innerTabImg" src="../../MenuImages/png/tripleIntegralSymbol.png"></a></li>
-                    <li class="innerTab"><a href="#integralsContourIntegral"><img class="innerTabImg" src="../../MenuImages/png/contourIntegralSymbol.png"></a></li>
-                    <li class="innerTab"><a href="#integralsContourDoubleIntegral"><img class="innerTabImg" src="../../MenuImages/png/doubleContourIntegralSymbol.png"></a></li>
-                    <li class="innerTab"><a href="#integralsContourTripleIntegral"><img class="innerTabImg" src="../../MenuImages/png/tripleContourIntegralSymbol.png"></a></li>
+                    <li class="innerTab active"><a href="#integralsIntegral"><img class="innerTabImg" src="/equation-editor/src/MenuImages/png/integralSymbol.png"></a></li>
+                    <li class="innerTab"><a href="#integralsDoubleIntegral"><img class="innerTabImg" src="/equation-editor/src/MenuImages/png/doubleIntegralSymbol.png"></a></li>
+                    <li class="innerTab"><a href="#integralsTripleIntegral"><img class="innerTabImg" src="/equation-editor/src/MenuImages/png/tripleIntegralSymbol.png"></a></li>
+                    <li class="innerTab"><a href="#integralsContourIntegral"><img class="innerTabImg" src="/equation-editor/src/MenuImages/png/contourIntegralSymbol.png"></a></li>
+                    <li class="innerTab"><a href="#integralsContourDoubleIntegral"><img class="innerTabImg" src="/equation-editor/src/MenuImages/png/doubleContourIntegralSymbol.png"></a></li>
+                    <li class="innerTab"><a href="#integralsContourTripleIntegral"><img class="innerTabImg" src="/equation-editor/src/MenuImages/png/tripleContourIntegralSymbol.png"></a></li>
                 </ul>
                 <div class="tab-content tab-content-nested">
                   <div id="integralsIntegral" class="tab inner active">
-                    <img class="menuItem" id="integralButton" src="../../MenuImages/png/integral.png">
-                    <img class="menuItem" id="integralNoUpperButton" src="../../MenuImages/png/integralNoUpper.png">
-                    <img class="menuItem" id="integralNoUpperNoLowerButton" src="../../MenuImages/png/integralNoUpperNoLower.png">
-                    <img class="menuItem" id="inlineIntegralButton" src="../../MenuImages/png/integralInline.png">
-                    <img class="menuItem" id="inlineIntegralNoUpperButton" src="../../MenuImages/png/integralNoUpperInline.png">
+                    <img class="menuItem" id="integralButton" src="/equation-editor/src/MenuImages/png/integral.png">
+                    <img class="menuItem" id="integralNoUpperButton" src="/equation-editor/src/MenuImages/png/integralNoUpper.png">
+                    <img class="menuItem" id="integralNoUpperNoLowerButton" src="/equation-editor/src/MenuImages/png/integralNoUpperNoLower.png">
+                    <img class="menuItem" id="inlineIntegralButton" src="/equation-editor/src/MenuImages/png/integralInline.png">
+                    <img class="menuItem" id="inlineIntegralNoUpperButton" src="/equation-editor/src/MenuImages/png/integralNoUpperInline.png">
                   </div>
                   <div id="integralsDoubleIntegral" class="tab inner">
-                    <img class="menuItem" id="doubleIntegralButton" src="../../MenuImages/png/doubleIntegral.png">
-                    <img class="menuItem" id="doubleIntegralNoUpperButton" src="../../MenuImages/png/doubleIntegralNoUpper.png">
-                    <img class="menuItem" id="doubleIntegralNoUpperNoLowerButton" src="../../MenuImages/png/doubleIntegralNoUpperNoLower.png">
-                    <img class="menuItem" id="inlineDoubleIntegralButton" src="../../MenuImages/png/doubleIntegralInline.png">
-                    <img class="menuItem" id="inlineDoubleIntegralNoUpperButton" src="../../MenuImages/png/doubleIntegralNoUpperInline.png">
+                    <img class="menuItem" id="doubleIntegralButton" src="/equation-editor/src/MenuImages/png/doubleIntegral.png">
+                    <img class="menuItem" id="doubleIntegralNoUpperButton" src="/equation-editor/src/MenuImages/png/doubleIntegralNoUpper.png">
+                    <img class="menuItem" id="doubleIntegralNoUpperNoLowerButton" src="/equation-editor/src/MenuImages/png/doubleIntegralNoUpperNoLower.png">
+                    <img class="menuItem" id="inlineDoubleIntegralButton" src="/equation-editor/src/MenuImages/png/doubleIntegralInline.png">
+                    <img class="menuItem" id="inlineDoubleIntegralNoUpperButton" src="/equation-editor/src/MenuImages/png/doubleIntegralNoUpperInline.png">
                   </div>
                   <div id="integralsTripleIntegral" class="tab inner">
-                    <img class="menuItem" id="tripleIntegralButton" src="../../MenuImages/png/tripleIntegral.png">
-                    <img class="menuItem" id="tripleIntegralNoUpperButton" src="../../MenuImages/png/tripleIntegralNoUpper.png">
-                    <img class="menuItem" id="tripleIntegralNoUpperNoLowerButton" src="../../MenuImages/png/tripleIntegralNoUpperNoLower.png">
-                    <img class="menuItem" id="inlineTripleIntegralButton" src="../../MenuImages/png/tripleIntegralInline.png">
-                    <img class="menuItem" id="inlineTripleIntegralNoUpperButton" src="../../MenuImages/png/tripleIntegralNoUpperInline.png">
+                    <img class="menuItem" id="tripleIntegralButton" src="/equation-editor/src/MenuImages/png/tripleIntegral.png">
+                    <img class="menuItem" id="tripleIntegralNoUpperButton" src="/equation-editor/src/MenuImages/png/tripleIntegralNoUpper.png">
+                    <img class="menuItem" id="tripleIntegralNoUpperNoLowerButton" src="/equation-editor/src/MenuImages/png/tripleIntegralNoUpperNoLower.png">
+                    <img class="menuItem" id="inlineTripleIntegralButton" src="/equation-editor/src/MenuImages/png/tripleIntegralInline.png">
+                    <img class="menuItem" id="inlineTripleIntegralNoUpperButton" src="/equation-editor/src/MenuImages/png/tripleIntegralNoUpperInline.png">
                   </div>
                   <div id="integralsContourIntegral" class="tab inner">
-                    <img class="menuItem" id="contourIntegralButton" src="../../MenuImages/png/contourIntegral.png">
-                    <img class="menuItem" id="contourIntegralNoUpperButton" src="../../MenuImages/png/contourIntegralNoUpper.png">
-                    <img class="menuItem" id="contourIntegralNoUpperNoLowerButton" src="../../MenuImages/png/contourIntegralNoUpperNoLower.png">
-                    <img class="menuItem" id="inlineContourIntegralButton" src="../../MenuImages/png/contourIntegralInline.png">
-                    <img class="menuItem" id="inlineContourIntegralNoUpperButton" src="../../MenuImages/png/contourIntegralNoUpperInline.png">
+                    <img class="menuItem" id="contourIntegralButton" src="/equation-editor/src/MenuImages/png/contourIntegral.png">
+                    <img class="menuItem" id="contourIntegralNoUpperButton" src="/equation-editor/src/MenuImages/png/contourIntegralNoUpper.png">
+                    <img class="menuItem" id="contourIntegralNoUpperNoLowerButton" src="/equation-editor/src/MenuImages/png/contourIntegralNoUpperNoLower.png">
+                    <img class="menuItem" id="inlineContourIntegralButton" src="/equation-editor/src/MenuImages/png/contourIntegralInline.png">
+                    <img class="menuItem" id="inlineContourIntegralNoUpperButton" src="/equation-editor/src/MenuImages/png/contourIntegralNoUpperInline.png">
                   </div>
                   <div id="integralsContourDoubleIntegral" class="tab inner">
-                    <img class="menuItem" id="contourDoubleIntegralButton" src="../../MenuImages/png/doubleContourIntegral.png">
-                    <img class="menuItem" id="contourDoubleIntegralNoUpperButton" src="../../MenuImages/png/doubleContourIntegralNoUpper.png">
-                    <img class="menuItem" id="contourDoubleIntegralNoUpperNoLowerButton" src="../../MenuImages/png/doubleContourIntegralNoUpperNoLower.png">
-                    <img class="menuItem" id="inlineContourDoubleIntegralButton" src="../../MenuImages/png/doubleContourIntegralInline.png">
-                    <img class="menuItem" id="inlineContourDoubleIntegralNoUpperButton" src="../../MenuImages/png/doubleContourIntegralNoUpperInline.png">
+                    <img class="menuItem" id="contourDoubleIntegralButton" src="/equation-editor/src/MenuImages/png/doubleContourIntegral.png">
+                    <img class="menuItem" id="contourDoubleIntegralNoUpperButton" src="/equation-editor/src/MenuImages/png/doubleContourIntegralNoUpper.png">
+                    <img class="menuItem" id="contourDoubleIntegralNoUpperNoLowerButton" src="/equation-editor/src/MenuImages/png/doubleContourIntegralNoUpperNoLower.png">
+                    <img class="menuItem" id="inlineContourDoubleIntegralButton" src="/equation-editor/src/MenuImages/png/doubleContourIntegralInline.png">
+                    <img class="menuItem" id="inlineContourDoubleIntegralNoUpperButton" src="/equation-editor/src/MenuImages/png/doubleContourIntegralNoUpperInline.png">
                   </div>
                   <div id="integralsContourTripleIntegral" class="tab inner">
-                    <img class="menuItem" id="contourTripleIntegralButton" src="../../MenuImages/png/tripleContourIntegral.png">
-                    <img class="menuItem" id="contourTripleIntegralNoUpperButton" src="../../MenuImages/png/tripleContourIntegralNoUpper.png">
-                    <img class="menuItem" id="contourTripleIntegralNoUpperNoLowerButton" src="../../MenuImages/png/tripleContourIntegralNoUpperNoLower.png">
-                    <img class="menuItem" id="inlineContourTripleIntegralButton" src="../../MenuImages/png/tripleContourIntegralInline.png">
-                    <img class="menuItem" id="inlineContourTripleIntegralNoUpperButton" src="../../MenuImages/png/tripleContourIntegralNoUpperInline.png">
+                    <img class="menuItem" id="contourTripleIntegralButton" src="/equation-editor/src/MenuImages/png/tripleContourIntegral.png">
+                    <img class="menuItem" id="contourTripleIntegralNoUpperButton" src="/equation-editor/src/MenuImages/png/tripleContourIntegralNoUpper.png">
+                    <img class="menuItem" id="contourTripleIntegralNoUpperNoLowerButton" src="/equation-editor/src/MenuImages/png/tripleContourIntegralNoUpperNoLower.png">
+                    <img class="menuItem" id="inlineContourTripleIntegralButton" src="/equation-editor/src/MenuImages/png/tripleContourIntegralInline.png">
+                    <img class="menuItem" id="inlineContourTripleIntegralNoUpperButton" src="/equation-editor/src/MenuImages/png/tripleContourIntegralNoUpperInline.png">
                   </div>
                 </div>
             </div>
             <div id="misc" class="tab outer">
-                <img class="menuItem" id="dotAccentButton" src="../../MenuImages/png/dotAccent.png">
-                <img class="menuItem" id="hatAccentButton" src="../../MenuImages/png/hatAccent.png">
-                <img class="menuItem" id="vectorAccentButton" src="../../MenuImages/png/vectorAccent.png">
-                <img class="menuItem" id="barAccentButton" src="../../MenuImages/png/barAccent.png">
+                <img class="menuItem" id="dotAccentButton" src="/equation-editor/src/MenuImages/png/dotAccent.png">
+                <img class="menuItem" id="hatAccentButton" src="/equation-editor/src/MenuImages/png/hatAccent.png">
+                <img class="menuItem" id="vectorAccentButton" src="/equation-editor/src/MenuImages/png/vectorAccent.png">
+                <img class="menuItem" id="barAccentButton" src="/equation-editor/src/MenuImages/png/barAccent.png">
                 <div style="display: inline-block">rows: <input type="text" id="rows" /><br> cols: <input type="text" id="cols" /></div>
                 <div class="menuItem" id="matrixButton" style="font-size: 35px; padding: 5px 5px; display: inline-block">Matrix</div>
             </div>
+            <div style="text-align: center; display: flex; justify-content: center;">
         </div>
     </div>
     <br>
     <br>
-    <button id="toLatex">To LaTeX</button>
-    <button id="submitSolution">Submit Solution</button>
+  </div> 
+    <div class="containerNew" id="container">
+      <button class="button" id="toLatex"> 
+          <div class="button__line"></div>
+          <div class="button__line"></div>
+          <span class="button__text">Odoslať odpoveď</span>
+      </button>
+  </div>
+
     <br>    <br>
     <br>    <br>
     <br>
-    LaTeX:
-    <br>
-    <div id="ContentLatex" style="margin: 20px; border: solid 1px #000">&nbsp;</div>
+
     <script>
       var generateLatex = function(expr) {
 	var latexString = '';
@@ -908,18 +915,18 @@ var superscriptToLatex = function(expr) {
         var jsonObj = $('.eqEdEquation').data('eqObject').buildJsonObj();
         
         // Call the generateLatex function to get the result
-        var latexResult = generateLatex(JSON.stringify(jsonObj));
-        console.log(latexResult);
+        var latexResult = generateLatex(jsonObj);
         // Send the result to the PHP script
         $.ajax({
-          url: '../php/octaveExpressionComparator.php',
+          
+          url: '/equation-editor/src/app/php/octaveExpressionComparator.php',
           method: 'POST',
-          data: { latexResult: "2+2" },
+          data: { latexResult: latexResult },
           success: function(response) {
             // console.log(JSON.parse(response));
             console.log(response);
             // $('#ContentLatex').html(response);
-           // window.location.href = '../php/octaveExpressionComparator.php';
+           window.location.href = '/equation-editor/src/app/php/octaveExpressionComparator.php';
           }
         });
       });

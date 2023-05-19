@@ -52,7 +52,7 @@ var loadFonts = function(callback) {
             testStrings: {
                 'MathJax_Size2:n4': '\u2211\u22C2\u2A00\u220F\u22C3\u2A02\u2210\u2A06\u2A01\u222B\u22C1\u2A04'
             },
-            urls: ['../../Fonts/TeX/font.css']
+            urls: ['/equation-editor/src/Fonts/TeX/font.css']
         },
         active: function() {
             fontsLoaded = true;
