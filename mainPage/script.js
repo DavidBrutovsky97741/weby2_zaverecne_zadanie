@@ -81,7 +81,7 @@ function openModal(id) { // zistak to id a podla toho dat filter na konkretnu sa
 function testWritingTask(id) { //id task setu
     console.log(id);
     //console.log(elementId);
-    window.location.href = "studentPages/testWriting.php?taks="+elementId;
+    window.location.href = "studentPages/testWriting.php?task="+elementId;
 
 }
 

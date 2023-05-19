@@ -12,7 +12,6 @@ function getPoints(PDO $db): array
         $stmt = $db->prepare($sql);
         if ($stmt->execute()) {
             $response = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            $response;
 
             return $response;
         }
@@ -29,7 +28,6 @@ function getAvailableTasks(PDO $db): array
         $stmt = $db->prepare($sql);
         if ($stmt->execute()) {
             $response = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            $response;
             return $response;
         }
         return [];
@@ -37,6 +35,22 @@ function getAvailableTasks(PDO $db): array
         return [];
     }
 }
+
+function getTaskSetById(PDO $db, int $taskSetId): array
+{
+    try {
+        $sql = "SELECT * FROM Tasks WHERE task_set_id = ?";
+        $stmt = $db->prepare($sql);
+        if ($stmt->execute([$taskSetId])) {
+            $response = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $response;
+        }
+        return [];
+    } catch (Exception $e) {
+        return [];
+    }
+}
+
 
 function getAvailableTask(PDO $db, int $taskSetId): array
 {
@@ -186,6 +200,16 @@ if (
     return;
 }
 
+
+if (
+    $_SERVER["REQUEST_METHOD"] == "POST"
+    && isset($_POST["taskSetId"])
+) {
+    echo json_encode(getTaskSetById($db, intval($_POST["taskSetId"])));
+    return;
+}
+
+
 if (
     $_SERVER["REQUEST_METHOD"] == "POST"
 
@@ -207,6 +231,25 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     echo json_encode(getAvailableTasks($db));
     return;
 }
+
+
+// echo json_encode(generateStudentTaskSet($db, intval($_POST["studentAisId"]), intval($_POST["taskSetId"])));
+
+// function getAvailableTask(PDO $db, int $taskSetId): array
+// {
+//     try {
+//         $sql = "SELECT * FROM Tasks_sets WHERE Tasks_sets.available = true AND Tasks_sets.id = ?";
+//         $stmt = $db->prepare($sql);
+//         if ($stmt->execute([$taskSetId])) {
+//             $response = $stmt->fetchAll(PDO::FETCH_ASSOC);
+//             return $response;
+//         }
+//         return [];
+//     } catch (Exception $e) {
+//         return [];
+//     }
+// }
+
 
 
 

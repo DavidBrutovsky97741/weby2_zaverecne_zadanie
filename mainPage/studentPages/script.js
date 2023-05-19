@@ -1,77 +1,72 @@
-window.onload = function () {
-  
+window.onload = function() {
+  var uniqueTasks;
+  var taskIds = [];
+  var url = new URL(window.location.href);
+
+  // Get the value of the 'taks' parameter
+  var params = new URLSearchParams(url.search);
+  var taskNumber = params.get('task');
 
   var tbody = document.getElementById('Tbody');
 
-  //TODO:
-  /*               TU TREBA Z BACKENDU SADU
   $.ajax({
+    url: "../../api/tasks/index.php",
+    method: "POST",
+    data: {
+      taskSetId: taskNumber,
+    },
+    success: function(response) {
+      response = JSON.parse(response);
 
-      url: "/Zadanie4/ip-api/index.php",
+      console.log(response);
 
-      method: "POST",
-
-      data: {
-          worker: "get_ip",
-      },
-
-      success: function (response) {
-          //console.log(response)
-          var data = JSON.parse(response);
-          //console.log(data)
-
+      uniqueTasks = response.length;
+      for (let i = 0; i < uniqueTasks; i++) {
+        taskIds.push(response[i].id);
       }
-  })*/
+      console.log("Number of tasks: " + uniqueTasks);
 
+      let count = uniqueTasks; // Use uniqueTasks variable for the count
 
-  //TODO:
-  let count = 5; //kolko ma sada uloh 
+      for (let i = 0; i < count; i++) {
+        var tr = document.createElement('tr');
+        tbody.appendChild(tr);
 
-  for(let i=0;i<count;i++){       
+        var td1 = document.createElement('td'); //idecko
+        td1.textContent = taskIds[i];
+        tr.appendChild(td1);
 
-      var tr = document.createElement('tr');
-      tbody.appendChild(tr);
-      
-      var td1 = document.createElement('td'); //idecko
-      td1.textContent = i+1;
-      tr.appendChild(td1);
-      //TODO:
-      var td2 = document.createElement('td');  //set task name
-      td2.textContent = 'Maximálny počet bodov';
-      tr.appendChild(td2);
-      
-      var td3 = document.createElement('td'); // stav
-      var state = document.createElement('i');
-      state.id = 'state' + i;
+        var td2 = document.createElement('td'); //set task name
+        td2.textContent = 'Maximálny počet bodov';
+        tr.appendChild(td2);
 
-      state.className = "material-icons";
-      state.textContent = "cancel";
-      
-      td3.appendChild(state);
-      tr.appendChild(td3);
-      
-      var td4 = document.createElement('td'); // pisat
-      var button = document.createElement('button');
-      button.id = i;
-      button.textContent = 'Písať úlohu';
-      
-      button.addEventListener('click', (function(buttonId) {
-          return function() {
-            writeTask(buttonId);
-          };
-        })(button.id));
+        var td3 = document.createElement('td'); // stav
+        var state = document.createElement('i');
+        state.id = 'state' + taskIds[i];
+        state.className = "material-icons";
+        state.textContent = "cancel";
+        td3.appendChild(state);
+        tr.appendChild(td3);
 
-      td4.appendChild(button);
-      tr.appendChild(td4);
-      
-  }
+        var td4 = document.createElement('td'); // pisat
+        var button = document.createElement('button');
+        button.id = taskIds[i];
+        button.textContent = 'Písať úlohu';
 
-}
+        button.addEventListener('click', function() {
+          writeTask(this.id);
+        });
+
+        td4.appendChild(button);
+        tr.appendChild(td4);
+      }
+    }
+  });
+};
+
 
 
 function writeTask(id){
-
-
   document.getElementById(id).disabled = true;
 
   document.getElementById('state' + id).innerHTML='check_box';
