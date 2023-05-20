@@ -95,7 +95,7 @@ if (!isset($_SESSION['login']) || (strcmp($_SESSION['login'], 'true') != 0) || (
         </table>
 
 
-        <button type="button" class="btn btn-success" id="testWrite" onclick="testWritingTask()">Písať test</button>
+        <button type="button" class="btn btn-success" id="testWrite" >Písať test</button>
 
         <button type="button" class="btn btn-danger" id="closeModal" onclick="closeModal()">Zatvoriť</button>
 

@@ -5,6 +5,8 @@ error_reporting(E_ALL);
 require_once('../config.php');
 require_once('../students/index.php');
 
+session_start();
+$studentAisId = $_SESSION['id'];
 function getPoints(PDO $db): array
 {
     try {
@@ -111,12 +113,13 @@ function updateStudentGeneratedCount(PDO $db, int $studentId)
     }
 }
 
-function generateStudentTaskSet(PDO $db, int $studentAisId, int $taskSetId)
+function generateStudentTaskSet(PDO $db, int $taskSetId)
 {
+    global $studentAisId;
     $availableTask = getAvailableTask($db, $taskSetId);
     if (count($availableTask) === 0)
         return false;
-    $students = getStudentByAisId($db, $studentAisId);
+    $students = getStudentByAisId($db, intval($studentAisId));
 
     try {
         $sql = "INSERT INTO Student_task_sets (points_acquired, task_set_id , student_id, state) VALUES (?, ?, ?, ?)";
@@ -239,9 +242,15 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     return;
 }
 
-
-// echo json_encode(generateStudentTaskSet($db, intval($_POST["studentAisId"]), intval($_POST["taskSetId"])));
-
+if (
+    $_SERVER["REQUEST_METHOD"] == "POST"
+    && isset($_POST['taskSetId3']))
+    {
+        echo json_encode(generateStudentTaskSet($db, intval($_POST["taskSetId3"])));
+        return;
+    }
+ 
+ 
 // function getAvailableTask(PDO $db, int $taskSetId): array
 // {
 //     try {
