@@ -1,5 +1,4 @@
 images = [];
-latexObjects = [];
 fileName = "";
 latexContent = "";
 uniqueSets = [];
@@ -13,7 +12,7 @@ $.ajax({
         for (let i = 0; i < response.length; i++) {
             if (uniqueSets.includes(response[i].id)) {
                 continue;
-            } else {   
+            } else {
                 uniqueSets.push(response[i].id);
             }
         }
@@ -30,9 +29,9 @@ function generateSets() {
     document.getElementById('sets').innerHTML = '';
 
     let count = uniqueSets.length;
-    
+
     //console.log(uniqueSets[0]);
-    
+
     for (let i = 0; i < count; i++) {
 
         let randomSetName = (Math.random() + 1).toString(36).substring(5);
@@ -69,7 +68,7 @@ function generateSets() {
 
 function openModal(id) { // zistak to id a podla toho dat filter na konkretnu sadu
 
-    
+
     $.ajax({
 
         url: "/api/tasks/index.php",
@@ -83,38 +82,38 @@ function openModal(id) { // zistak to id a podla toho dat filter na konkretnu sa
 
         success: function (response) {
             response = JSON.parse(response);
-            let countTaksks = response.length;      
-            
+            let countTaksks = response.length;
+
             fetch("http://localhost:8000/api/tasks/index.php?tasks").then((response) => {
                 if (response.ok) return response.text()
             }).then((data) => {
                 const parsed = JSON.parse(data)
-       
+
                 count = parsed.length;
 
-                for (let i=0; i<count; i++){
-                    if(parsed[i].id==id){
-                       let points =  parsed[i].max_points;               
+                for (let i = 0; i < count; i++) {
+                    if (parsed[i].id == id) {
+                        let points = parsed[i].max_points;
 
-                       document.getElementById('points').innerHTML = points;
-                       document.getElementById('countTasks').innerHTML = countTaksks;
+                        document.getElementById('points').innerHTML = points;
+                        document.getElementById('countTasks').innerHTML = countTaksks;
                     }
                 }
 
-                
+
 
             })
-    
+
         }
-    }) 
+    })
 
     elementId = id;
     //alert(elementId);
     let buttonElement = document.getElementById('testWrite');
 
-    buttonElement.onclick = function() {
+    buttonElement.onclick = function () {
         testWritingTask(id);
-      };
+    };
 
     document.getElementById('modalSet').style.display = 'block';
 
@@ -144,7 +143,7 @@ function testWritingTask(id) {
 
 function closeModal() {
     document.getElementById('modalSet').style.display = 'none';
-    
+
 }
 
 
@@ -154,7 +153,7 @@ function handleFormSubmit(event) {
     var imageFolderInput = document.getElementById('imageFolder');
     var latexFolderInput = document.getElementById('latexFolder');
 
-   
+
 
     // Check if the file inputs exist
     if (!imageFolderInput || !latexFolderInput) {
@@ -168,30 +167,31 @@ function handleFormSubmit(event) {
     var onlyLaTeX = true;
 
     // Loop through the selected image files and check their extensions
-    for (var i = 0; i < imageFiles.length; i++) {
-        var imageFile = imageFiles[i];
-        var imageExtension = imageFile.name.split('.').pop().toLowerCase();
+    for (let i = 0; i < imageFiles.length; i++) {
+        let imageFile = imageFiles[i];
+        let imageExtension = imageFile.name.split('.').pop().toLowerCase();
 
-        // Check if the file extension is not an image extension
-        if (!['jpg', 'jpeg', 'png'].includes(imageExtension)) {
-            onlyImages = false;
-            break;
-        } else {
-            var reader = new FileReader();
+        if (['jpg', 'jpeg', 'png'].includes(imageExtension)) {
+            let reader = new FileReader();
             reader.onload = function (event) {
-                var imageContent = event.target.result;
+                let imageContent = event.target.result;
 
-                var imageObject = {
+                let imageObject = {
                     "fileName": imageFile.name,
                     "image64": imageContent
-                }
+                };
 
+                console.log("imagefile" + imageObject.fileName);
                 images.push(imageObject);
-                // console.log(images);
             };
             reader.readAsDataURL(imageFile);
         }
     }
+
+
+    // console.log(images);
+
+
 
     // Loop through the selected LaTeX files and check their extensions
     for (var j = 0; j < latexFiles.length; j++) {
@@ -202,24 +202,20 @@ function handleFormSubmit(event) {
         if (latexExtension !== 'tex') {
             onlyLaTeX = false;
             break;
-        }else{
-            var reader = new FileReader();
-            reader.onload = function (event) {
-                var contents = event.target.result;
-                console.log("File contents:", contents);
-                latexContent = contents;
-                latexContent = event.target.result;
-                var latexObj={
-                    "fileName": latexFile.name,
-                    "latex": latexContent
-                }
-                console.log(latexContent);
-                latexObjects.push(latexObj);
-            };
-            reader.readAsText(latexFile);
         }
-        sendData(latexObjects, images, fileName);
     }
+    var reader = new FileReader();
+    reader.onload = function (event) {
+
+        latexContent = event.target.result;
+        sendData(latexContent, images, fileName);
+    };
+    reader.readAsText(latexFile);
+    //DELETE images array
+    while (images.length > 0) {
+        images.pop();
+    }
+
 
 
 
