@@ -111,32 +111,31 @@ function parseLaTeX($text)
     preg_match_all($pattern, $text, $matches, PREG_SET_ORDER);
 
     $tasks = array();
-    var_dump($matches);
+    // var_dump($matches);
     foreach ($matches as $match) {
         $task = array();
         $task['section'] = trim($match[1]);
         $task['task'] = trim($match[2]);
-        $task['image'] = isset($match[3]) && $match[3] != "" ? trim($match[3]) : null;
+        $task['image'] = isset($match[3]) && $match[3] != "" ? ["fileName" => trim($match[3]), "image64" => ""] : ["fileName" => "", "image64" => ""];
         $task['solution'] = trim($match[4]);
         $tasks[] = $task;
     }
+
     return $tasks;
 }
 
-function validateImages($tasks, $images): bool
+function assignImagesToToTasks($tasks, $images): array
 {
-    foreach ($tasks as $task) {
-        if (is_null($task["image"]) || $task["image"] === "")
+    foreach ($tasks as $taskKey => $taskValue) {
+        if ($tasks[$taskKey]["image"]["fileName"] === "")
             continue;
-        $contains = false;
         foreach ($images as $image) {
-            if (str_contains($task["image"], $image["fileName"]))
-                $contains = true;
+            if (str_contains($tasks[$taskKey]["image"]["fileName"], $image["fileName"])) {
+                $tasks[$taskKey]["image"]["image64"] = $image["image64"];
+            }
         }
-        if ($contains == false)
-            return false;
     }
-    return true;
+    return $tasks;
 }
 
 
@@ -189,7 +188,6 @@ function createImage(PDO $db, array $image): Result
 function createTask(PDO $db, int $taskSetId, array $task, int|null $imageId): Result
 {
     try {
-        var_dump($task);
         $sql = "INSERT INTO Tasks (task_set_id, task_text, task_image_id, answer ) VALUES (?, ?, ?, ?)";
         $stmt = $db->prepare($sql);
         if ($stmt->execute([$taskSetId, $task["task"], $imageId, $task["solution"]])) {
@@ -206,10 +204,9 @@ function createTask(PDO $db, int $taskSetId, array $task, int|null $imageId): Re
 function createTasks(PDO $db, int $taskSetId, array $tasks, array $images): Result
 {
     foreach ($tasks as $task) {
-        $image = findImage($task, $images);
         $imageResult = null;
-        if (!is_null($task["image"]) || $task["image"] != "") {
-            $imageResult = createImage($db, $image);
+        if ($task["image"]["fileName"] != "" || $task["image"]["image64"] != "") {
+            $imageResult = createImage($db, $task["image"]);
             if ($imageResult->isErr())
                 return $imageResult;
         }
@@ -227,9 +224,8 @@ function createNewTaskSetBuild(PDO $db, array $request): Result
     $latexText = $request["text"];
     $images = $request["images"];
     $tasks = parseLaTeX($latexText);
-    if (!validateImages($tasks, $images))
-        return new Err(error: "missing images");
 
+    $tasks = assignImagesToToTasks($tasks, $images);
     $newSetResult = createNewTaskSet($db, $name, $maxPoints, $latexText);
     if ($newSetResult->isErr())
         return $newSetResult;
