@@ -39,7 +39,16 @@ function getAvailableTasks(PDO $db): array
 function getTaskSetById(PDO $db, int $taskSetId): array
 {
     try {
-        $sql = "SELECT * FROM Tasks WHERE task_set_id = ?";
+        $sql = "SELECT 
+        Tasks.id,	
+        Tasks.created_at,	
+        Tasks.task_set_id,	
+        Tasks.task_text,	
+        Tasks.task_image_id,	
+        Tasks.answer,		
+        image_base64,	
+        file_name 
+        FROM Tasks INNER JOIN Images ON Images.id = Tasks.task_image_id WHERE task_set_id = ?";
         $stmt = $db->prepare($sql);
         if ($stmt->execute([$taskSetId])) {
             $response = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -177,7 +186,8 @@ if (
     return;
 }
 
-function changePoints($id,$points,PDO $db){
+function changePoints($id, $points, PDO $db)
+{
 
     try {
         $sql = "UPDATE Tasks_sets SET max_points = ? WHERE id = ?";
@@ -221,7 +231,7 @@ if (
     $_SERVER["REQUEST_METHOD"] == "POST"
 
 ) {
-    echo changePoints($_POST['id'],$_POST['points'],$db);
+    echo changePoints($_POST['id'], $_POST['points'], $db);
     return;
 }
 
