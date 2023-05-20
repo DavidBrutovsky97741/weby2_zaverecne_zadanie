@@ -1,0 +1,580 @@
+.eqEdEquation {
+    position: relative;
+    line-height: 1;
+    display: inline-block;
+    visibility: hidden;
+}
+
+.activeContainer .hoverContainer {
+    background: #B5B5B5;
+}
+
+.hoverContainer {
+    background: #E8E8E8;
+}
+
+.eqEdEquation div,
+.eqEdEquation span,
+.eqEdEquation svg,
+.eqEdEquation img {
+    position: absolute;
+    top: 0em;
+    left: 0em;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    /* Try to prevent highlighting */
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0) !important;
+}
+
+.fontTest {
+    visibility: hidden;
+}
+
+.fontSizeNormal {
+    font-size: 35.5px;/*18.5px;*/
+}
+
+.fontSizeSmaller {
+    font-size: 27.7px;/* fontSizeNormal * 0.7802 */
+}
+
+.fontSizeSmallest {
+    font-size: 23.8px;/* fontSizeNormal * 0.6703 */
+}
+
+.fontSizeMessage {
+    font-size: 20.5px;
+    color: #A9A9B1;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.MathJax_MathItalic {
+    font-family: 'MathJax_Math';
+    font-style: italic;
+}
+
+.MathJax_Main {
+    font-family: 'MathJax_Main';
+}
+
+.MathJax_MainItalic {
+    font-family: 'MathJax_Main';
+    font-style: italic;
+}
+
+.MathJax_Size1 {
+    font-family: 'MathJax_Size1';
+}
+
+.MathJax_Size2 {
+    font-family: 'MathJax_Size2';
+}
+
+.MathJax_Size3 {
+    font-family: 'MathJax_Size3';
+}
+
+.MathJax_Size4 {
+    font-family: 'MathJax_Size4';
+}
+
+.MathJax_AMS {
+    font-family: 'MathJax_AMS';
+}
+
+div.cursor {
+    background-color: #000000;
+    /* The cursor should always be on top */
+    z-index: 50;
+}
+
+div.normalCursor {
+    width: 2px;
+    height: 90%;
+    top: 5%;
+    left: 0px;
+}
+
+div.squareCursor {
+    width: 80%;
+    height: 80%;
+    top: 10%;
+    left: 10%;
+}
+
+.cursorOff {
+    visibility: hidden;
+}
+
+.highlight {
+    background: #5266FF;
+}
+
+.highlighted div {
+    color: #FFFFFF;
+    border-color: #FFFFFF;
+}
+
+.highlighted .stackedFractionHorizontalBar,
+.highlighted .squareRootOverBar,
+.highlighted .nthRootOverBar {
+    background: #FFFFFF;
+}
+
+.highlighted path {
+    fill: #FFFFFF;
+}
+
+.highlighted rect {
+    stroke: #FFFFFF;
+}
+
+.eqEdContainer {
+    cursor: text;
+    z-index: 3;
+}
+
+div.activeContainer {
+    background: #CFCFCF;
+}
+
+.squareEmptyContainer {
+    cursor: pointer;
+    border: solid #000000;
+}
+
+.eqEdWrapper {
+    z-index: 3;
+}
+
+/* This overflow must be hidden, because brackets extend past
+   equation boundaries, and mess up mouse interactions. */
+.bracketWrapper {
+    overflow: hidden;
+}
+
+.activeContainer .topLevelEmptyContainerWrapper {
+    background: #CFCFCF;
+}
+/*
+.topLevelEmptyContainerWrapper {
+    background: #EDEDED;
+}
+*/
+.stackedFractionHorizontalBar {
+    background: #000000;
+}
+
+.squareRootOverBar {
+    background: #000000;
+}
+
+.nthRootOverBar {
+    background: #000000;
+}
+
+.nthRootRadical {
+    z-index: 7;
+}
+
+.accentSymbol {
+    z-index: 8;
+}
+
+.dotAccent {
+    clip: rect(0.075em, 0.33em, 0.28em, 0.15em);
+}
+
+.dotAccentIE {
+    clip: rect(-0.5em, 0.85em, 0em, 0.1em);
+}
+
+.hatAccent {
+    clip: rect(0.05em, 0.4em, 0.29em, 0.1em);
+}
+
+.hatAccentIE {
+    clip: rect(-0.5em, 0.85em, 0em, 0.1em);
+}
+
+.barAccent {
+    clip: rect(0.21em, 0.45em, 0.28em, 0.05em);
+}
+
+.barAccentIE {
+    clip: rect(-0.1em, 0.45em, 0em, 0.05em);
+}
+
+.nonHighlightVersion {
+    visibility: visible;
+}
+
+.highlightVersion {
+    visibility: hidden;
+}
+
+.eqImg {
+    width: 100%;
+    height: 100%;
+}
+
+.submission-scroll {
+    border: 2px solid #A9A9B1;
+    border-radius: 5px;
+    margin: 30px;
+    padding: 5px;
+    overflow: auto;
+    max-height: 100px;
+    max-width: 350px;
+}
+
+.submission-dynamic {
+    border: 2px solid #A9A9B1;
+    border-radius: 5px;
+    padding: 5px;
+    display: inline-block;
+}
+
+#loadingMessageOuter {
+    width: 300px; 
+    height: 64px;
+}
+
+.eqEdMenuItem {
+    width: 35px;
+    height: 35px;
+    background-color: #E8E8E8;
+    display: inline-block;
+    margin-right: 2.5px;
+    margin-bottom: 2.5px;
+}
+
+.eqEdMenuItem:hover {
+    background-color: #B5B5B5;
+    cursor: pointer;
+}
+
+/* Menu CSS */
+/*----- Tabs -----*/
+.tabs {
+    width:100%;
+    display:inline-block;
+}
+ 
+/*----- Tab Links -----*/
+/* Clearfix */
+.tab-links:after {
+    display:block;
+    clear:both;
+    content:'';
+}
+
+.tab-links {
+    margin-bottom: 0px;
+    padding-left: 7px;
+    white-space: nowrap;
+}
+
+.tab-links li {
+    margin-left: 3px;
+    margin-right: 3px;
+    margin-top: 6px;
+    margin-bottom: 0px;
+    /*float:left;*/
+    display:inline-block;
+    list-style:none;
+}
+ 
+.tab-links a {
+    padding:9px 15px;
+    display:inline-block;
+    background:#E0E0E0;
+    font-size:16px;
+    color:#000;
+    text-decoration:none;
+}
+
+.outer-tab-links a:hover {
+    background:#BABABA;
+}
+
+.inner-tab-links a:hover {
+    background:#8A8A8A;
+}
+
+.outerTab.active a, .outerTab.active a:hover {
+    background: #9C9C9C;
+}
+
+.innerTab.active a, .innerTab.active a:hover {
+    background: #707070;
+}
+
+.top-level-tab {
+    background:#9C9C9C;
+}
+/*----- Content of Tabs -----*/
+.tab-content {
+    padding: 15px 2.5%;
+}
+
+.tab-content-nested {
+    background: #707070;
+}
+
+#tab-content-top {
+    width: 700px;
+    background: #9C9C9C;
+}
+ 
+.tab {
+    display:none;
+}
+
+.tab.active {
+    display:block;
+}
+
+.innerTabImg {
+    height: 34px;
+}
+
+.menuItem {
+    background: transparent;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    padding: 5px;
+    vertical-align: top;
+}
+
+.menuItem:hover {
+    cursor: pointer;
+}
+
+.tab.outer > .menuItem:hover {
+    background-color: #707070;
+}
+
+.tab.inner > .menuItem:hover {
+    background-color: #545454;
+}
+
+
+
+.button{
+    position : relative ;
+    z-index : 0 ;
+    width : 50vh ;
+    height : 56px ;
+    text-decoration : none ;
+    border: none;
+    font-size : 14px ; 
+    font-weight : bold ;
+    color : var(--line_color) ;
+    letter-spacing : 2px ;
+    transition : all .3s ease ;
+    background: rgb(245, 245, 245);      
+}
+.button__text{
+    display : flex ;
+    justify-content : center ;
+    align-items : center ;
+    width : 100% ;
+    height : 100% ;
+}
+.button::before,
+.button::after,
+.button__text::before,
+.button__text::after{
+    content : '' ;
+    position : absolute ;
+    height : 3px ;
+    border-radius : 2px ;
+    background : var(--line_color) ;
+    transition : all .5s ease ;
+}
+.button::before{
+    top : 0 ;
+    left : 54px ;
+    width : calc( 100% - 56px * 2 - 16px ) ;
+}
+.button::after{
+    top : 0 ;
+    right : 54px ;
+    width : 8px ;
+    
+}
+.button__text::before{
+    bottom : 0 ;
+    right : 54px ;
+    width : calc( 100% - 56px * 2 - 16px ) ;
+}
+.button__text::after{
+    bottom : 0 ;
+    left : 54px ;
+    width : 8px ;
+}
+.button__line{
+    position : absolute ;
+    top : 0 ;
+    width : 56px ;
+    height : 100% ;
+    overflow : hidden ;
+}
+.button__line::before{
+    content : '' ;
+    position : absolute ;
+    top : 0 ;
+    width : 150% ;
+    height : 100% ;
+    box-sizing : border-box ;
+    border-radius : 300px ;
+    border : solid 3px var(--line_color) ;
+}
+.button__line:nth-child(1),
+.button__line:nth-child(1)::before{
+    left : 0 ;
+}
+.button__line:nth-child(2),
+.button__line:nth-child(2)::before{
+    right : 0 ;
+}
+.button:hover{
+    letter-spacing : 6px ;
+}
+.button:hover::before,
+.button:hover .button__text::before{
+    width : 8px ;
+}
+.button:hover::after,
+.button:hover .button__text::after{
+    width : calc( 100% - 56px * 2 - 16px ) ;
+}
+.button__drow1,
+.button__drow2{
+    position : absolute ;
+    z-index : -1 ;
+    border-radius : 16px ;
+    transform-origin : 16px 16px ;
+}
+.button__drow1{
+    top : -16px ;
+    left : 40px ;
+    width : 32px ;
+    height : 0;
+    transform : rotate( 30deg ) ;
+}
+.button__drow2{
+    top : 44px ;
+    left : 77px ;
+    width : 32px ;
+    height : 0 ;
+    transform : rotate(-127deg ) ;
+}
+.button__drow1::before,
+.button__drow1::after,
+.button__drow2::before,
+.button__drow2::after{
+    content : '' ;
+    position : absolute ;
+}
+.button__drow1::before{
+    bottom : 0 ;
+    left : 0 ;
+    width : 0 ;
+    height : 32px ;
+    border-radius : 16px ;
+    transform-origin : 16px 16px ;
+    transform : rotate( -60deg ) ;
+}
+.button__drow1::after{
+    top : -10px ;
+    left : 45px ;
+    width : 0 ;
+    height : 32px ;
+    border-radius : 16px ;
+    transform-origin : 16px 16px ;
+    transform : rotate( 69deg ) ;
+}
+.button__drow2::before{
+    bottom : 0 ;
+    left : 0 ;
+    width : 0 ;
+    height : 32px ;
+    border-radius : 16px ;
+    transform-origin : 16px 16px ;
+    transform : rotate( -146deg ) ;
+}
+.button__drow2::after{
+    bottom : 26px ;
+    left : -40px ;
+    width : 0 ;
+    height : 32px ;
+    border-radius : 16px ;
+    transform-origin : 16px 16px ;
+    transform : rotate( -262deg ) ;
+}
+.button__drow1,
+.button__drow1::before,
+.button__drow1::after,
+.button__drow2,
+.button__drow2::before,
+.button__drow2::after{
+    background : var( --back_color ) ;
+}
+.button:hover .button__drow1{
+    animation : drow1 ease-in .06s ;
+    animation-fill-mode : forwards ;
+}
+.button:hover .button__drow1::before{
+    animation : drow2 linear .08s .06s ;
+    animation-fill-mode : forwards ;
+}
+.button:hover .button__drow1::after{
+    animation : drow3 linear .03s .14s ;
+    animation-fill-mode : forwards ;
+}
+.button:hover .button__drow2{
+    animation : drow4 linear .06s .2s ;
+    animation-fill-mode : forwards ;
+}
+.button:hover .button__drow2::before{
+    animation : drow3 linear .03s .26s ;
+    animation-fill-mode : forwards ;
+}
+.button:hover .button__drow2::after{
+    animation : drow5 linear .06s .32s ;
+    animation-fill-mode : forwards ;
+}
+
+.container{
+    width : 100% ;
+    height : 10vh ;
+    display : flex ;
+    flex-direction : column ;
+    justify-content : center ;
+    align-items : center ;
+}
+
+
+.containerNew{
+    width : 100% ;
+    height : 10vh ;
+    display : flex ;
+    flex-direction : column ;
+    justify-content : center ;
+    align-items : center ;
+    margin-top: 5%;
+
+}
+
+.eqEdContainer.topLevelContainer.fontSizeNormal {   
+    left:400px;
+}

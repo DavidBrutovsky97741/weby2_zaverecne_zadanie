@@ -35,6 +35,7 @@
             <form action="/api/login-api.php" method="post">
                 <input type="text" placeholder="Prihlasovacie meno" name="name">
                 <input type="password" placeholder="Heslo" name="password">
+                <p > Teacher: </p>
                 <input type="checkbox" name="adminRole">
                 <button>Prihlásiť sa</button>
             </form>

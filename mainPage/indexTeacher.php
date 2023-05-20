@@ -39,12 +39,14 @@ if (!isset($_SESSION['login']) || (strcmp($_SESSION['login'], 'true') != 0) || (
 
         <a href="/mainPage/indexTeacher.php"><i class='material-icons'>home</i></a>
 
+        <a href="/mainPage/navodPDF.php"><i class='material-icons'>assignment</i></a>
+
 
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 
 
         </div>
-        <a class="navAtt" id="logout" href="/api/logout-api.php">Ohlásiť sa </a>
+        <a class="navAtt" id="logout" href="/api/logout-api.php">Odhlásiť sa </a>
 
         <a class="navAtt">&nbsp;&nbsp;&nbsp;</a>
         <a class="navAttname">
@@ -67,15 +69,15 @@ if (!isset($_SESSION['login']) || (strcmp($_SESSION['login'], 'true') != 0) || (
             <p id="newSetName" >Nahrať novú sadu</p> 
         </div>
 
-        <div class="can" onclick="">
+        <div class="can" onclick="window.open('/mainPage/teacherPages/studentsOverwiev.php')">
             <p id="studentsOverview" >Prehľad študentov</p>
         </div>
 
-        <div class="can">
+        <div class="can" onclick="window.open('/mainPage/teacherPages/modifyAvailable.php')">
             <p id="whatToGenerate" >Výber sád na generovanie</p>
         </div>
 
-        <div class="can">
+        <div class="can" onclick="window.open('/mainPage/teacherPages/changePoints.php')">
             <p id="changePoints" >Zmeniť body za sadu</p>
         </div>
 

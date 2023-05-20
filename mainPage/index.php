@@ -41,13 +41,15 @@ if (!isset($_SESSION['login']) || (strcmp($_SESSION['login'], 'true') != 0) || (
 
         <a href="/mainPage/index.php"><i class='material-icons'>home</i></a>
 
+        <a href="/mainPage/navodPDF.php"><i class='material-icons'>assignment</i></a>
+
 
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 
 
         </div>
 
-        <a class="navAtt" id="logout" href="/api/logout-api.php">Ohlásiť sa </a>
+        <a class="navAtt" id="logout" href="/api/logout-api.php">Odhlásiť sa </a>
 
 
 
@@ -88,18 +90,13 @@ if (!isset($_SESSION['login']) || (strcmp($_SESSION['login'], 'true') != 0) || (
 
                     <td id="points">with two columns</td>
                 </tr>
-                <tr>
 
-                    <td id="taskStateTranslate">Stav</td>
-
-
-                    <td id="taskState">with two columns</td>
-                </tr>
             </tbody>
         </table>
 
 
-        <button type="button" class="btn btn-success" id="testWrite" onclick="testWritingTask()">Písať test</button>
+        <button type="button" class="btn btn-success" id="testWrite" >Písať test</button>
+
         <button type="button" class="btn btn-danger" id="closeModal" onclick="closeModal()">Zatvoriť</button>
 
         
