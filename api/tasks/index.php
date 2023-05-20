@@ -209,6 +209,13 @@ if (
     return;
 }
 
+if (
+    $_SERVER["REQUEST_METHOD"] == "POST"
+    && isset($_POST["pointsAcquired"]) && isset($_POST["taskSetId2"])
+) {
+    echo json_encode(submitStudentTaskSet($db, intval($_POST["pointsAcquired"]), intval($_POST["taskSetId2"])));
+    return;
+}
 
 if (
     $_SERVER["REQUEST_METHOD"] == "POST"

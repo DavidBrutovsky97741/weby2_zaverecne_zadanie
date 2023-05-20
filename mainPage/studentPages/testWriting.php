@@ -101,7 +101,7 @@ if (!isset($_SESSION['login']) || (strcmp($_SESSION['login'], 'true') != 0) || (
 
 
     <div class="containerNew" id="container">
-        <button class="button" onclick="submitTaks()">
+        <button class="button" onclick="submitTask()">
             <div class="button__line"></div>
             <div class="button__line"></div>
             <span class="button__text" id="buttonGenerate">Odoslať odpovede</span>

@@ -1,6 +1,8 @@
+var taskNumber;
+var taskIds = [];
 window.onload = function() {
   var uniqueTasks;
-  var taskIds = [];
+  taskIds = [];
   var taskText = [];
   var taskSolution = [];
   var cleanedText = [];
@@ -9,7 +11,7 @@ window.onload = function() {
 
   // Get the value of the 'taks' parameter
   var params = new URLSearchParams(url.search);
-  var taskNumber = params.get('task');
+  taskNumber = params.get('task');
 
   var tbody = document.getElementById('Tbody');
 
@@ -198,8 +200,61 @@ function displayEquationEditor(value) {
 
 
 }
-function submitTaks(){
-  //TODO
+
+// cant test yet, no data in db
+function submitTask(){
+
+  console.log(taskNumber);
+  $.ajax({
+
+    url: "../../api/tasks/index.php",
+    method: "POST",
+    data: {
+      taskSetId: taskNumber,
+    },
+    success: function(response) {
+      console.log(response);
+      response = JSON.parse(response);
+
+      console.log(response);
+
+      uniqueTasks = response.length;
+      for (let i = 0; i < uniqueTasks; i++) {
+        taskIds.push(response[i].id);
+      }
+      
+      var totalPoints = 0;
+     // Get the table element
+    for (let index = 0; index < taskIds.length; index++) {
+        taskId = taskIds[index];
+        var result = document.getElementById(taskId);
+        var delimiter = "/";
+        var points = result.innerHTML.split(delimiter);
+
+        var acquired = parseInt(points[0]);
+        totalPoints += acquired;
+
+
+    }
+    $.ajax({
+
+      url: "../../api/tasks/index.php",
+      method: "POST",
+      data: {
+        pointsAcquired: totalPoints,
+        taskSetId2: taskNumber,
+      },
+      success: function(response) {
+        response = JSON.parse(response);
+  
+        console.log(response);
+
+        document.getElementById('container').style.display = 'none';
+      }
+    });
+    }
+  });
+    
 }
 
 
