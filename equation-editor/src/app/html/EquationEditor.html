@@ -924,7 +924,7 @@ var superscriptToLatex = function(expr) {
           method: 'POST',
           data: { latexResult: latexResult },
           success: function(response) {
-            // console.log(JSON.parse(response));
+             console.log(response);
             var parts = response.split(' ');
             // Extracting the ID and value
             var id = parts[0];

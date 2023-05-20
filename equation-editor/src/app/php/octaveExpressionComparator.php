@@ -13,7 +13,7 @@ if (isset($_POST['latexResult'])) {
 
 if (isset($_POST['id'])) {
     $_SESSION['correctResultId'] = $_POST['id'];
-    // echo "ID: " . $_POST['id'];;
+     echo "ID: " . $_POST['id'];;
 } else {
     // echo "ID parameter not found in the URL.";
 }
@@ -75,7 +75,7 @@ try {
     $db = new PDO("mysql:host=$hostname;dbname=$dbname", $username, $password);
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
-    echo $e->getMessage();
+    //echo $e->getMessage();
 }
 
     try {
@@ -93,32 +93,33 @@ try {
     
         // Retrieve the 'answer' column value
         $answer = $row['answer'];
-    //    echo $answer;
+       // echo $answer;
         // Output the result
         return $answer;
     } catch (PDOException $e) {
-        echo $e->getMessage();
+      //  echo $e->getMessage();
     }
 }
 
 
 
 if (isset($_SESSION['latexResult']) && isset($_SESSION['correctResultId']) ) {
-
-  //  echo $_SESSION['latexResult'] . "\n";
-//echo $_SESSION['correctResultId'] . "\n";
+    
+//   echo $_SESSION['latexResult'];
+// echo $_SESSION['correctResultId'];
     // Get the correct symbolic expression from Bence
 
-    $correctResultId = $_SESSION['correctResultId'] . "\n";
+
+    $correctResultId = $_SESSION['correctResultId'];
     $rawCorrectResult = getLatexResultByID($correctResultId);
     $correctLatexExpression = parseCorrectLatexResult($rawCorrectResult);
     $correctOctaveExpression = latexToOctave($correctLatexExpression);
-    //echo "\n\nCorrect symbolic expression: $correctOctaveExpression\n";
+  //  echo "\n\nCorrect symbolic expression: $correctOctaveExpression\n";
 
     $studentLatexExpression = $_SESSION['latexResult'];
     $studentOctaveExpression = latexToOctave($studentLatexExpression);
-  //  echo "Student's symbolic expression: $studentOctaveExpression\n";
-
+ //  echo "Student's symbolic expression: $studentOctaveExpression\n";
+ //   echo $correctLatexExpression, $studentLatexExpression;
     // Compare the two symbolic expressions
     $result = compareSymbolicExpressions($correctOctaveExpression, $studentOctaveExpression);
 
@@ -131,7 +132,7 @@ if (isset($_SESSION['latexResult']) && isset($_SESSION['correctResultId']) ) {
         return true; // spravna odpoved
     } else {
       //  echo "The expressions are not equal.\n";
-            echo($_SESSION['correctResultId'] . " " . "0/1");
+        echo($_SESSION['correctResultId'] . " " . "0/1");
             $_SESSION['correctResultId'] = null;
         return false; // nespravna odpoved
     }
@@ -142,6 +143,11 @@ function parseCorrectLatexResult($inputString) {
 
     $newString = '';
     $copy = false;
+    // Replace first "*}" with "="
+    $inputString = str_replace('*}', '=', $inputString);
+
+    // Replace first "\end" with "="
+    $inputString = str_replace('\end', '=', $inputString);
 
     for ($i = 0; $i < strlen($inputString); $i++) {
         $char = $inputString[$i];
@@ -161,7 +167,7 @@ function parseCorrectLatexResult($inputString) {
             $copy = true;
         }
     }
-
+   // echo "daffafaf" . $newString;
     return $newString;
 }
 

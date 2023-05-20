@@ -112,11 +112,11 @@ function writeTask(id, response) {
       }) 
 
       var tabsDiv = document.querySelector('.tabs');
-      console.log(tabsDiv.style.display);
+      // console.log(tabsDiv.style.display);
       tabsDiv.style.display = '';
   
       var mainDiv = document.getElementById('main');
-      console.log(mainDiv.style.display);
+      // console.log(mainDiv.style.display);
       mainDiv.style.display = 'flex';
 
       var mainDiv2 = document.querySelector('.eqEdEquation');
@@ -133,11 +133,10 @@ function writeTask(id, response) {
 
   if (task) {
 
-    var clean =  task.task_text.replace(/\\begin{equation\*}([\s\S]*?)\\end{equation\*}/g, " \\( $1 \\)");
-
+    var clean =  task.task_text.replace(/\$/, "\\begin{equation*}").replace(/\$/, "\\end{equation*}");
     document.getElementById("taskContainer").innerHTML = clean;
-   // document.getElementById("taskImage").src = task.task_image_id
-    console.log(clean);
+    document.getElementById("taskImage").src = task.image_base64;
+    console.log(task);
     // Do something with the task data
     MathJax.typesetPromise([document.getElementById('taskContainer')])
     .catch(function(err) {
