@@ -924,11 +924,17 @@ var superscriptToLatex = function(expr) {
           data: { latexResult: latexResult },
           success: function(response) {
             // console.log(JSON.parse(response));
-            console.log(response);
+            var parts = response.split(' ');
+            // Extracting the ID and value
+            var id = parts[0];
+            var points = parts[1];
+            console.log(id, points);
+            document.getElementById(id).innerHTML = points;
             // $('#ContentLatex').html(response);
-           window.location.href = '/equation-editor/src/app/php/octaveExpressionComparator.php';
+          //  window.location.href = '/equation-editor/src/app/php/octaveExpressionComparator.php';
           }
         });
+
       });
     </script>
 

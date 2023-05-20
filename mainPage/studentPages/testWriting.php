@@ -122,3 +122,9 @@ if (!isset($_SESSION['login']) || (strcmp($_SESSION['login'], 'true') != 0) || (
 </body>
 
 </html>
+
+
+<?php
+    require '../../equation-editor/src/app/html/EquationEditor.html';
+
+?>

@@ -54,7 +54,7 @@ window.onload = function() {
 
         var td2 = document.createElement('td'); //set task name
         td2.id = taskIds[i];
-        td2.innerHTML = "0/10";
+        td2.innerHTML = "0/0";
         tr.appendChild(td2);
         // document.getElementById("td2"+taskIds[i]) .innerHTML = cleanedText[i];
 
@@ -86,6 +86,27 @@ window.onload = function() {
 };
 
 function writeTask(id, response) {
+
+
+      console.log(id);
+
+      $.ajax({
+
+          url: "/equation-editor/src/app/php/octaveExpressionComparator.php",
+
+          method: "POST",
+
+          data: {
+              id: id,
+          },
+
+          success: function (response) {
+            console.log(response);
+          
+          }
+      }) 
+
+
   document.getElementById(id).disabled = true;
 
   document.getElementById('state' + id).innerHTML='check_box';
@@ -98,7 +119,7 @@ function writeTask(id, response) {
     var clean =  task.task_text.replace(/\\begin{equation\*}([\s\S]*?)\\end{equation\*}/g, " \\( $1 \\)");
 
     document.getElementById("taskContainer").innerHTML = clean;
-    document.getElementById("taskImage").src = task.task_image_id
+   // document.getElementById("taskImage").src = task.task_image_id
     console.log(clean);
     // Do something with the task data
     MathJax.typesetPromise([document.getElementById('taskContainer')])
