@@ -48,9 +48,16 @@ function getTaskSetById(PDO $db, int $taskSetId): array
         Tasks.task_text,	
         Tasks.task_image_id,	
         Tasks.answer,		
-        image_base64,	
-        file_name 
-        FROM Tasks INNER JOIN Images ON Images.id = Tasks.task_image_id WHERE task_set_id = ?";
+        Images.image_base64,	
+        Images.file_name 
+    FROM 
+        Tasks 
+    LEFT JOIN 
+        Images 
+    ON 
+        Images.id = Tasks.task_image_id 
+    WHERE 
+        task_set_id = ?";
         $stmt = $db->prepare($sql);
         if ($stmt->execute([$taskSetId])) {
             $response = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -254,13 +261,13 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 
 if (
     $_SERVER["REQUEST_METHOD"] == "POST"
-    && isset($_POST['taskSetId3']))
-    {
-        echo json_encode(generateStudentTaskSet($db, intval($_POST["taskSetId3"])));
-        return;
-    }
- 
- 
+    && isset($_POST['taskSetId3'])
+) {
+    echo json_encode(generateStudentTaskSet($db, intval($_POST["taskSetId3"])));
+    return;
+}
+
+
 // function getAvailableTask(PDO $db, int $taskSetId): array
 // {
 //     try {
