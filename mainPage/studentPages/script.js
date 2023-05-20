@@ -13,6 +13,9 @@ window.onload = function() {
 
   var tbody = document.getElementById('Tbody');
 
+
+  displayEquationEditor('none');
+
   $.ajax({
     url: "../../api/tasks/index.php",
     method: "POST",
@@ -106,6 +109,18 @@ function writeTask(id, response) {
           }
       }) 
 
+      var tabsDiv = document.querySelector('.tabs');
+      console.log(tabsDiv.style.display);
+      tabsDiv.style.display = '';
+  
+      var mainDiv = document.getElementById('main');
+      console.log(mainDiv.style.display);
+      mainDiv.style.display = 'flex';
+
+      var mainDiv2 = document.querySelector('.eqEdEquation');
+  
+      mainDiv2.style.visibility = 'visible';
+
 
   document.getElementById(id).disabled = true;
 
@@ -170,6 +185,21 @@ function slovakStudentTranslateTest(){
     }
 }
 
+function displayEquationEditor(value) {
+
+
+    var tabsDiv = document.querySelector('.tabs');
+    console.log(tabsDiv.style.display);
+    tabsDiv.style.display = 'none';
+
+    var mainDiv = document.getElementById('main');
+    console.log(mainDiv.style.display);
+    mainDiv.style.display = 'none';
+
+
+}
 function submitTaks(){
   //TODO
 }
+
+

@@ -178,8 +178,9 @@
 
     <br /><br />
     <input id="hiddenFocusInput" style="width: 0; height: 0; opacity: 0; position: absolute; top: 0; left: 0;" type="text" autocapitalize="off" />
-    
-
+    <div id="loadingMessageOuter" style="width: 600px; height: 64px; ">
+      <div id="loadingMessage" class="fontSizeSmaller" style="width: 234px; height: 64px; position: fixed; top: 60%; left: 50%; transform: translate(-50%, -50%);"></div>
+    </div>
 
     <div class="equation-editor"></div>
     <div style="text-align: center; display: flex; justify-content: center;">
@@ -193,7 +194,7 @@
             <li class="outerTab"><a href="#integrals">Integrals</a></li>
             <li class="outerTab"><a href="#misc">Misc</a></li>
         </ul>
-    <div style="text-align: center; display: flex; justify-content: center;">
+    <div id="main" style="text-align: center; display: flex; justify-content: center;">
         <div class="tab-content" id="tab-content-top">
             <div id="common" class="tab outer active">
                 <img class="menuItem" id="stackedFractionButton" src="/equation-editor/src/MenuImages/png/stackedFraction.png">
@@ -930,10 +931,23 @@ var superscriptToLatex = function(expr) {
             var points = parts[1];
             console.log(id, points);
             document.getElementById(id).innerHTML = points;
+
+
+            var tabsDiv = document.querySelector('.tabs');
+            console.log(tabsDiv.style.display);
+            tabsDiv.style.display = 'none';
+
+            var mainDiv = document.getElementById('main');
+            console.log(mainDiv.style.display);
+            mainDiv.style.display = 'none';
+            var mainDiv2 = document.querySelector('.eqEdEquation');
+  
+  mainDiv2.style.visibility = 'hidden';
             // $('#ContentLatex').html(response);
           //  window.location.href = '/equation-editor/src/app/php/octaveExpressionComparator.php';
           }
         });
+
 
       });
     </script>
