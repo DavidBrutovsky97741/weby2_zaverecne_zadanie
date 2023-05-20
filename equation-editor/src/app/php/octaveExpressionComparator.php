@@ -132,7 +132,7 @@ if (isset($_SESSION['latexResult']) && isset($_SESSION['correctResultId']) ) {
     } else {
       //  echo "The expressions are not equal.\n";
             echo($_SESSION['correctResultId'] . " " . "0/1");
-            $_SESSION['id'] = null;
+            $_SESSION['correctResultId'] = null;
         return false; // nespravna odpoved
     }
 }

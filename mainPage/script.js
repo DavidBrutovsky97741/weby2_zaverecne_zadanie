@@ -197,7 +197,7 @@ function handleFormSubmit(event) {
     };
     reader.readAsText(latexFile);
     //DELETE images array
-    while (imgaes.length > 0) {
+    while (images.length > 0) {
         images.pop();
     }
 
