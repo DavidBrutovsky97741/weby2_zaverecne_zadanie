@@ -159,7 +159,7 @@ function latexToOctave($latexExpression) {
             }
             $octaveExpression .= $char;
         }
-        
+
         elseif ($char == ")" || $char == "]" || $char == "}") {
             $lastBracketClose = true;
             $octaveExpression .= $char;
@@ -187,6 +187,12 @@ function multiplicationCheck($octaveExpression) {
 
         if (is_numeric($lastLetter) && ctype_alpha($currentLetter)) {
             $updatedOctaveExpression .= "*";
+        }
+        
+        if (is_numeric($lastLetter)){
+            if ($currentLetter == "(" || $currentLetter == "[" || $currentLetter == "{") {
+                $updatedOctaveExpression .= "*";
+            }
         }
 
         else if ($lastLetter == ")" || $lastLetter == "]" || $lastLetter == "}") {
