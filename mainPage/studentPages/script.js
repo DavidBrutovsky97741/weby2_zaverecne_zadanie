@@ -147,7 +147,7 @@ function writeTask(id, response) {
 function englishStudentTranslateTest(){
   document.getElementById('logout').innerHTML = "Log out";
   document.getElementById('navName').innerHTML = " &nbsp; Final task webte2";
-  document.getElementById('taskName').innerHTML = "Task";
+  document.getElementById('taskName').innerHTML = "Points";
   document.getElementById('stateName').innerHTML = " State";
   document.getElementById('functionName').innerHTML = " Functions";
   document.getElementById('buttonGenerate').innerHTML = " Submit tasks";
@@ -168,7 +168,7 @@ function englishStudentTranslateTest(){
 function slovakStudentTranslateTest(){
   document.getElementById('logout').innerHTML = "Odhlásiť sa";
   document.getElementById('navName').innerHTML = " &nbsp; Záverečné zadanie webte2";
-  document.getElementById('taskName').innerHTML = "Úloha";
+  document.getElementById('taskName').innerHTML = "Body";
   document.getElementById('stateName').innerHTML = " Stav";
   document.getElementById('functionName').innerHTML = " Funkcie";
   document.getElementById('buttonGenerate').innerHTML = " Odoslať odpovede";

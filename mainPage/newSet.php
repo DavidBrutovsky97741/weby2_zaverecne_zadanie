@@ -86,7 +86,7 @@ if (!isset($_SESSION['login']) || (strcmp($_SESSION['login'], 'true') != 0) || (
 
             <div class="formUploadsection">
                 <label for="latexFolder">LaTeX Folder:</label>
-                <input type="file" id="latexFolder" webkitdirectory directory multiple required>
+                <input type="file" id="latexFolder"  accept=".tex" required>
             </div>
 
             <button type="submit">Upload</button>
