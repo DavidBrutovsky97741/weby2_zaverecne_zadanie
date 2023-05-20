@@ -132,13 +132,12 @@ if (!isset($_SESSION['login']) || (strcmp($_SESSION['login'], 'true') != 0) || (
         $(document).ready(function () {
             $('#myTable').DataTable({
                 columnDefs: [
-                    {
+
             { "orderData": [3, 2], "targets": 3 },
                     { "orderData": [4, 2], "targets": 4 },
                     { "orderData": [5, 2], "targets": 5 },
-        }
-    ]  });
-    
+                    ]
+    });
 });
 
 
