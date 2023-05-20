@@ -119,10 +119,25 @@ function openModal(id) { // zistak to id a podla toho dat filter na konkretnu sa
 
 
 }
-function testWritingTask(id) { //id task setu
+function testWritingTask(id) { 
+
     console.log(id);
-    //console.log(elementId);
-    window.location.href = "studentPages/testWriting.php?task=" + elementId;
+    // not done .. 
+    $.ajax({
+
+        url: "../api/tasks/index.php",
+        method: "POST",
+        data: {
+          taskSetId3: id,
+        },
+        success: function(response) {
+          response = JSON.parse(response);
+    
+          console.log(response);
+  
+        }
+      });
+    window.location.href = "studentPages/testWriting.php?task="+elementId;
 
 }
 
@@ -197,7 +212,7 @@ function handleFormSubmit(event) {
     };
     reader.readAsText(latexFile);
     //DELETE images array
-    while (imgaes.length > 0) {
+    while (images.length > 0) {
         images.pop();
     }
 
